@@ -16,6 +16,11 @@ Game::Engine::~Engine()
 void Game::Engine::Start()
 {
 	sf::Event event;
+	sf::RectangleShape r;
+	r.setFillColor(sf::Color::Blue);
+	r.setSize(sf::Vector2f(30.f, 60.f));
+	r.setPosition(sf::Vector2f(2, 3));
+
 	rw->setFramerateLimit(60);
 	while (rw->isOpen()) {
 		while (rw->pollEvent(event)) {
@@ -24,7 +29,10 @@ void Game::Engine::Start()
 			}
 			
 		}
+		rw->clear();
 		rw->draw(c.getSprite());
+		rw->draw(r);
+		rw->display();
 		
 	}
 }
