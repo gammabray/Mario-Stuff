@@ -25,7 +25,7 @@ namespace Game {
 		void setPosition(const Vector2f& value) { *_position = value; }
 		const Vector2f getSize() { return *_size; }
 		void setSize(const Vector2f& value) { *_size = value; }
-		const sf::Sprite getSprite() { return *_sprite; }
+	    sf::Sprite getSprite() { return *_sprite; }
 		virtual void Draw(sf::RenderTarget& target, const sf::RenderStates& states) = 0;
 		DisplayObject(const Vector2f& startPos, const Vector2f& startSize);
 		~DisplayObject();
