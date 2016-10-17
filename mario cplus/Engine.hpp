@@ -5,7 +5,8 @@
 #include <vector>
 typedef int Level;
 typedef std::string Logger;
-//temporary aliases before actual level added
+typedef Game::AnimatedObject Enemy;
+//temporary aliases before actual implementations added
 namespace Game {
 	class Engine {
 	private:
@@ -13,7 +14,7 @@ namespace Game {
 		Character        c;
 		Logger           l;
 		sf::RenderWindow *rw;
-		std::vector<AnimatedObject> drawables;
+		std::vector<Enemy> drawables;
 
 	public:
 		Engine();
