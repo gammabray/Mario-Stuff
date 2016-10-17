@@ -7,6 +7,7 @@
 #include <vector>
 
 using sf::Vector2f;
+//base class for all animated ojects in game.
 class AnimatedObject : public DisplayObject {
 protected:
 	std::vector<sf::IntRect> SpriteStates;
