@@ -12,7 +12,7 @@ namespace Game {
 		Level            currentLevel;
 		Character        c;
 		Logger           l;
-		sf::RenderWindow rw;
+		sf::RenderWindow *rw;
 		std::vector<AnimatedObject> drawables;
 
 	public:
