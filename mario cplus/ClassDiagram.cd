@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AnimatedObject">
+    <Position X="6.5" Y="1" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="AnimatedObject::direction" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>AnimatedObject.hpp</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>CgAABQAAAAIAEACAAAAAAAAgCCBAAAAAAAAAAQAMAAA=</HashCode>
+      <FileName>AnimatedObject.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DisplayObject">
+    <Position X="3" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAYAAFggAABAAAQAiAAAAAAABAAEAgAIAAAA=</HashCode>
+      <FileName>DisplayObject.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
