@@ -15,6 +15,7 @@ DisplayObject::~DisplayObject()
 	delete _position;
 	delete _size;
 	delete _scaleFactor;
+	_texture = nullptr;
 	delete _texture;
 	delete _sprite;	
 	delete _collisionBox;
