@@ -1,6 +1,6 @@
 #include "AnimatedObject.hpp"
 
-AnimatedObject::AnimatedObject(const Vector2f & startPos, const Vector2f& startSize, int noOfSprites)
+Game::AnimatedObject::AnimatedObject(const Vector2f & startPos, const Vector2f& startSize, int noOfSprites)
 	: DisplayObject(startPos,startSize)
 {
 	_acceleration = new Vector2f();//add to later
@@ -9,7 +9,7 @@ AnimatedObject::AnimatedObject(const Vector2f & startPos, const Vector2f& startS
 
 }
 
-AnimatedObject::~AnimatedObject()
+Game::AnimatedObject::~AnimatedObject()
 {
 	
 	delete _acceleration;

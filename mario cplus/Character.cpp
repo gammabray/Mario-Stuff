@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-Character::Character(const Vector2f& startPos, const Vector2f& startSize) 
+Game::Character::Character(const Vector2f& startPos, const Vector2f& startSize) 
 	: AnimatedObject(startPos,startSize,6)
 	,IsJumping(false), IsWalking(false)
 //remember to add no of sprites later
@@ -22,7 +22,7 @@ Character::Character(const Vector2f& startPos, const Vector2f& startSize)
 }
 
 
-void Character::addSprites()
+void Game::Character::addSprites()
 {
 	
 	SpriteStates.push_back(sf::IntRect(3,0,13,17));
@@ -32,7 +32,7 @@ void Character::addSprites()
 	SpriteStates.push_back(sf::IntRect(SpriteStates[2]));
 	SpriteStates.push_back(sf::IntRect(155,0,17,17));
 }
-void Character::update(const sf::View& v, sf::Keyboard::Key k)
+void Game::Character::update(const sf::View& v, sf::Keyboard::Key k)
 {
 	float delta = static_cast<float>( _speedClock.restart().asMilliseconds());
 	switch (k) {
@@ -56,17 +56,17 @@ void Character::update(const sf::View& v, sf::Keyboard::Key k)
 
 
 }
-void Character::move(float delta, const sf::View& v)
+void Game::Character::move(float delta, const sf::View& v)
 {
 }
 
 
 
-void Character::DisplayInfo()
+void Game::Character::DisplayInfo()
 {
 }
 
-void Character::Draw(sf::RenderTarget & target, const sf::RenderStates & states)
+void Game::Character::Draw(sf::RenderTarget & target, const sf::RenderStates & states)
 {
 	
 	if(IsVisible)

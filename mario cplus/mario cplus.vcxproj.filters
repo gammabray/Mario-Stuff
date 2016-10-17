@@ -30,6 +30,9 @@
     <ClCompile Include="Character.cpp">
       <Filter>Class Definitions</Filter>
     </ClCompile>
+    <ClCompile Include="Engine.cpp">
+      <Filter>Class Definitions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DisplayObject.hpp">
@@ -39,6 +42,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Character.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

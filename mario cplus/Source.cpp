@@ -9,7 +9,7 @@ int main() {
 	sf::RectangleShape rectangle(sf::Vector2f(360,260));
 	rectangle.setSize(sf::Vector2f(200, 200));
 	rectangle.setFillColor(sf::Color::Blue);
-	Character c(sf::Vector2f(600, 600), sf::Vector2f());
+	Game::Character c(sf::Vector2f(600, 600), sf::Vector2f());
 	
 	
 	while (window.isOpen()) {

@@ -1,6 +1,6 @@
 #include <SFML\Graphics.hpp>
 #include "DisplayObject.hpp"
-DisplayObject::DisplayObject(const Vector2f& startPosition, const Vector2f& startSize) {
+Game::DisplayObject::DisplayObject(const Vector2f& startPosition, const Vector2f& startSize) {
 	_position = new Vector2f(startPosition);
 	_size = new Vector2f(startSize);
 	_scaleFactor = new Vector2f(1, 1);
@@ -10,7 +10,7 @@ DisplayObject::DisplayObject(const Vector2f& startPosition, const Vector2f& star
 	_collisionBox = new sf::FloatRect();
 }
 
-DisplayObject::~DisplayObject()
+Game::DisplayObject::~DisplayObject()
 {
 	delete _position;
 	delete _size;
