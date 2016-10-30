@@ -6,6 +6,7 @@
 
 
 #include <SFML\Graphics.hpp>
+
 using sf::Vector2f;
 
 //Base class for all drawable objects in game
@@ -21,14 +22,14 @@ namespace Game {
 		sf::FloatRect* _collisionBox;
 		bool           IsVisible;
 	public:
-		const Vector2f getPosition() { return *_position; }
+		const Vector2f& getPosition() { return *_position; }
 		void setPosition(const Vector2f& value) { *_position = value; }
-		const Vector2f getSize() { return *_size; }
+		const Vector2f& getSize() { return *_size; }
 		void setSize(const Vector2f& value) { *_size = value; }
 	    sf::Sprite getSprite() { return *_sprite; }
-		virtual void Draw(sf::RenderTarget& target, const sf::RenderStates& states) = 0;
+		virtual void Draw(sf::RenderTarget& target, const sf::RenderStates& states = sf::RenderStates::Default) = 0;
 		DisplayObject(const Vector2f& startPos, const Vector2f& startSize);
-		~DisplayObject();
+		virtual ~DisplayObject();
 
 
 

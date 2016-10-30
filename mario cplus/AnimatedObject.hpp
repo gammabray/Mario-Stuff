@@ -27,13 +27,13 @@ namespace Game {
 		Vector2f* _velocity;
 	public:
 		virtual void addSprites() = 0;
-		virtual void move(float delta, const sf::View&v) = 0;
-		virtual void update(const sf::View& v, sf::Keyboard::Key k = sf::Keyboard::Key::Unknown) = 0;
+		virtual void move(float delta, sf::View& v) = 0;
+		virtual void update(sf::View& v, sf::Keyboard::Key k = sf::Keyboard::Key::Unknown) = 0;
 		virtual void DisplayInfo() = 0;
 
 
 		AnimatedObject(const Vector2f& startPos, const Vector2f& startSize, int noOfSprites);
-		~AnimatedObject();
+		virtual ~AnimatedObject();
 	};
 }
 #endif

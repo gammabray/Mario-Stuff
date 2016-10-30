@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="DisplayObject">
+  <Class Name="Game::DisplayObject">
     <Position X="3" Y="1" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAIAAAAYAAFggAABAAAQAiAAAAAAABAAEAgAIAAAA=</HashCode>

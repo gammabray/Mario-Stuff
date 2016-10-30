@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Game::AnimatedObject">
+    <Position X="5.75" Y="5.25" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="Game::AnimatedObject::direction" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>AnimatedObject.hpp</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>CgAABQAAAAIAEACAAAAAAAAgCCBAAAAAAAAAAQAMAAA=</HashCode>
+      <FileName>AnimatedObject.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game::Character">
+    <Position X="5.75" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAIAEgCAAAAAAAAAAAAAAAAABAAAAAAFCQA=</HashCode>
+      <FileName>Character.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game::DisplayObject">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAYAAFggAABAAAQAiAAAAAAABAAEAgAIAAAA=</HashCode>
+      <FileName>DisplayObject.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game::Engine">
+    <Position X="3.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACQAAgAAAAAAAEAAAgAAAAKABAAAAIAABAA=</HashCode>
+      <FileName>Engine.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game::Tile">
+    <Position X="3.5" Y="5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="Game::Tile::__unnamed_enum_00ca_1" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Tile.hpp</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAQA=</HashCode>
+      <FileName>Tile.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Typedef Name="Level" Collapsed="true">
+    <Position X="2" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engine.hpp</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Logger" Collapsed="true">
+    <Position X="2" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engine.hpp</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Enemy" Collapsed="true">
+    <Position X="10.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engine.hpp</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

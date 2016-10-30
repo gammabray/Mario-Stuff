@@ -33,6 +33,12 @@
     <ClCompile Include="Engine.cpp">
       <Filter>Class Definitions</Filter>
     </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Class Definitions</Filter>
+    </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>Class Definitions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DisplayObject.hpp">
@@ -47,8 +53,17 @@
     <ClInclude Include="Engine.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Tile.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Background.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
 </Project>
