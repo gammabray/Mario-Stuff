@@ -4,7 +4,7 @@
 
 Game::Character::Character(const Vector2f& startPos, const Vector2f& startSize) 
 	: AnimatedObject(startPos,startSize,6)
-	,IsJumping(false), IsWalking(false)
+	,IsJumping(false), IsWalking(false),StartSpeed(0.2f,0.2f)
 //remember to add no of sprites later
 {
 	
@@ -32,7 +32,7 @@ void Game::Character::addSprites()
 	SpriteStates.push_back(sf::IntRect(SpriteStates[2]));
 	SpriteStates.push_back(sf::IntRect(155,0,17,17));
 }
-void Game::Character::update(const sf::View& v, sf::Keyboard::Key k)
+void Game::Character::update(sf::View& v, sf::Keyboard::Key k)
 {
 	float delta = static_cast<float>( _speedClock.restart().asMilliseconds());
 	switch (k) {
@@ -46,9 +46,11 @@ void Game::Character::update(const sf::View& v, sf::Keyboard::Key k)
 		break;
 	case sf::Keyboard::Left:
 		travelling = direction::LEFT;
+		this->move(delta,v);
 		break;
 	case sf::Keyboard::Right:
-		travelling = direction::DOWN;
+		travelling = direction::RIGHT;
+		this->move(delta, v);
 		break;
 
 
@@ -56,8 +58,22 @@ void Game::Character::update(const sf::View& v, sf::Keyboard::Key k)
 
 
 }
-void Game::Character::move(float delta, const sf::View& v)
+void Game::Character::move(float delta, sf::View& v)
 {
+	switch (travelling) {
+	case direction::LEFT:
+		v.move(delta * StartSpeed.x, 0.f);
+		
+		break;
+	case direction::RIGHT:
+		v.move(delta * -StartSpeed.x, 0.f);
+		IsWalking = true;
+		break;
+	default:
+		IsWalking = false;
+
+		break;
+	}
 }
 
 
