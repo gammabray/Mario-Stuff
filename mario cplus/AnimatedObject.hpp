@@ -20,11 +20,11 @@ namespace Game {
 		};
 		direction travelling;
 		int       currSprite;
-		sf::Clock _animationClock;
-		sf::Clock _speedClock;		  
-		Vector2f* _acceleration;
-		Vector2f* _deceleration;
-		Vector2f* _velocity;
+		sf::Clock animationClock;
+		sf::Clock speedClock;		  
+		Vector2f* acceleration;
+		Vector2f* deceleration;
+		Vector2f* velocity;
 	public:
 		virtual void addSprites() = 0;
 		virtual void move(float delta, sf::View& v) = 0;

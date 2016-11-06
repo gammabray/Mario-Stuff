@@ -3,6 +3,7 @@
 #define ENGINE_HPP
 #include "Character.hpp"
 #include "Tile.hpp"
+#include "Background.hpp"
 #include <vector>
 typedef int Level;
 typedef std::string Logger;
@@ -19,6 +20,7 @@ namespace Game {
 		sf::RenderWindow  *rw;
 		sf::View           currentView;
 		sf::Keyboard::Key  pressedKey;
+		Background		   back;
 
 		std::vector<Enemy*>          drawables;
 		std::vector<Tile>            tiles;

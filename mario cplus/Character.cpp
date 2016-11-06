@@ -8,15 +8,15 @@ Game::Character::Character(const Vector2f& startPos, const Vector2f& startSize)
 //remember to add no of sprites later
 {
 	
-	if (!_texture->loadFromFile("Images\\marioSpriteSheet.gif")) {
-		delete _texture;
+	if (!texture->loadFromFile("Images\\marioSpriteSheet.gif")) {
+		delete texture;
 		std::cout << "Failed to load Texture for Character..." << std::endl;
 	}
-	_sprite->setTexture(*_texture);
+	sprite->setTexture(*texture);
 	addSprites();
-	_sprite->setTextureRect(SpriteStates[0]);
-	_sprite->setPosition(*_position);
-	_sprite->setScale(*_scaleFactor);
+	sprite->setTextureRect(SpriteStates[0]);
+	sprite->setPosition(*position);
+	sprite->setScale(*scaleFactor);
 	IsVisible = true;
 
 }
@@ -34,7 +34,7 @@ void Game::Character::addSprites()
 }
 void Game::Character::update(sf::View& v, sf::Keyboard::Key k)
 {
-	float delta = static_cast<float>( _speedClock.restart().asMilliseconds());
+	float delta = static_cast<float>( speedClock.restart().asMilliseconds());
 	switch (k) {
 	case sf::Keyboard::Unknown:
 		break;
@@ -86,5 +86,5 @@ void Game::Character::Draw(sf::RenderTarget & target, const sf::RenderStates & s
 {
 	
 	if(IsVisible)
-		target.draw(*_sprite,states.Default);
+		target.draw(*sprite,states.Default);
 }

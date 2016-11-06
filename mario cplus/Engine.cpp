@@ -3,14 +3,15 @@
 #include <iostream>
 
 
-Game::Engine::Engine() : c(sf::Vector2f(600,600),sf::Vector2f(0,0)),currentView(sf::Vector2f(640,360),sf::Vector2f(1280,720))
-						
+Game::Engine::Engine() : c(sf::Vector2f(600,600),sf::Vector2f(0,0)),currentView(sf::Vector2f(640,360),sf::Vector2f(1280,720)),back(sf::Vector2f(4000,720))
 
-{
+{ 
+
 	rw = new sf::RenderWindow(sf::VideoMode(1280, 720), "Game Title");
 	if (!tempLevelTexture.loadFromFile("Images\\level.png")) {
 		std::cout << "Failed to load Level Image..." << std::endl;
 	}
+	
 	tempLevelSprite.setTexture(tempLevelTexture);
 	
 }
@@ -44,7 +45,7 @@ void Game::Engine::Start()
 		rw->clear();
 		rw->setView(currentView);
 		c.update(currentView, c.IsWalking ? pressedKey : sf::Keyboard::Unknown);
-		
+		rw->draw(tempLevelSprite);
 		c.Draw(*rw);
 		for (Tile tile : tiles) {
 			tile.Draw(*rw, sf::RenderStates::Default);
