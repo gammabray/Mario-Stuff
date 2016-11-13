@@ -4,10 +4,12 @@
 #include "Character.hpp"
 #include "Tile.hpp"
 #include "Background.hpp"
+#include "Enemy.hpp"
 #include <vector>
+#include <memory>
 typedef int Level;
 typedef std::string Logger;
-typedef Game::AnimatedObject Enemy;
+
 //temporary aliases before actual implementations added
 namespace Game {
 	class Engine {
@@ -21,9 +23,18 @@ namespace Game {
 		sf::View           currentView;
 		sf::Keyboard::Key  pressedKey;
 		Background		   back;
-
-		std::vector<Enemy*>          drawables;
-		std::vector<Tile>            tiles;
+		bool               keyFlag;
+		enum class collisionType {
+			TOP,
+			LEFT,
+			RIGHT,
+			BOTTOM,
+			NOCOL,
+			GENERIC,
+		};
+		std::vector<Enemy*>  drawables;
+		std::vector<Tile>    tiles;
+		collisionType collisionCheck(DisplayObject& d1, DisplayObject& d2);
 
 	public:
 		Engine();

@@ -3,7 +3,8 @@
 #include <iostream>
 
 
-Game::Engine::Engine() : c(sf::Vector2f(600,600),sf::Vector2f(0,0)),currentView(sf::Vector2f(640,360),sf::Vector2f(1280,720)),back(sf::Vector2f(4000,720))
+
+Game::Engine::Engine() : c(sf::Vector2f(600,600),sf::Vector2f(12,6)),currentView(sf::Vector2f(640,360),sf::Vector2f(1280,720)),back(sf::Vector2f(4000,720))
 
 { 
 
@@ -12,7 +13,6 @@ Game::Engine::Engine() : c(sf::Vector2f(600,600),sf::Vector2f(0,0)),currentView(
 		std::cout << "Failed to load Level Image..." << std::endl;
 	}
 	
-	tempLevelSprite.setTexture(tempLevelTexture);
 	
 }
 
@@ -32,27 +32,47 @@ void Game::Engine::Start()
 	sf::Event event;
 	
 	std::cout << sf::Texture::getMaximumSize() << std::endl;
-	c.IsWalking = true;
+	
 	rw->setFramerateLimit(60);
 	while (rw->isOpen()) {
 		while (rw->pollEvent(event)) {
 			if (event.type == sf::Event::Closed) {
 				rw->close();
 			}
-			pressedKey = event.key.code;
+			if (event.type == sf::Event::KeyPressed && !keyFlag) {
+				pressedKey = event.key.code;
+				keyFlag = true;
+			}
+				
+			if (event.type == sf::Event::KeyReleased && keyFlag ) {
+				pressedKey = sf::Keyboard::Unknown;
+				keyFlag = false;
+
+			}
+
 			
 		}
 		rw->clear();
 		rw->setView(currentView);
-		c.update(currentView, c.IsWalking ? pressedKey : sf::Keyboard::Unknown);
-		rw->draw(tempLevelSprite);
+//		back.draw(*rw, sf::RenderStates::Default);
+		c.update(currentView, pressedKey);
+	
+		c.DisplayInfo();
 		c.Draw(*rw);
-		for (Tile tile : tiles) {
-			tile.Draw(*rw, sf::RenderStates::Default);
-		}
+		
 		
 		rw->display();
 		
 		
 	}
 }
+Game::Engine::collisionType Game::Engine::collisionCheck(DisplayObject & d1, DisplayObject & d2)
+	//NOTE: d1 should be the character in character - other object collisions
+{
+	if (!d1.getCollisionBox().intersects(d2.getCollisionBox())) {
+		return collisionType::NOCOL;
+	}
+	else return collisionType::GENERIC;
+		
+}
+
