@@ -1,1 +1,3 @@
-This is a readme file. I am using this to test out what i need to write for my platformer project for final year.
+This is a public hosting of my A2 Computer Science project to create a platformer.
+
+Every Sunday I will commit the changes I have made to the project in the week. 
