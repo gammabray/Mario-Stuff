@@ -11,8 +11,9 @@ namespace Game {
 		//Represents the player's character in the game
 	protected:
 		
-		Vector2f* _VelocityBeforeJumping;
+		Vector2f VelocityBeforeJumping;
 		const Vector2f StartSpeed;
+		
 
 	public:
 		bool       IsWalking;
@@ -21,8 +22,10 @@ namespace Game {
 		void addSprites();
 		void move(float delta, sf::View& v);
 		void update(sf::View& v, sf::Keyboard::Key k = sf::Keyboard::Key::Unknown);
+		void jump();
 		void DisplayInfo();
 		void Draw(sf::RenderTarget& target, const sf::RenderStates& states = sf::RenderStates::Default);
+		void changeSprite(int changeTo = 0);
 
 
 
