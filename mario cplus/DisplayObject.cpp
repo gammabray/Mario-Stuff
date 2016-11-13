@@ -1,22 +1,19 @@
 #include <SFML\Graphics.hpp>
 #include "DisplayObject.hpp"
+
 Game::DisplayObject::DisplayObject(const Vector2f& startPosition, const Vector2f& startSize) {
-	position = new Vector2f(startPosition);
-	size = new Vector2f(startSize);
-	scaleFactor = new Vector2f(1, 1);
-	texture = new sf::Texture();
-	sprite = new sf::Sprite();
-	sprite->setPosition(*position);
-	collisionBox = new sf::FloatRect();
+	position = startPosition;
+	size = startSize;
+	scaleFactor = Vector2f(1, 1);
+	texture = std::make_unique<sf::Texture>();
+	sprite = std::make_unique <sf::Sprite>();
+	sprite->setTexture(*texture);
+	sprite->setPosition(position);
+	collisionBox;
 }
 
 Game::DisplayObject::~DisplayObject()
 {
-	delete position;
-	delete size;
-	delete scaleFactor;
-	texture = nullptr;
-	delete texture;
-	delete sprite;	
-	delete collisionBox;
+	texture.release();
+	sprite.release();
 }

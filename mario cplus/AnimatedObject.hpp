@@ -5,6 +5,7 @@
 #include "DisplayObject.hpp"
 #include "SFML\Graphics.hpp"
 #include <vector>
+#include <memory>
 
 using sf::Vector2f;
 //base class for all animated ojects in game.
@@ -16,15 +17,16 @@ namespace Game {
 			LEFT,
 			RIGHT,									   
 			UP,
-			DOWN
+			DOWN,
+			STATIONARY
 		};
 		direction travelling;
 		int       currSprite;
 		sf::Clock animationClock;
 		sf::Clock speedClock;		  
-		Vector2f* acceleration;
-		Vector2f* deceleration;
-		Vector2f* velocity;
+		Vector2f  acceleration;
+		Vector2f  deceleration;
+		Vector2f  velocity;
 	public:
 		virtual void addSprites() = 0;
 		virtual void move(float delta, sf::View& v) = 0;
