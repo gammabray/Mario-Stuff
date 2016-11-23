@@ -5,9 +5,10 @@
 #include "Tile.hpp"
 #include "Background.hpp"
 #include "Enemy.hpp"
+#include "Level.hpp"
 #include <vector>
 #include <memory>
-typedef int Level;
+
 typedef std::string Logger;
 
 //temporary aliases before actual implementations added
@@ -18,6 +19,7 @@ namespace Game {
 		sf::Texture        tempLevelTexture;//temporary before level implemented
 		sf::Sprite         tempLevelSprite;
 		Character          c;
+		Enemy			   e;
 		Logger             l;
 		sf::RenderWindow  *rw;
 		sf::View           currentView;
@@ -33,10 +35,15 @@ namespace Game {
 			GENERIC,
 		};
 		std::vector<Enemy*>  drawables;
-		std::vector<Tile>    tiles;
-		collisionType collisionCheck(DisplayObject& d1, DisplayObject& d2);
-
+		
+						  		
+		
+		collisionType collisionCheck(Character& ch, Enemy& e);//Character/enemy collision
+		collisionType collisionCheck(Enemy& e, Level& l);//Enemy/Tile collision
+		collisionType collisionCheck(Enemy& e1, Enemy& e2);//Enemy-Enemy collision
+		collisionType collisionCheck(Character& c, Tile& t);//Character/level collision
 	public:
+		
 		Engine();
 		~Engine();
 		void Start();
