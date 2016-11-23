@@ -2,15 +2,28 @@
 #ifndef ENEMY_HPP
 #define ENEMY_HPP
 #include "AnimatedObject.hpp"
+#include "Character.hpp"
 namespace Game {
+	enum class EnemyType
+	{
+		TY1,//change later
+		TY2,
+	};
 	class Enemy : public AnimatedObject
 	{
 	private:
-		std::string name;
-
-
+		EnemyType type;
+		const static sf::Vector2f startSpeed;
+		
+		void move(float delta, Character& ch);
+		bool colFlag;
+		
 	public:
-		Enemy();
+		void Draw(sf::RenderTarget& target, const sf::RenderStates& states = sf::RenderStates::Default);
+		void update(Character& ch);
+		void addSprites();
+		void DisplayInfo();
+		Enemy(const sf::Vector2f& startPos, const sf::Vector2f& startSize,int NoOfSprites,EnemyType t);
 		~Enemy();
 	};
 }
