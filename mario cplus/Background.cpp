@@ -10,18 +10,30 @@ std::vector<std::unique_ptr<sf::Texture>> Game::Background::s_blockTextures;
 //Functions for nested struct BackgroundTile
 Game::BackgroundTile::BackgroundTile(sf::Vector2f pos, sf::Texture& t)	: position(pos)
 {
-	texture = std::make_shared<sf::Texture>();
+	texture = std::make_unique<sf::Texture>();//create unique pointer
 	*texture = t;
-	sprite = std::make_shared<sf::Sprite>();
+	sprite = std::make_unique<sf::Sprite>();
+
 	sprite->setTexture(*texture);
-	
+	sprite->setPosition(position);
+}
+
+Game::BackgroundTile::BackgroundTile(const BackgroundTile & copy) 
+{
+	this->texture = std::make_unique<sf::Texture>(*copy.texture);
+	this->sprite = std::make_unique<sf::Sprite>(*copy.sprite);
+	this->position = copy.position;
+	sprite->setTexture(*texture);
+	sprite->setPosition(position);
+
+
+
 }
 
 Game::BackgroundTile::~BackgroundTile()
 {
-
-	texture = nullptr;
-	sprite = nullptr;
+	texture.release();
+	sprite.release();
 }
 
 void Game::Background::addTextures()
@@ -55,11 +67,9 @@ void Game::Background::draw(sf::RenderTarget & target, sf::RenderStates states) 
 
 void Game::Background::generateBackgroundTiles(int NoOfTiles)
 {
-	BackgroundTile b1(sf::Vector2f(0, 0), *s_blockTextures[0]);
-	BackgroundTile b2(sf::Vector2f(0, 0), *s_blockTextures[0]);
+	
 	for (int i = 0; i < NoOfTiles; i++) {
-		backTiles.push_back(b1);
-		backTiles.push_back(b2);
+		backTiles.emplace_back(sf::Vector2f(i * BackgroundTile::s_tilesize.x, 0), *s_blockTextures[0]);				
 	}
 	
 }
