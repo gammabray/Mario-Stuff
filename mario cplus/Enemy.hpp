@@ -4,6 +4,7 @@
 #include "AnimatedObject.hpp"
 #include "Character.hpp"
 namespace Game {
+	class Character;
 	enum class EnemyType
 	{
 		TY1,//change later

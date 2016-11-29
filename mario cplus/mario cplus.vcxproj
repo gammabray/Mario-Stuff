@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AABB.cpp" />
     <ClCompile Include="AnimatedObject.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Character.cpp" />
@@ -30,6 +31,7 @@
     <ClCompile Include="Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AABB.hpp" />
     <ClInclude Include="AnimatedObject.hpp" />
     <ClInclude Include="Background.hpp" />
     <ClInclude Include="Character.hpp" />

@@ -54,7 +54,8 @@ void Game::Level::addTiles() //generate tiles and collsion boxes
 	
 	
 	for (Tile& t : tiles) {
-		collisionBoxes.push_back(sf::FloatRect(t.getPosition().x, t.getPosition().y, 12, 12));
+//		collisionBoxes.push_back(sf::FloatRect(t.getPosition().x, t.getPosition().y, 12, 12);
+		collisionBoxes.push_back(AABB(sf::Vector2f(12,12),t.getPosition()));
 	}
 
 	

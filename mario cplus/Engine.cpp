@@ -69,13 +69,9 @@ void Game::Engine::Start()
 		rw->setView(currentView);
 		//back.draw(*rw, sf::RenderStates::Default);
 		currentLevel.draw(*rw);
-		c.update(currentView);
-		e.update(c);
-		if (collisionCheck(c, e) == collisionType::GENERIC) {
-			c.hit(*rw);
-			std::this_thread::sleep_for(std::chrono::milliseconds(10000));
-			return;
-		};
+		c.update(currentLevel);
+		currentView.setCenter(c.getPosition().x,640.f);
+		e.update(this->c);
 
 
 
@@ -87,25 +83,3 @@ void Game::Engine::Start()
 
 		}
 	}
-Game::Engine::collisionType Game::Engine::collisionCheck(Character & c, Tile & t)
-{
-	sf::FloatRect checkBox(c.getPosition().x - 640, 0.f, 1280, 720.f);
-	if (!checkBox.contains(t.getPosition())) {//filter out tiles not in the immediate area
-		return collisionType::NOCOL;
-	}
-	else {
-
-	}
-}
-
-Game::Engine::collisionType Game::Engine::collisionCheck(Character & ch, Enemy & e)
-{
-	if (c.IsJumping && ch.getCollisionBox().intersects(e.getCollisionBox())) {
-		return collisionType::TOP;
-	}
-	else if (ch.getCollisionBox().intersects(e.getCollisionBox())) {
-		return collisionType::GENERIC;
-	}
-	return collisionType::NOCOL;
-}
-

@@ -1,10 +1,13 @@
 #include "Character.hpp"
 #include <iostream>
+#include "Enemy.hpp"
+#include "Tile.hpp"
+
 
 
 Game::Character::Character(const Vector2f& startPos, const Vector2f& startSize) 
 	: AnimatedObject(startPos,startSize,6)
-	,IsJumping(false), IsWalking(false),StartSpeed(0.2f,1.f)
+	, IsJumping(false), IsWalking(false),StartSpeed(0.2f,1.f)
 
 {
 	animationClock.restart();
@@ -20,7 +23,7 @@ Game::Character::Character(const Vector2f& startPos, const Vector2f& startSize)
 	sprite->setTextureRect(SpriteStates[0]);//start standing
 	sprite->setPosition(position);
 	sprite->setScale(scaleFactor);
-	IsVisible = true;
+	IsMovable = true;
 
 }
 
@@ -37,14 +40,14 @@ void Game::Character::addSprites()
 	SpriteStates.push_back(sf::IntRect(155,0,17,17));
 	SpriteStates.push_back(sf::IntRect(187, 17, 15, 17));
 }
-void Game::Character::update(sf::View& v)
+void Game::Character::update(Level& l)
 //updates the position of the sprite on the screen
 {
 	changeSprite();
 	float delta = static_cast<float>( speedClock.restart().asMilliseconds());//time since last frame
-	collisionBox = sprite->getGlobalBounds();//set collision box
+	collisionBox.setPosition(this->position);//set collision box
 	if (IsJumping) {
-		this->move(delta, v);
+		this->move(delta, l);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
 		this->jump();
@@ -60,7 +63,7 @@ void Game::Character::update(sf::View& v)
 			sprite->setScale(-1, 1);
 			travelling = direction::LEFT;
 			velocity.x = StartSpeed.x;
-			this->move(delta, v);
+			this->move(delta,l);
 			return;
 
 		}
@@ -69,7 +72,7 @@ void Game::Character::update(sf::View& v)
 			sprite->setScale(1, 1);
 			velocity.x = StartSpeed.x;
 			travelling = direction::RIGHT;
-			this->move(delta, v);
+			this->move(delta,l);
 			return;
 
 		}
@@ -105,44 +108,49 @@ void Game::Character::jump()
 	}
 	
 }
-void Game::Character::move(float delta, sf::View& v)
+
+void Game::Character::move(float delta, Level& l)
 //change the position of the player depending on whether
 //they are jumping or not.
 {
+	sf::Vector2f oldPos = this->position;
+	sf::Vector2f newPos = oldPos;
 	
+	if (collisionCheck(l)) {
+		sprite->setPosition(this->collisionBox.getMinVector());
+		this->position = sprite->getPosition();
+		
+
+	}
 	switch (travelling) {
 	case direction::LEFT:
 		if (IsJumping) {
 			return;
 		}
 		IsWalking = true;
-		v.move(delta * -velocity.x, 0.f);
-		this->sprite->move(delta * -velocity.x, 0.f);
-		this->position += sf::Vector2f(delta * -velocity.x, 0.f);
+		newPos += sf::Vector2f(delta * -velocity.x, 0.f);
 		break;
 	case direction::RIGHT:
 		if (IsJumping) {
 			return;
 		}
 		IsWalking = true;
-		v.move(delta * velocity.x, 0.f);
-		this->sprite->move(delta * velocity.x, 0.f);
-		this->position += sf::Vector2f(delta * velocity.x, 0.f);
+		newPos += sf::Vector2f(delta * velocity.x, 0.f);
 		break;
 	case direction::UP:
 		if (IsJumping) {
-			if (this->position.y > 600) {
-				this->position.y = 600;
-				this->sprite->setPosition(sf::Vector2f(this->position.x,600));
+			if (this->collisionCheck(l)) {
+				this->position = oldPos;
+				this->sprite->setPosition(oldPos);
 				velocity = VelocityBeforeJumping;
 				IsJumping = false;
 				IsWalking = false;
 				return;
 			}
 			velocity.y -= acceleration.y;
-			v.move(delta * VelocityBeforeJumping.x, 0);
+
 			this->sprite->move(delta * VelocityBeforeJumping.x, delta * -velocity.y);
-			
+
 			this->position += sf::Vector2f(delta * VelocityBeforeJumping.x, delta * -velocity.y);
 		}
 		break;
@@ -151,10 +159,15 @@ void Game::Character::move(float delta, sf::View& v)
 		IsWalking = false;
 		currSprite = 0;
 		break;
-	
-		
+
+
 	}
+	sprite->setPosition(newPos);
+	this->position = newPos;
+
 }
+
+
 
 
 
@@ -166,10 +179,29 @@ void Game::Character::DisplayInfo()
 
 void Game::Character::Draw(sf::RenderTarget & target, const sf::RenderStates & states)
 {
-	if(IsVisible)
+	if(IsMovable)
 		target.draw(*sprite,states.Default);
 }
 
+bool Game::Character::collisionCheck(Enemy & e)
+{
+	if (!this->collisionBox.IsColliding(e.getCollisionBox())) {
+		return false;
+	}
+	else {
+		return true;
+	}
+}
+bool Game::Character::collisionCheck(Level & l)
+{
+	for (AABB boundingBox : l.getCollisionBoxes()) {
+		if (this->collisionBox.IsColliding(boundingBox)) {
+			return true;
+		}
+		
+	}
+	return false;
+}
 void Game::Character::changeSprite(int changeTo)
 {
 	
@@ -206,7 +238,7 @@ void Game::Character::hit(sf::RenderWindow& rw)
 	f.loadFromFile("C://Windows//Fonts//Arial.ttf");
 	
 	sf::Text t("you lost", f, 40u);
-	t.setFillColor(sf::Color::White);
+	t.setColor(sf::Color::White);
 	t.setPosition(this->position.x, this->position.y - 200);
 	rw.draw(*sprite);
 	rw.draw(t);

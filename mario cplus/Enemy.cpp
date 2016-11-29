@@ -9,7 +9,7 @@ const sf::Vector2f Game::Enemy::startSpeed(0.15f,0.0f);
 Game::Enemy::Enemy(const sf::Vector2f& startPos, const sf::Vector2f& startSize, int NoOfSprites, Game::EnemyType t)
 	:AnimatedObject(startPos, startSize, NoOfSprites), type(t), colFlag(false)
 {
-	collisionBox = sprite->getGlobalBounds();
+	collisionBox.setPosition(this->position);
 	switch (t) {
 	case EnemyType::TY1:
 		if (!texture->loadFromFile("Images\\goomba.png")) {
@@ -39,12 +39,12 @@ void Game::Enemy::Draw(sf::RenderTarget & target, const sf::RenderStates & state
 }
 void Game::Enemy::update(Character& ch)
 {
-	collisionBox = sprite->getGlobalBounds();
+	collisionBox.setPosition(this->position);
 	
 	float delta = static_cast<float>(speedClock.restart().asMilliseconds());
 	move(delta, ch);
 }
-void Game::Enemy::move(float delta,Game::Character &ch) {
+void Game::Enemy::move(float delta,Character &ch) {
 	switch (type) {
 	default://temporary
 		if (this->position.x == ch.getPosition().x) {

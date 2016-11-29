@@ -21,10 +21,18 @@ namespace Game {
 		std::vector<sf::IntRect> SpriteStates;//container of different sprites for animation
 		enum class direction {
 			LEFT,
-			RIGHT,									   
+			RIGHT,
 			UP,
 			DOWN,
 			STATIONARY
+		};
+		enum class collisionType {
+			TOP,
+			LEFT,
+			RIGHT,
+			BOTTOM,
+			NOCOL,
+			GENERIC,
 		};
 		direction travelling; //where the object is facing
 		int       currSprite; //current sprite the object is using
