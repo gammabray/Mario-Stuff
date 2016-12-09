@@ -13,8 +13,8 @@ void Game::Level::addTiles() //generate tiles and collsion boxes
 	}
 	input.close();
 	sf::Vector2f currentPos;//current position of tile creator
-	const float xOffset = 32;
-	const float yOffset = 32;
+	const float xOffset = 12;
+	const float yOffset = 12;
 	
 	float groundLevel;
 	//add tiles
@@ -22,11 +22,10 @@ void Game::Level::addTiles() //generate tiles and collsion boxes
 	for (std::string& s : layout) {
 		for (char& c : s){
 			if (c == '1') {
-				tiles.push_back(Tile(currentPos, sf::Vector2f(32, 32), static_cast<int>(c - '0')));
+				tiles.push_back(Tile(currentPos, sf::Vector2f(12, 12), static_cast<int>(c - '0')));
 				//the if statement above adds a tile to the container of tiles if
 				//the given character in the string is a tile ( not just air)
-				//the last line converts the ASCII character to its int value by 
-				//reducing the character by the value of the character 0.
+				//the last line converts the ASCII character to its int value (not it's ascii code)
 
 				count++;
 			}
@@ -39,7 +38,7 @@ void Game::Level::addTiles() //generate tiles and collsion boxes
 		currentPos.y += yOffset;
 
 	}
-	
+	tiles.shrink_to_fit();
 	groundLevel = currentPos.y;
 
 	//create collsion boxes for level
@@ -55,8 +54,8 @@ void Game::Level::addTiles() //generate tiles and collsion boxes
 	
 	
 	for (Tile& t : tiles) {
-
-		collisionBoxes.push_back(AABB(sf::Vector2f(xOffset,yOffset),t.getPosition()));
+//		collisionBoxes.push_back(sf::FloatRect(t.getPosition().x, t.getPosition().y, 12, 12);
+		collisionBoxes.push_back(AABB(sf::Vector2f(12,12),t.getPosition()));
 	}
 
 	

@@ -15,7 +15,7 @@ namespace Game {
 		/// Class: DisplayObject (Abstract)
 		/// 
 		///	The base class for all 'entities' in the game. This includes enemies and the character.
-		///	It is not a base class for the Level and Background classes as they are essentially containers for Level and Background Tiles.
+		///	It is not a base class for the Level and Background tiles as they are essentially containers for Level and Background Tiles.
 		///
 		///
 		///
@@ -35,11 +35,11 @@ namespace Game {
 		const Vector2f& getSize() { return size; }
 		void setSize(const Vector2f& value) { size = value; }
 		sf::Sprite getSprite() { return *sprite; }
-		AABB& getCollisionBox() { return collisionBox; }
+		const AABB& getCollisionBox() { return collisionBox; }
 		DisplayObject(const DisplayObject& copy);
 		virtual void Draw(sf::RenderTarget& target, const sf::RenderStates& states = sf::RenderStates::Default) = 0;//pure virtual function : implementation left to derived classes
 		DisplayObject(const Vector2f& startPos, const Vector2f &startSize);
-		
+		virtual ~DisplayObject();//virtual destructor so called first
 
 
 
