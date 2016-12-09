@@ -8,8 +8,10 @@ namespace Game {
 	public:
 		AABB(sf::Vector2f s, sf::Vector2f pos);
 		sf::Vector2f& getMinVector() { return mtv; }
+		sf::Vector2f& getPosition() { return position; }
+		sf::Vector2f& getSize() { return size; }
 		void setPosition(sf::Vector2f value) { position = value; }
-		const bool IsColliding(AABB other);
+		bool IsColliding(AABB& other, bool jumping = false);
 		
 
 	private:
@@ -19,7 +21,7 @@ namespace Game {
 		float halfwidth,
 			halfheight;
 		const sf::Vector2f toUnitVector(const sf::Vector2f v);
-		const float dotProduct(sf::Vector2f v1, sf::Vector2f v2) { return (v1.x * v2.x) + (v1.y * v2.y); }
+		const float dotProduct(sf::Vector2f v1, sf::Vector2f v2) { 	return (v1.x * v2.x) + (v1.y * v2.y); }
 
 
 	};

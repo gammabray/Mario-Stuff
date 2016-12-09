@@ -5,14 +5,30 @@ Game::AABB::AABB(sf::Vector2f s, sf::Vector2f pos) : size(s), position(pos), hal
 
 }
 
-const bool Game::AABB::IsColliding(AABB other)
+bool Game::AABB::IsColliding(AABB& other,bool jumping)
 {
-	std::vector<sf::Vector2f> axes{ toUnitVector(sf::Vector2f(1,0)),toUnitVector(sf::Vector2f(0,1)) };
-	axes.shrink_to_fit();
+	
 
-	sf::Vector2f lengthBetween((position.x + (size.x / 2)) - (other.position.x + (other.size.x / 2)), (position.y + (size.y / 2)) - (other.position.y + (other.size.y / 2)));
-	if ((abs(lengthBetween.x) < halfwidth + other.halfwidth) && (abs(lengthBetween.y) < halfheight + other.halfheight)) {
-		mtv = sf::Vector2f(abs(lengthBetween.x) - halfwidth - other.halfwidth, abs(lengthBetween.y) - halfheight - other.halfheight);
+	sf::Vector2f lengthBetween((position.x + halfwidth) - (other.position.x + other.halfwidth), (position.y + halfheight) - (other.position.y + (other.halfheight)));
+	
+	if ((abs(lengthBetween.x) < halfwidth + other.halfwidth) && (abs(lengthBetween.y) < halfheight + other.halfheight)) {	//there is a collision
+	
+		if (lengthBetween.x == 0 || lengthBetween.y == 0) { mtv = sf::Vector2f(0, 0);  return true; }
+		
+		if (abs(lengthBetween.y) > abs(lengthBetween.x)) {
+		
+				mtv = sf::Vector2f(0, -lengthBetween.y - halfheight - other.halfheight);//top collision		
+		}
+		if (abs(lengthBetween.y) < abs(lengthBetween.x)) {
+			if (lengthBetween.x < 0)
+				mtv = sf::Vector2f(-lengthBetween.x - halfwidth - other.halfwidth, 0);
+			else if (lengthBetween.x > 0)
+				mtv = sf::Vector2f(-lengthBetween.x + halfwidth + other.halfwidth, 0);
+		}
+		
+		if (jumping) {
+			mtv = sf::Vector2f(0, -lengthBetween.y - halfheight - other.halfheight);
+		}
 		return true;
 	}
 	
