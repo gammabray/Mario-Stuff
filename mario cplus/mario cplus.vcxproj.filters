@@ -48,6 +48,9 @@
     <ClCompile Include="AABB.cpp">
       <Filter>Class Definitions</Filter>
     </ClCompile>
+    <ClCompile Include="GameInterface.cpp">
+      <Filter>Class Definitions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DisplayObject.hpp">
@@ -75,6 +78,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AABB.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameInterface.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Coin.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
