@@ -19,9 +19,10 @@ namespace Game {
 		///
 		///</summary>
 	protected:
-		
-		Vector2f VelocityBeforeJumping;//what the players velocity was before the jump function was executed
-		const Vector2f StartSpeed;//original speed when starting to move
+		sf::Vector2f currentFallSpeed;
+		const sf::Vector2f fallAcceleration;
+		sf::Vector2f VelocityBeforeJumping;//what the players velocity was before the jump function was executed
+		const sf::Vector2f StartSpeed;//original speed when starting to move
 		
 
 	public:
@@ -36,7 +37,7 @@ namespace Game {
 		void Draw(sf::RenderTarget& target, const sf::RenderStates& states = sf::RenderStates::Default);
 		bool collisionCheck(Enemy& e);
 		bool collisionCheck(Level& l);
-
+	
 		void changeSprite(int changeTo = 0);//change what sprite is displayed
 		void hit(sf::RenderWindow& rw);//when hit by enemy
 

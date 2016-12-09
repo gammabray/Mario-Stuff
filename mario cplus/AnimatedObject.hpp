@@ -48,7 +48,7 @@ namespace Game {
 
 
 		AnimatedObject(const Vector2f& startPos, const Vector2f& startSize, int noOfSprites);
-		virtual ~AnimatedObject();
+		
 	};
 }
 #endif

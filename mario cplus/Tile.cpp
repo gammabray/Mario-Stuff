@@ -14,7 +14,7 @@ Game::Tile::Tile(const sf::Vector2f & startPos, const sf::Vector2f & startSize,G
 	case 0:
 		break;
 	case 1:
-		filepath = "Images\\tile1.gif";
+		filepath = "Images\\block.png";
 		break;
 	}
 	if (!texture->loadFromFile(filepath)) {
