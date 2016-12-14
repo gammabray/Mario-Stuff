@@ -80,3 +80,14 @@ void Game::Enemy::DisplayInfo()
 	std::cout << "position: " << this->position << std::endl;
 
 }
+
+bool Game::Enemy::collisionCheck(Level & l)
+{
+	for (AABB box : l.getCollisionBoxes())
+	{
+		if (this->collisionBox.IsColliding(box)) {
+			return true;
+		}
+	} 
+	return false;
+}
