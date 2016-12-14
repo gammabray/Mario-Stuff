@@ -2,19 +2,28 @@
 #ifndef GAME_INTERFACE_HPP
 #define GAME_INTERFACE_HPP
 #include "AnimatedObject.hpp"
+#include "PlayerTracker.hpp"
 
 namespace Game {
+	class PlayerTracker;
 	class GameInterface: public sf::Drawable {
 	private:
-		const sf::Font font;
-		std::pair<const std::string, int> score;
-		std::pair<const std::string, int> lives;
-		sf::Text scoreText;
+	
+
+		std::unique_ptr<sf::Font> font;
+
+		sf::Text scoreLabel;
+		sf::Text scoreValue;
+		sf::Text timeLabel;
+		sf::Text timeValue;
+		
 	public:
 		GameInterface();
-		void draw(sf::RenderTarget & target, sf::RenderStates states) const;
+		
+		void update(PlayerTracker& tracker,const sf::View& v);
+		void draw(sf::RenderTarget & target, sf::RenderStates states = sf::RenderStates::Default) const;
 	};
 
 }
 
-#endif#pragma once
+#endif
