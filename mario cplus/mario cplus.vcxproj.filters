@@ -51,6 +51,9 @@
     <ClCompile Include="GameInterface.cpp">
       <Filter>Class Definitions</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerTracker.cpp">
+      <Filter>Class Definitions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DisplayObject.hpp">
@@ -86,8 +89,25 @@
     <ClInclude Include="Coin.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerTracker.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerUp.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Images\block.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\char.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\tilesample.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
