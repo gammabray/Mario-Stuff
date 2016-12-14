@@ -21,7 +21,7 @@ namespace Game {
 		float halfwidth,
 			halfheight;
 		const sf::Vector2f toUnitVector(const sf::Vector2f v);
-		const float dotProduct(sf::Vector2f v1, sf::Vector2f v2) { 	return (v1.x * v2.x) + (v1.y * v2.y); }
+		
 
 
 	};

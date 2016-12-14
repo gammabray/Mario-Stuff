@@ -9,7 +9,7 @@ bool Game::AABB::IsColliding(AABB& other,bool jumping)
 {
 	
 
-	sf::Vector2f lengthBetween((position.x + halfwidth) - (other.position.x + other.halfwidth), (position.y + halfheight) - (other.position.y + (other.halfheight)));
+	sf::Vector2f lengthBetween((position.x) - (other.position.x), position.y - (other.position.y));
 	
 	if ((abs(lengthBetween.x) < halfwidth + other.halfwidth) && (abs(lengthBetween.y) < halfheight + other.halfheight)) {	//there is a collision
 	
