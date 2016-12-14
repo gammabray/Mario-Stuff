@@ -11,10 +11,6 @@ std::ostream & Game::operator<<(std::ostream & o, sf::Vector2f v)
 	o << "x: " << v.x << " y: " << v.y; return o;
 }
 
-Game::AnimatedObject::~AnimatedObject()
-{
 
-	
-}
 
 
