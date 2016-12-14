@@ -5,6 +5,7 @@
 #include <SFML\Graphics.hpp>
 #include "Level.hpp"
 #include "Enemy.hpp"
+#include "PlayerTracker.hpp"
 using sf::Vector2f;
 
 
@@ -19,15 +20,17 @@ namespace Game {
 		///
 		///</summary>
 	protected:
-		
-		Vector2f VelocityBeforeJumping;//what the players velocity was before the jump function was executed
-		const Vector2f StartSpeed;//original speed when starting to move
+		sf::Vector2f currentFallSpeed;
+		const sf::Vector2f fallAcceleration;
+		sf::Vector2f VelocityBeforeJumping;//what the players velocity was before the jump function was executed
+		const sf::Vector2f StartSpeed;//original speed when starting to move
 		
 
 	public:
+		PlayerTracker tracker;
 		bool IsWalking;
 		bool IsJumping;
-		Character(const Vector2f& startPos, const Vector2f& startSize);
+		Character(const Vector2f& startPos);
 		void addSprites();
 		void move(float delta, Level& l);//move character and view according to speed, whether player is jumping
 		void update(Level& l);//Update position of character on screen
@@ -36,7 +39,7 @@ namespace Game {
 		void Draw(sf::RenderTarget& target, const sf::RenderStates& states = sf::RenderStates::Default);
 		bool collisionCheck(Enemy& e);
 		bool collisionCheck(Level& l);
-
+	
 		void changeSprite(int changeTo = 0);//change what sprite is displayed
 		void hit(sf::RenderWindow& rw);//when hit by enemy
 
