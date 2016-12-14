@@ -6,6 +6,7 @@
 #include "Background.hpp"
 #include "Enemy.hpp"
 #include "Level.hpp"
+#include "GameInterface.hpp"
 #include <vector>
 #include <memory>
 
@@ -19,20 +20,21 @@ namespace Game {
 		sf::Texture        tempLevelTexture;//temporary before level implemented
 		sf::Sprite         tempLevelSprite;
 		Character          c;
-		Enemy			   e;
+		//Enemy			   e;
 		Logger             l;
-		sf::RenderWindow  *rw;
+		sf::RenderWindow   rw;
 		sf::View           currentView;
 		sf::Keyboard::Key  pressedKey;
 		Background		   back;
 		bool               keyFlag;
+		GameInterface	   gui;
 		
-		std::vector<Enemy*>  drawables;
+		
 	
 	public:
 		
 		Engine();
-		~Engine();
+		
 		void Start();
 
 
