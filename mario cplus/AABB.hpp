@@ -20,7 +20,7 @@ namespace Game {
 			mtv;//minimum translation vector - if colliding, the vector to push object out of the other object
 		float halfwidth,
 			halfheight;
-		const sf::Vector2f toUnitVector(const sf::Vector2f v);
+		
 		
 
 

@@ -37,10 +37,3 @@ bool Game::AABB::IsColliding(AABB& other,bool jumping)
 
 }
 
-const sf::Vector2f Game::AABB::toUnitVector(const sf::Vector2f v)
-{
-	float mag = sqrtf((v.x * v.x) + (v.y * v.y));
-	if (mag == 0) return v;
-	return sf::Vector2f(v.x / mag, v.y / mag);
-	
-}
