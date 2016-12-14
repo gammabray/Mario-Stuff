@@ -5,7 +5,7 @@
 #include <typeinfo>
 
 const sf::Vector2f Game::BackgroundTile::s_tilesize = sf::Vector2f(1000.f,720.f); // size of each piece of the background to be drawn
-std::vector<std::unique_ptr<sf::Texture>> Game::Background::s_blockTextures;
+std::vector<std::shared_ptr<sf::Texture>> Game::Background::s_blockTextures;
 
 //Functions for nested struct BackgroundTile
 Game::BackgroundTile::BackgroundTile(sf::Vector2f pos, sf::Texture& t)	: position(pos)
@@ -20,8 +20,8 @@ Game::BackgroundTile::BackgroundTile(sf::Vector2f pos, sf::Texture& t)	: positio
 
 Game::BackgroundTile::BackgroundTile(const BackgroundTile & copy) 
 {
-	this->texture = std::make_unique<sf::Texture>(*copy.texture);
-	this->sprite = std::make_unique<sf::Sprite>(*copy.sprite);
+	this->texture = copy.texture;
+	this->sprite = copy.sprite;
 	this->position = copy.position;
 	sprite->setTexture(*texture);
 	sprite->setPosition(position);
@@ -30,27 +30,18 @@ Game::BackgroundTile::BackgroundTile(const BackgroundTile & copy)
 
 }
 
-Game::BackgroundTile::~BackgroundTile()
-{
-	texture.release();
-	sprite.release();
-}
+
 
 void Game::Background::addTextures()
 {
-	s_blockTextures.push_back(std::make_unique<sf::Texture>());
+	s_blockTextures.push_back(std::make_shared<sf::Texture>());
 	if (!s_blockTextures[0]->loadFromFile("Images\\tilesample.png")) {						 
 		std::cout << "Failed to load first tile image" << std::endl;
 	}
 
 }
 
-void Game::Background::deleteTextures()
-{
-	for (auto &blocktexture : s_blockTextures) {
-		blocktexture.release();
-	}
-}
+
 
 Game::Background::Background(sf::Vector2f levelsize)
 {
