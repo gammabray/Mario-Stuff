@@ -5,8 +5,8 @@
 Game::Tile::Tile(const sf::Vector2f & startPos, const sf::Vector2f & startSize,Game::TileID ID, sf::Texture &t) : 
 	position(startPos),size(startSize)
 {
-	this->texture = std::make_unique<sf::Texture>();
-	this->sprite = std::make_unique<sf::Sprite>();
+	this->texture = std::make_shared<sf::Texture>();
+	this->sprite = std::make_shared<sf::Sprite>();
 
 	std::string filepath;
 	this->ID = ID;
@@ -14,7 +14,7 @@ Game::Tile::Tile(const sf::Vector2f & startPos, const sf::Vector2f & startSize,G
 	case 0:
 		break;
 	case 1:
-		filepath = "Images\\tile1.gif";
+		filepath = "Images\\block.png";
 		break;
 	}
 	if (!texture->loadFromFile(filepath)) {
@@ -22,19 +22,16 @@ Game::Tile::Tile(const sf::Vector2f & startPos, const sf::Vector2f & startSize,G
 	}
 	sprite->setTexture(*texture);
 	sprite->setPosition(position);
+	sprite->setOrigin(16.f, 16.f);
 }
 
 Game::Tile::Tile(const Tile & copy){
 	this->ID = copy.ID;
 	this->position = copy.position;
 	this->size = copy.size;
-	this->texture = std::make_unique<sf::Texture>(*copy.texture);
-	this->sprite = std::make_unique<sf::Sprite>(*copy.sprite);
+	this->texture = copy.texture;
+	this->sprite = copy.sprite;
 }
 
-Game::Tile::~Tile()
-{
-	texture.release();
-	sprite.release();
-}
+
 

@@ -19,12 +19,12 @@ namespace Game {
 		sf::Vector2f size;
 
 	public:
-		std::unique_ptr<sf::Texture> texture;
-		std::unique_ptr<sf::Sprite> sprite;
+		std::shared_ptr<sf::Texture> texture;
+		std::shared_ptr<sf::Sprite> sprite;
 		sf::Vector2f& getPosition(){ return position; }
 		Tile(const sf::Vector2f& startPos, const sf::Vector2f& startSize,TileID ID,sf::Texture &t = sf::Texture());
 		Tile(const Tile& copy);
-		~Tile();
+		
 	
 
 	};
