@@ -7,7 +7,7 @@
 #include <vector>
 #include <memory>
 
-using sf::Vector2f;
+
 
 
 namespace Game {
@@ -38,16 +38,17 @@ namespace Game {
 		int       currSprite; //current sprite the object is using
 		sf::Clock animationClock; //clock to time walkign animation
 		sf::Clock speedClock; // clock to measure time since last frame to smoothly move the same amount every frame		  
-		Vector2f  acceleration;
-		Vector2f  deceleration;
-		Vector2f  velocity;
+		sf::Vector2f  acceleration;
+		sf::Vector2f  deceleration;
+		sf::Vector2f  velocity;
+		const sf::Vector2f maxVelocity;
 		
 	public:
 		virtual void addSprites() = 0;//add co-ordinate information for sprite areas
 		virtual void DisplayInfo() = 0;// show where sprite is
 
 
-		AnimatedObject(const Vector2f& startPos, const Vector2f& startSize, int noOfSprites);
+		AnimatedObject(const Vector2f& startPos, const Vector2f& startSize, int noOfSprites, const sf::Vector2f& acceleration, const sf::Vector2f& maxSpeed);
 		
 	};
 }
