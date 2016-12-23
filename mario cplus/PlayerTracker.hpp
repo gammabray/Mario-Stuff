@@ -29,6 +29,7 @@ namespace Game {
 		 PlayerTracker();
 		 void trackTime();
 		 void setScore(int score);
+		 void addScore(int score);
 		 void addLife();
 		 void removeLife();
 		 //void updatePowerUp(PowerUpType type);	//not implemented power-ups yet.

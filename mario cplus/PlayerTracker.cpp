@@ -21,6 +21,10 @@ void Game::PlayerTracker::trackTime()
 
 void Game::PlayerTracker::setScore(int score)
 {
+	currScore = score;
+}
+void Game::PlayerTracker::addScore(int score)
+{
 	currScore += score;
 }
 
