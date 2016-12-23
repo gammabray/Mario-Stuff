@@ -5,13 +5,13 @@
 
 
 
-Game::Character::Character(const sf::Vector2f& startPos)
-	: AnimatedObject(startPos, sf::Vector2f(24,48), 6),
-	tracker(),
-	IsJumping(false), IsWalking(false), StartSpeed(0.2f, 1.f), fallAcceleration(0.f, 0.4f),currentFallSpeed(0.f,0.f)
 
+Game::Character::Character(const sf::Vector2f& startPos)
+	: AnimatedObject(startPos, sf::Vector2f(24, 48), 6),
+
+	IsJumping(false), IsWalking(false), StartSpeed(0.2f, 1.f), fallAcceleration(0.f, 0.4f), currentFallSpeed(0.f, 0.f)
 {
-	
+	tracker = new PlayerTracker();
 	animationClock.restart();
 	travelling = direction::STATIONARY;
 	acceleration = sf::Vector2f(0.f, 0.08f);
@@ -27,6 +27,11 @@ Game::Character::Character(const sf::Vector2f& startPos)
 	sprite->setOrigin(12,24.f);
 	IsMovable = true;
 
+}
+
+Game::Character::~Character()
+{
+	delete tracker;
 }
 
 
@@ -48,7 +53,7 @@ void Game::Character::update(Level& l)
 
 	changeSprite();
 	float delta = static_cast<float>(speedClock.restart().asMilliseconds());//time since last frame
-	tracker.trackTime();
+	tracker->trackTime();
 	if (IsJumping) {
 		this->move(delta, l);
 	}
@@ -82,11 +87,8 @@ void Game::Character::update(Level& l)
 
 
 		}
-		/*if (!collisionCheck(l)) {
-			travelling = direction::DOWN;
-			this->move(delta, l);
-			return;
-		}*/
+		
+		
 		else {
 			travelling = direction::STATIONARY;
 		}

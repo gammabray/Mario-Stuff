@@ -6,11 +6,11 @@
 #include "Level.hpp"
 #include "Enemy.hpp"
 #include "PlayerTracker.hpp"
-using sf::Vector2f;
+
 
 
 namespace Game {
-	class Enemy;
+	class Enemy; class PlayerTracker;
 	class Character : public AnimatedObject
 	{
 		///<summary>
@@ -27,10 +27,13 @@ namespace Game {
 		
 
 	public:
-		PlayerTracker tracker;
+		PlayerTracker* tracker;
 		bool IsWalking;
 		bool IsJumping;
+
 		Character(const Vector2f& startPos);
+		~Character();
+
 		void addSprites();
 		void move(float delta, Level& l);//move character and view according to speed, whether player is jumping
 		void update(Level& l);//Update position of character on screen
@@ -38,8 +41,7 @@ namespace Game {
 		void DisplayInfo();
 		void Draw(sf::RenderTarget& target, const sf::RenderStates& states = sf::RenderStates::Default);
 		bool collisionCheck(Enemy& e);
-		bool collisionCheck(Level& l);
-	
+		bool collisionCheck(Level& l); 	
 		void changeSprite(int changeTo = 0);//change what sprite is displayed
 		void hit(sf::RenderWindow& rw);//when hit by enemy
 
