@@ -7,7 +7,8 @@ const sf::Vector2f Game::Enemy::startSpeed(0.15f,0.0f);
 
 
 Game::Enemy::Enemy(const sf::Vector2f& startPos, const sf::Vector2f& startSize, int NoOfSprites, Game::EnemyType t)
-	:AnimatedObject(startPos, startSize, NoOfSprites), type(t), colFlag(false)
+	:AnimatedObject(startPos, startSize, NoOfSprites,sf::Vector2f(0,0),sf::Vector2f(0.15f,0.f)),
+	type(t), colFlag(false)
 {
 	collisionBox.setPosition(this->position);
 	switch (t) {
@@ -83,9 +84,9 @@ void Game::Enemy::DisplayInfo()
 
 bool Game::Enemy::collisionCheck(Level & l)
 {
-	for (AABB box : l.getCollisionBoxes())
+	for (Tile& t : l.getTiles())
 	{
-		if (this->collisionBox.IsColliding(box)) {
+		if (this->collisionBox.IsColliding(t.getCollisionBox())) {
 			return true;
 		}
 	} 
