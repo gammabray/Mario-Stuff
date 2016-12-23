@@ -21,8 +21,8 @@ void Game::Level::addTiles() //generate tiles and collsion boxes
 	int count = 0;
 	for (std::string& s : layout) {
 		for (char& c : s){
-			if (c == '1') {
-				tiles.emplace_back(currentPos, sf::Vector2f(32, 32),tileID::DIRT);
+			if (c == tileID::DIRT) {
+				tiles.push_back(Tile(currentPos, sf::Vector2f(32, 32),tileID::DIRT));
 				//the if statement above adds a tile to the container of tiles if
 				//the given character in the string is a tile ( not just air)
 				//the last line converts the ASCII character to its int value by 
@@ -31,8 +31,8 @@ void Game::Level::addTiles() //generate tiles and collsion boxes
 				
 			}
 			else if (c == Coin::s_ID) {
-				coins.emplace_front(sf::Vector2f(currentPos.x + 16, currentPos.y));
-				//coins are created in the middle of the tile grid
+				coins.emplace_back(sf::Vector2f(currentPos.x, currentPos.y - 16));
+				//coins are created in the middle/top of the tile grid
 																				   
 			}
 			count++;
@@ -59,10 +59,7 @@ void Game::Level::addTiles() //generate tiles and collsion boxes
 
 	
 	
-	for (Tile& t : tiles) {
-
-		collisionBoxes.push_back(AABB(sf::Vector2f(xOffset,yOffset),t.getPosition()));
-	}
+	
 
 	
 	
@@ -77,7 +74,21 @@ Game::Level::Level(sf::Vector2f startSize)
 
 void Game::Level::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
-	for (auto& tile : tiles) {
-		target.draw(*tile.sprite);
+	for (auto& coin : coins) {
+		target.draw(coin.getSprite());
 	}
+	for (auto& tile : tiles) {
+		target.draw(tile.getSprite());
+	}
+}
+
+void Game::Level::eraseCoin(int index)
+{
+	try {
+		this->coins.erase(coins.begin() + index);
+	}
+	catch (std::out_of_range e) {
+		std::cout << e.what() << std::endl;
+	}
+	
 }

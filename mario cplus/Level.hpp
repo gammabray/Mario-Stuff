@@ -13,15 +13,15 @@ namespace Game {
 	class Level : public sf::Drawable {
 	private:
 		std::vector<Tile> tiles;
-		std::vector<AABB> collisionBoxes;
-		std::forward_list<Coin> coins; //linked list
+		std::vector<Coin> coins; 
 		void addTiles();
-	public:
+	public:														  
 		std::vector<Tile>& getTiles() { return tiles; }
-		std::vector<AABB>& getCollisionBoxes() { return collisionBoxes; }
+		std::vector<Coin>& getCoins() { return coins; }
+		
 		Level(sf::Vector2f startSize);
 		void draw(sf::RenderTarget & target, sf::RenderStates states = sf::RenderStates::Default) const;
-
+		void eraseCoin(int index);
 	};
 }
 
