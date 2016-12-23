@@ -20,7 +20,7 @@ namespace Game {
 		sf::Texture        tempLevelTexture;//temporary before level implemented
 		sf::Sprite         tempLevelSprite;
 		Character          c;
-		//Enemy			   e;
+		Enemy			   e;
 		Logger             l;
 		sf::RenderWindow   rw;
 		sf::View           currentView;
