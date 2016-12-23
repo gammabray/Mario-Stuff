@@ -4,11 +4,12 @@
 #include "DisplayObject.hpp"
 #include <iostream>
 namespace Game {
+	
 	class Coin : public DisplayObject {
 	public:
-		const static int s_ID = 3;
+		const static char s_ID = '3';
 		const static int s_scoreGiven = 25;
-		const static sf::Vector2f s_size ;
+		const static sf::Vector2f s_size;
 		Coin(const sf::Vector2f& startPos);
 		void Draw(sf::RenderTarget& target, const sf::RenderStates& states = sf::RenderStates::Default);
 	
