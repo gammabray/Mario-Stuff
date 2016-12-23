@@ -2,11 +2,15 @@
 #include <SFML\Graphics.hpp>
 #include <iostream>
 
-Game::Tile::Tile(const sf::Vector2f & startPos, const sf::Vector2f & startSize,Game::tileID ID, sf::Texture &t) : 
-	position(startPos),size(startSize)
+void Game::Tile::Draw(sf::RenderTarget & target, const sf::RenderStates & states)
 {
-	this->texture = std::make_shared<sf::Texture>();
-	this->sprite = std::make_shared<sf::Sprite>();
+	target.draw(*this->sprite);
+}
+
+Game::Tile::Tile(const sf::Vector2f & startPos, const sf::Vector2f & startSize,Game::tileID ID, sf::Texture &t) :
+	DisplayObject(startPos,startSize)
+{
+
 
 	std::string filepath;
 	this->ID = ID;
@@ -26,13 +30,6 @@ Game::Tile::Tile(const sf::Vector2f & startPos, const sf::Vector2f & startSize,G
 	sprite->setOrigin(16.f, 16.f);
 }
 
-Game::Tile::Tile(const Tile & copy){
-	this->ID = copy.ID;
-	this->position = copy.position;
-	this->size = copy.size;
-	this->texture = copy.texture;
-	this->sprite = copy.sprite;
-}
 
 
 
