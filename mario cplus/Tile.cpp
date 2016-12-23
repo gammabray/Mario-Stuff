@@ -2,7 +2,7 @@
 #include <SFML\Graphics.hpp>
 #include <iostream>
 
-Game::Tile::Tile(const sf::Vector2f & startPos, const sf::Vector2f & startSize,Game::TileID ID, sf::Texture &t) : 
+Game::Tile::Tile(const sf::Vector2f & startPos, const sf::Vector2f & startSize,Game::tileID ID, sf::Texture &t) : 
 	position(startPos),size(startSize)
 {
 	this->texture = std::make_shared<sf::Texture>();
@@ -11,10 +11,11 @@ Game::Tile::Tile(const sf::Vector2f & startPos, const sf::Vector2f & startSize,G
 	std::string filepath;
 	this->ID = ID;
 	switch (this->ID) {
-	case 0:
-		break;
-	case 1:
+	case tileID::DIRT:
 		filepath = "Images\\block.png";
+		break;
+	case tileID::SNOW:
+		
 		break;
 	}
 	if (!texture->loadFromFile(filepath)) {
