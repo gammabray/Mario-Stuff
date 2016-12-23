@@ -23,6 +23,7 @@ namespace Game {
 		sf::Vector2f currentFallSpeed;
 		const sf::Vector2f fallAcceleration;
 		sf::Vector2f VelocityBeforeJumping;//what the players velocity was before the jump function was executed
+		direction directionBeforeJumping;
 		const sf::Vector2f StartSpeed;//original speed when starting to move
 		
 

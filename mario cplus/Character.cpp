@@ -7,14 +7,13 @@
 
 
 Game::Character::Character(const sf::Vector2f& startPos)
-	: AnimatedObject(startPos, sf::Vector2f(24, 48), 6),
-
-	IsJumping(false), IsWalking(false), StartSpeed(0.2f, 1.f), fallAcceleration(0.f, 0.4f), currentFallSpeed(0.f, 0.f)
+	: AnimatedObject(startPos, sf::Vector2f(24, 48), 6,sf::Vector2f(0.02f,0.08f),sf::Vector2f(0.3f,2.f)),
+	IsJumping(false), IsWalking(false), StartSpeed(0.0f, 1.f), fallAcceleration(0.f, 0.08f), currentFallSpeed(0.f, 0.f)
 {
 	tracker = new PlayerTracker();
 	animationClock.restart();
 	travelling = direction::STATIONARY;
-	acceleration = sf::Vector2f(0.f, 0.08f);
+	
 	if (!texture->loadFromFile("Images\\char.png")) {
 		texture.release();//delete texture
 		std::cout << "Failed to load Texture for Character..." << std::endl;
@@ -24,7 +23,7 @@ Game::Character::Character(const sf::Vector2f& startPos)
 	sprite->setTextureRect(SpriteStates[0]);//start standing
 	sprite->setPosition(position);
 	sprite->setScale(scaleFactor);
-	sprite->setOrigin(12,24.f);
+	
 	IsMovable = true;
 
 }
@@ -69,9 +68,12 @@ void Game::Character::update(Level& l)
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		{
+			if (!IsWalking) {  //just started walking
+				velocity.x = StartSpeed.x;
+			}
 			sprite->setScale(-1, 1);
 			travelling = direction::LEFT;
-			velocity.x = StartSpeed.x;
+			
 			this->move(delta, l);
 			return;
 
@@ -79,8 +81,11 @@ void Game::Character::update(Level& l)
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		{
+			if (!IsWalking) {  //just started walking
+				velocity.x = StartSpeed.x;
+			}
 			sprite->setScale(1, 1);
-			velocity.x = StartSpeed.x;
+			
 			travelling = direction::RIGHT;
 			this->move(delta, l);
 			return;
@@ -114,6 +119,7 @@ void Game::Character::jump()
 			VelocityBeforeJumping.x = 0;
 			break;
 		}
+		directionBeforeJumping = travelling;
 		IsJumping = true;
 		IsWalking = false;
 		
@@ -129,7 +135,9 @@ void Game::Character::move(float delta, Level& l)
 {
 	sf::Vector2f oldPos = this->position;
 	sf::Vector2f newPos = oldPos;
-	
+	if (IsWalking && velocity.x < maxVelocity.x) {
+		velocity.x += acceleration.x;
+	}
 	
 	switch (travelling) {
 	case direction::LEFT:
@@ -178,12 +186,18 @@ void Game::Character::move(float delta, Level& l)
 	
 	if (this->collisionCheck(l)) {
 		if (IsJumping) {
-			velocity = VelocityBeforeJumping;
+			velocity = directionBeforeJumping == direction::RIGHT? VelocityBeforeJumping : -VelocityBeforeJumping;
+			if (VelocityBeforeJumping.x != 0.f) {
+				this->IsWalking = true;
+			}
+			else {
+				IsWalking = false;
+			}
 		}
 		
 		this->sprite->move(this->collisionBox.getMinVector());
 		IsJumping = false;
-		IsWalking = false;
+	
 		
 	}
 	else {
@@ -218,21 +232,23 @@ void Game::Character::Draw(sf::RenderTarget & target, const sf::RenderStates & s
 bool Game::Character::collisionCheck(Enemy & e)
 //Checks for collision with an enemy
 {
-	if (!this->collisionBox.IsColliding(e.getCollisionBox())) {
-		return false;
-	}
-	else {
-		return true;
-	}
-}
+	return this->collisionBox.IsColliding(e.getCollisionBox());
+} 
+
 bool Game::Character::collisionCheck(Level & l)
-//checks for collision between each tile of the level and the player
+//checks for collision between the coins and the player, and then the
+//the tiles and they player. For coins the player is given score if they 
 {
+	for (int i = 0; i < l.getCoins().size(); i++) {
+		if (this->collisionBox.IsColliding(l.getCoins()[i].getCollisionBox())) {
+			l.eraseCoin(i);
+			tracker->addScore(Coin::s_scoreGiven);
+		}
+	}
 	
-	
-	for (AABB boundingBox : l.getCollisionBoxes()) {
+	for (Tile& t : l.getTiles()) {
 		
-		if (this->collisionBox.IsColliding(boundingBox)) {
+		if (this->collisionBox.IsColliding(t.getCollisionBox())) {
 			return true;
 		}
 		
