@@ -69,7 +69,7 @@ std::string Game::GameInterface::convertToStandardTime(sf::Time & t) //convert t
 {
 	std::stringstream ss;
 	ss << std::setfill('0') << std::setw(2) << static_cast<int>(t.asSeconds() / 60) << ":";//minutes
-	ss << std::setfill('0') << std::setw(2) << static_cast<int>(t.asSeconds() - static_cast<int>(t.asSeconds() / 60)) << ":";//seconds
+	ss << std::setfill('0') << std::setw(2) << static_cast<int>(t.asSeconds() - static_cast<int>(t.asSeconds() / 60) * 60) << ":";//seconds
 	ss << std::setfill('0') << std::setprecision(3) << t.asMilliseconds() - static_cast<int>(t.asSeconds()) * 1000; //milliseconds
 	return ss.str();
 	
