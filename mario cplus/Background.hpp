@@ -32,7 +32,7 @@ namespace Game {
 		void generateBackgroundTiles(int NoOfTiles);//create background tiles based off of how big the level is
 		sf::Vector2f levelSize;
 	public:
-		static void addTextures();
+		static void s_addTextures();
 		
 		Background(sf::Vector2f levelsize);
 		void draw(sf::RenderTarget & target, sf::RenderStates states) const;//draw all to screen

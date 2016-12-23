@@ -32,7 +32,7 @@ Game::BackgroundTile::BackgroundTile(const BackgroundTile & copy)
 
 
 
-void Game::Background::addTextures()
+void Game::Background::s_addTextures()
 {
 	s_blockTextures.push_back(std::make_shared<sf::Texture>());
 	if (!s_blockTextures[0]->loadFromFile("Images\\tilesample.png")) {						 
