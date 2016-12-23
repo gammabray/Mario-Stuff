@@ -22,15 +22,20 @@ void Game::Level::addTiles() //generate tiles and collsion boxes
 	for (std::string& s : layout) {
 		for (char& c : s){
 			if (c == '1') {
-				tiles.push_back(Tile(currentPos, sf::Vector2f(32, 32), static_cast<int>(c - '0')));
+				tiles.emplace_back(currentPos, sf::Vector2f(32, 32),tileID::DIRT);
 				//the if statement above adds a tile to the container of tiles if
 				//the given character in the string is a tile ( not just air)
 				//the last line converts the ASCII character to its int value by 
 				//reducing the character by the value of the character 0.
 
-				count++;
-			}
 				
+			}
+			else if (c == Coin::s_ID) {
+				coins.emplace_front(sf::Vector2f(currentPos.x + 16, currentPos.y));
+				//coins are created in the middle of the tile grid
+																				   
+			}
+			count++;
 			
 			currentPos.x += xOffset;
 

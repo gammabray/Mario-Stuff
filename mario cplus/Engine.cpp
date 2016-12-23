@@ -7,9 +7,6 @@
 
 
 Game::Engine::Engine() :
-	//This is a C++ initialization list.
-	//It is used to directly initialize the non pointer fields of the class.
-
 	c(sf::Vector2f(640, 360)), 
 	currentView(sf::Vector2f(640, 360), sf::Vector2f(1280, 720)),
 	back(sf::Vector2f(4000, 720)),
@@ -61,7 +58,7 @@ void Game::Engine::Start()
 		currentView.setCenter(c.getPosition().x, 640.f);
 		
 		rw.setView(currentView);
-		//back.draw(rw, sf::RenderStates::Default);
+		back.draw(rw, sf::RenderStates::Default);
 		currentLevel.draw(rw);
 		c.update(currentLevel);
 		
@@ -70,7 +67,7 @@ void Game::Engine::Start()
 
 
 			c.Draw(rw);
-			gui.update(c.tracker, currentView);
+			gui.update(*c.tracker, currentView);
 			gui.draw(rw);
 			//e.DisplayInfo();
 			//e.Draw(rw);

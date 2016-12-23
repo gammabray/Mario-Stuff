@@ -54,6 +54,9 @@
     <ClCompile Include="PlayerTracker.cpp">
       <Filter>Class Definitions</Filter>
     </ClCompile>
+    <ClCompile Include="Coin.cpp">
+      <Filter>Class Definitions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DisplayObject.hpp">
@@ -97,9 +100,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="Images\block.png">
       <Filter>Resource Files</Filter>
     </Image>
@@ -109,5 +109,8 @@
     <Image Include="Images\tilesample.png">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
 </Project>

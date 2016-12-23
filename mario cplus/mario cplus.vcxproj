@@ -23,6 +23,7 @@
     <ClCompile Include="AnimatedObject.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="Coin.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="GameInterface.cpp" />
@@ -48,12 +49,12 @@
     <ClInclude Include="Tile.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="Images\block.png" />
     <Image Include="Images\char.png" />
     <Image Include="Images\tilesample.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6952d47b-ec73-4fdc-aca9-efe195e3ea56}</ProjectGuid>

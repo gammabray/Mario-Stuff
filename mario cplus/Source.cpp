@@ -3,7 +3,7 @@
 
 int main() {
 
-	Game::Background::addTextures();
+	Game::Background::s_addTextures();
 	Game::Engine engine;
 	engine.Start();
 	

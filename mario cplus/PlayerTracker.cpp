@@ -8,21 +8,15 @@
 
 
 
-Game::PlayerTracker::PlayerTracker() : currScore(0), currLives(3), timeSpent("0"), clock(), isDead(false)
+Game::PlayerTracker::PlayerTracker() :  isDead(false)
 {
-
+	currScore = 0;
+	clock.restart();
 }
-std::string Game::PlayerTracker::convertToStandardTime(sf::Time & t) //e.g in the form minutes:seconds (12:03)
-{
-	std::stringstream ss;
-	ss << std::fixed << std::setprecision(3) << t.asSeconds();
-	return ss.str();
-	
-
-}	 
+ 
 void Game::PlayerTracker::trackTime()
 {
-	timeSpent = convertToStandardTime(clock.getElapsedTime());
+	timeSpent = this->clock.getElapsedTime();
 }
 
 void Game::PlayerTracker::setScore(int score)

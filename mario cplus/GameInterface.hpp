@@ -3,19 +3,22 @@
 #define GAME_INTERFACE_HPP
 #include "AnimatedObject.hpp"
 #include "PlayerTracker.hpp"
+#include <sstream>
+#include <iomanip>
 
 namespace Game {
-	class PlayerTracker;
+	class PlayerTracker; // forward declaration
 	class GameInterface: public sf::Drawable {
 	private:
 	
 
 		std::unique_ptr<sf::Font> font;
-
+		static std::string convertToStandardTime(sf::Time& t);
 		sf::Text scoreLabel;
 		sf::Text scoreValue;
 		sf::Text timeLabel;
 		sf::Text timeValue;
+		
 		
 	public:
 		GameInterface();

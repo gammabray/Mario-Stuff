@@ -3,14 +3,18 @@
 #define LEVEL_HPP
 #include <SFML\Graphics.hpp>
 #include <vector>
-#include "Tile.hpp"
 #include <fstream>
+#include <forward_list>
+#include "Tile.hpp"
 #include "AABB.hpp"
+#include "Coin.hpp"
+
 namespace Game {
 	class Level : public sf::Drawable {
 	private:
 		std::vector<Tile> tiles;
 		std::vector<AABB> collisionBoxes;
+		std::forward_list<Coin> coins; //linked list
 		void addTiles();
 	public:
 		std::vector<Tile>& getTiles() { return tiles; }

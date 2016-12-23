@@ -1,5 +1,8 @@
 #include "GameInterface.hpp"
 
+
+
+
 Game::GameInterface::GameInterface()
 {
 	font = std::make_unique<sf::Font>();
@@ -44,9 +47,9 @@ void Game::GameInterface::update(PlayerTracker & tracker,const sf::View& v)
 	scoreValue.setPosition(v.getCenter().x - 500, v.getCenter().y - 360);
 	scoreValue.setString(std::to_string(tracker.currScore));
 
-	timeLabel.setPosition(v.getCenter().x + 400, v.getCenter().y - 360);
-	timeValue.setPosition(v.getCenter().x + 500, v.getCenter().y - 360);
-	timeValue.setString(tracker.timeSpent);
+	timeLabel.setPosition(v.getCenter().x + 380, v.getCenter().y - 360);
+	timeValue.setPosition(v.getCenter().x + 480, v.getCenter().y - 360);
+	timeValue.setString(convertToStandardTime(tracker.timeSpent));
 
 
 }
@@ -59,5 +62,15 @@ void Game::GameInterface::draw(sf::RenderTarget & target, sf::RenderStates state
 	target.draw(scoreLabel);
 	
 
+	
+}
+
+std::string Game::GameInterface::convertToStandardTime(sf::Time & t) //convert to min:second:ms
+{
+	std::stringstream ss;
+	ss << std::setfill('0') << std::setw(2) << static_cast<int>(t.asSeconds() / 60) << ":";//minutes
+	ss << std::setfill('0') << std::setw(2) << static_cast<int>(t.asSeconds() - static_cast<int>(t.asSeconds() / 60)) << ":";//seconds
+	ss << std::setfill('0') << std::setprecision(3) << t.asMilliseconds() - static_cast<int>(t.asSeconds()) * 1000; //milliseconds
+	return ss.str();
 	
 }

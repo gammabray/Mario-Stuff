@@ -10,7 +10,7 @@
 ///Tracks information about the player in the game.
 ///</summary>
 namespace Game {
-	class GameInterface;
+	
 	class PlayerTracker {
 	 private:
 		int currScore;
@@ -21,8 +21,8 @@ namespace Game {
 		
 		friend class GameInterface;//to allow the GameInterface class to get all information
 								   // about the player without public methods
-		std::string convertToStandardTime(sf::Time& t);
-		std::string timeSpent;
+		
+		sf::Time timeSpent;
 		
 	 public:
 		 bool isDead;
