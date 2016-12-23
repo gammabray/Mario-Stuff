@@ -28,15 +28,14 @@ namespace Game {
 		std::unique_ptr<sf::Texture> texture;
 		std::unique_ptr<sf::Sprite>  sprite;
 		AABB collisionBox;
-		bool           IsMovable;
+		bool IsMovable;
 	public:
 		const Vector2f& getPosition() { return position; }
 		void setPosition(const Vector2f& value) { position = value; }
 		const Vector2f& getSize() { return size; }
 		void setSize(const Vector2f& value) { size = value; }
-		sf::Sprite getSprite() { return *sprite; }
+		sf::Sprite getSprite() const { return *sprite; }
 		AABB& getCollisionBox() { return collisionBox; }
-		DisplayObject(const DisplayObject& copy);
 		virtual void Draw(sf::RenderTarget& target, const sf::RenderStates& states = sf::RenderStates::Default) = 0;//pure virtual function : implementation left to derived classes
 		DisplayObject(const Vector2f& startPos, const Vector2f &startSize);
 		
