@@ -8,18 +8,20 @@
 #include "Tile.hpp"
 #include "AABB.hpp"
 #include "Coin.hpp"
+#include <unordered_map>
 
 namespace Game {
 	class Level : public sf::Drawable {
 	private:
 		std::vector<Tile> tiles;
 		std::vector<Coin> coins; 
-		void addTiles();
+		void addTiles(int levelID);
+		const static int testLevelID = 0;
 	public:														  
 		std::vector<Tile>& getTiles() { return tiles; }
 		std::vector<Coin>& getCoins() { return coins; }
-		
-		Level(sf::Vector2f startSize);
+		const static std::unordered_map<int,sf::Vector2f> levelSizes;
+		Level(sf::Vector2f startSize,int levelID);
 		void draw(sf::RenderTarget & target, sf::RenderStates states = sf::RenderStates::Default) const;
 		void eraseCoin(int index);
 	};

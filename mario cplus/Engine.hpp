@@ -33,7 +33,7 @@ namespace Game {
 	
 	public:
 		
-		Engine();
+		Engine(int startLevel);
 		
 		void Start();
 

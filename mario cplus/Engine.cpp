@@ -6,12 +6,12 @@
 
 
 
-Game::Engine::Engine() :
+Game::Engine::Engine(int startLevel) :
 	c(sf::Vector2f(640, 360)), 
-	currentView(sf::Vector2f(640, 360), sf::Vector2f(1280, 720)),
-	back(sf::Vector2f(4000, 720)),
+	currentView(sf::Vector2f(640, 460), sf::Vector2f(1280, 720)),	
 	e(sf::Vector2f(1200, 600), sf::Vector2f(16,16), 0, Game::EnemyType::TY1),
-	currentLevel(sf::Vector2f(4000,720)),
+	currentLevel(sf::Vector2f(4000,720),startLevel),
+	back(Level::levelSizes.at(startLevel)),		 
 	rw(sf::VideoMode(1280, 720), "Game Title"),
 	gui()
 	
@@ -55,22 +55,23 @@ void Game::Engine::Start()
 		}
 		rw.clear();
 		
-		currentView.setCenter(c.getPosition().x, 640.f);
+		currentView.setCenter(c.getPosition().x, 460.f);
 		
 		rw.setView(currentView);
 		back.draw(rw, sf::RenderStates::Default);
 		currentLevel.draw(rw);
 		c.update(currentLevel);
 		
-		e.update(this->c);
+	//	e.update(this->c);
 		
 
 
 			c.Draw(rw);
 			gui.update(*c.tracker, currentView);
 			gui.draw(rw);
-			e.DisplayInfo();
-			e.Draw(rw);
+			
+		//	e.DisplayInfo();
+		//	e.Draw(rw);
 			rw.display();
 
 
