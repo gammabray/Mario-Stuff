@@ -242,3 +242,14 @@ ModelManifest.xml
 .fake/
 /mario cplus/mario cplus.zip
 /mario cplus/71216.zip
+/WindowsFormsApplication1/Properties/Settings.settings
+/WindowsFormsApplication1/Properties/Settings.Designer.cs
+/WindowsFormsApplication1/Properties/Resources.resx
+/WindowsFormsApplication1/Properties/Resources.Designer.cs
+/WindowsFormsApplication1/Properties/AssemblyInfo.cs
+/WindowsFormsApplication1/Program.cs
+/WindowsFormsApplication1/Level Editor.resx
+/WindowsFormsApplication1/Level Editor.Designer.cs
+/WindowsFormsApplication1/Level Editor.csproj
+/WindowsFormsApplication1/Level Editor.cs
+/WindowsFormsApplication1/App.config
