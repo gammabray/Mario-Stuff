@@ -29,8 +29,8 @@
     <ClCompile Include="GameInterface.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="PlayerTracker.cpp" />
-    <ClCompile Include="Source.cpp" />
     <ClCompile Include="DisplayObject.cpp" />
+    <ClCompile Include="Source.cpp" />
     <ClCompile Include="Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
