@@ -16,8 +16,10 @@ bool Game::AABB::IsColliding(AABB& other,bool jumping)
 		if (lengthBetween.x == 0 || lengthBetween.y == 0) { mtv = sf::Vector2f(0, 0);  return true; }
 		
 		if (abs(lengthBetween.y) > abs(lengthBetween.x)) {
-		
-				mtv = sf::Vector2f(0, -lengthBetween.y - halfheight - other.halfheight);//top collision		
+			if (lengthBetween.y < 0)
+				mtv = sf::Vector2f(0, -lengthBetween.y - halfheight - other.halfheight);//top collision
+			else if (lengthBetween.y > 0)
+				mtv = sf::Vector2f(0, -lengthBetween.y + halfheight + other.halfheight);;
 		}
 		if (abs(lengthBetween.y) < abs(lengthBetween.x)) {
 			if (lengthBetween.x < 0)
