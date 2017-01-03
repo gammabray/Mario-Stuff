@@ -16,7 +16,7 @@ namespace Game {
 		int currScore;
 		int currLives;
 		
-		PowerUpType currPowerUp;
+		PowerUp::PowerUpType currPowerUp;
 		sf::Clock clock;
 		
 		friend class GameInterface;//to allow the GameInterface class to get all information

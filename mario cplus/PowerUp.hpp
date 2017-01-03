@@ -1,16 +1,21 @@
 #pragma once
 #ifndef POWERUP_HPP
 #define POWERUP_HPP
-#include "AnimatedObject.hpp"
+#include "DisplayObject.hpp"
 #include "Character.hpp"
 namespace Game {
 	class Character;
-	enum class PowerUpType {
+	
+	class PowerUp : public DisplayObject {
+	public:	 
+		enum PowerUpType : char {
+			BETTERJUMP = 'J',
+			FIREBALL = 'F'
+		};
+		PowerUpType effect;
+		PowerUp(const sf::Vector2f& startPos);
 
-
-	};
-	class PowerUp : public AnimatedObject {
-		bool IsColliding(Character& ch);
+		void Draw(sf::RenderTarget& target, const sf::RenderStates& states = sf::RenderStates::Default);
 	};
 }
 #endif
