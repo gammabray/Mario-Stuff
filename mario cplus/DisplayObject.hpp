@@ -7,7 +7,6 @@
 #include <memory>
 #include "AABB.hpp"
 
-using sf::Vector2f;
 
 namespace Game {
 	class DisplayObject {
@@ -22,22 +21,22 @@ namespace Game {
 		///</summary>
 
 	protected:
-		Vector2f position;
-		Vector2f size;
-		Vector2f scaleFactor;
+		sf::Vector2f position;
+		sf::Vector2f size;
+		sf::Vector2f scaleFactor;
 		std::unique_ptr<sf::Texture> texture;
 		std::unique_ptr<sf::Sprite>  sprite;
 		AABB collisionBox;
 		bool IsMovable;
 	public:
-		const Vector2f& getPosition() { return position; }
-		void setPosition(const Vector2f& value) { position = value; }
-		const Vector2f& getSize() { return size; }
-		void setSize(const Vector2f& value) { size = value; }
+		const sf::Vector2f& getPosition() { return position; }
+		void setPosition(const sf::Vector2f& value) { position = value; }
+		const sf::Vector2f& getSize() { return size; }
+		void setSize(const sf::Vector2f& value) { size = value; }
 		sf::Sprite getSprite() const { return *sprite; }
 		AABB& getCollisionBox() { return collisionBox; }
 		virtual void Draw(sf::RenderTarget& target, const sf::RenderStates& states = sf::RenderStates::Default) = 0;//pure virtual function : implementation left to derived classes
-		DisplayObject(const Vector2f& startPos, const Vector2f &startSize);
+		DisplayObject(const sf::Vector2f& startPos, const sf::Vector2f &startSize);
 		
 
 
