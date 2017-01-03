@@ -18,8 +18,8 @@ Game::Tile::Tile(const sf::Vector2f & startPos, const sf::Vector2f & startSize,G
 	case tileID::DIRT:
 		filepath = "Images\\block.png";
 		break;
-	case tileID::SNOW:
-		
+	case tileID::METAL:
+		filepath = "Images\\metalblock.png";
 		break;
 	}
 	if (!texture->loadFromFile(filepath)) {

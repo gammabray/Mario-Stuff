@@ -9,6 +9,7 @@ namespace Game {
 		DIRT = '1',
 		SNOW,
 		SAND,
+		METAL
 	};
 	class Tile : public DisplayObject
 		///<summary>
