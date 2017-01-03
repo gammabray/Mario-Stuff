@@ -3,9 +3,11 @@
 #define CHARACTER_HPP
 #include "AnimatedObject.hpp"
 #include <SFML\Graphics.hpp>
+
 #include "Level.hpp"
 #include "Enemy.hpp"
 #include "PlayerTracker.hpp"
+
 
 
 
@@ -25,14 +27,14 @@ namespace Game {
 		sf::Vector2f VelocityBeforeJumping;//what the players velocity was before the jump function was executed
 		direction directionBeforeJumping;
 		const sf::Vector2f StartSpeed;//original speed when starting to move
-		
+		sf::Vector2f respawnPoint;
 
 	public:
 		PlayerTracker* tracker;
 		bool IsWalking;
 		bool IsJumping;
 
-		Character(const Vector2f& startPos);
+		Character(const sf::Vector2f& startPos);
 		~Character();
 
 		void addSprites();
@@ -45,7 +47,9 @@ namespace Game {
 		bool collisionCheck(Level& l); 	
 		void changeSprite(int changeTo = 0);//change what sprite is displayed
 		void hit(sf::RenderWindow& rw);//when hit by enemy
-
+		
+		void setRespawnPoint(const sf::Vector2f& value) { respawnPoint = value; }
+		sf::Vector2f& getRespawnPoint() { return respawnPoint; }
 
 
 	};

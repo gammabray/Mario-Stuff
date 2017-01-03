@@ -96,6 +96,7 @@ void Game::Character::update(Level& l)
 		
 		else {
 			travelling = direction::STATIONARY;
+			
 		}
 		
 	}
@@ -138,7 +139,8 @@ void Game::Character::move(float delta, Level& l)
 	if (IsWalking && velocity.x < maxVelocity.x) {
 		velocity.x += acceleration.x;
 	}
-	
+
+
 	switch (travelling) {
 	case direction::LEFT:
 		if (IsJumping) {
@@ -146,7 +148,7 @@ void Game::Character::move(float delta, Level& l)
 		}
 		IsWalking = true;
 		newPos += sf::Vector2f(delta * -velocity.x, 0.f);
-		
+
 		break;
 	case direction::RIGHT:
 		if (IsJumping) {
@@ -154,27 +156,21 @@ void Game::Character::move(float delta, Level& l)
 		}
 		IsWalking = true;
 		newPos += sf::Vector2f(delta * velocity.x, 0.f);
-		
+
 		break;
 	case direction::UP:
 		if (IsJumping) {
-			
-			velocity.y -= acceleration.y;
-
+			velocity.y -= fallAcceleration.y;
 			newPos += sf::Vector2f(delta * VelocityBeforeJumping.x, delta * -velocity.y);
-
-			
 		}
 		break;
 	case direction::DOWN:
 
-		if (!IsJumping) {
-			currentFallSpeed.y += fallAcceleration.y;
-			newPos.y += currentFallSpeed.y / 2;
-		}
+
+
 		break;
 	case direction::STATIONARY:
-		velocity = sf::Vector2f(0,0);
+		velocity = sf::Vector2f(0, 0);
 		currentFallSpeed = sf::Vector2f(0, 0);
 		IsWalking = false;
 		currSprite = 0;
@@ -182,6 +178,8 @@ void Game::Character::move(float delta, Level& l)
 
 
 	}
+	
+
 	collisionBox.setPosition(sprite->getPosition());
 	
 	if (this->collisionCheck(l)) {
