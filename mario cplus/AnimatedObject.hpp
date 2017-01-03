@@ -48,7 +48,7 @@ namespace Game {
 		virtual void DisplayInfo() = 0;// show where sprite is
 
 
-		AnimatedObject(const Vector2f& startPos, const Vector2f& startSize, int noOfSprites, const sf::Vector2f& acceleration, const sf::Vector2f& maxSpeed);
+		AnimatedObject(const sf::Vector2f& startPos, const sf::Vector2f& startSize, int noOfSprites, const sf::Vector2f& acceleration, const sf::Vector2f& maxSpeed);
 		
 	};
 }
