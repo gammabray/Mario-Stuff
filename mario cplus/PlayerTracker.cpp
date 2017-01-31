@@ -8,10 +8,11 @@
 
 
 
-Game::PlayerTracker::PlayerTracker() :  isDead(false)
+Game::PlayerTracker::PlayerTracker() :  AllLivesLost(false)
 {
 	currScore = 0;
 	clock.restart();
+	currLives = 999;
 }
  
 void Game::PlayerTracker::trackTime()
@@ -37,7 +38,7 @@ void Game::PlayerTracker::removeLife()
 {
 	currLives--;
 	if (currLives < 0) {
-		isDead = true;
+		AllLivesLost = true;
 	}
 }
 
