@@ -35,6 +35,16 @@ Game::GameInterface::GameInterface()
 	timeValue.setFont(*font);
 	timeValue.setFillColor(sf::Color::White);
 	timeValue.setCharacterSize(32);
+
+	lifeLabel.setString("Lives: ");
+	lifeLabel.setFont(*font);
+	lifeLabel.setFillColor(sf::Color::White);
+	lifeLabel.setCharacterSize(32);
+
+	lifeValue.setString("");
+	lifeValue.setFont(*font);
+	lifeValue.setFillColor(sf::Color::White);
+	lifeValue.setCharacterSize(32);
 	
 	
 	
@@ -51,6 +61,10 @@ void Game::GameInterface::update(PlayerTracker & tracker,const sf::View& v)
 	timeValue.setPosition(v.getCenter().x + 480, v.getCenter().y - 360);
 	timeValue.setString(convertToStandardTime(tracker.timeSpent));
 
+	lifeLabel.setPosition(v.getCenter().x + 400, v.getCenter().y + 300);
+	lifeValue.setPosition(v.getCenter().x + 500, v.getCenter().y + 300);
+	lifeValue.setString(std::to_string(tracker.currLives));
+
 
 }
 
@@ -60,6 +74,8 @@ void Game::GameInterface::draw(sf::RenderTarget & target, sf::RenderStates state
 	target.draw(timeValue);
 	target.draw(scoreValue);
 	target.draw(scoreLabel);
+	target.draw(lifeValue);
+	target.draw(lifeLabel);
 	
 
 	

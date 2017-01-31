@@ -18,6 +18,8 @@ namespace Game {
 		sf::Text scoreValue;
 		sf::Text timeLabel;
 		sf::Text timeValue;
+		sf::Text lifeLabel;
+		sf::Text lifeValue;
 	
 		
 		
