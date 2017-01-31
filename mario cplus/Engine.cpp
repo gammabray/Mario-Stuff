@@ -7,18 +7,19 @@
 
 
 Game::Engine::Engine(int startLevel) :
-	c(sf::Vector2f(640, 360)), 
+	c(sf::Vector2f(640, 500)), 
 	currentView(sf::Vector2f(640, 460), sf::Vector2f(1280, 720)),	
 	e(sf::Vector2f(1200, 600), sf::Vector2f(16,16), 0, Game::EnemyType::TY1),
-	currentLevel(sf::Vector2f(4000,720),startLevel),
+	currentLevel(Level::levelSizes.at(startLevel),startLevel),
 	back(Level::levelSizes.at(startLevel)),		 
 	rw(sf::VideoMode(1280, 720), "Game Title"),
-	gui()
+	gui(),
+	manager()
 	
 { 
 	
 
-	
+	rw.setFramerateLimit(120);
 	
 	
 }
@@ -30,9 +31,9 @@ void Game::Engine::Start()
 {
 	sf::Event event;
 
-	std::cout << sf::Texture::getMaximumSize() << std::endl;
-	
-	rw.setFramerateLimit(60);
+
+
+	int NoOfFrames = 0 ;
 	while (rw.isOpen()) {
 		while (rw.pollEvent(event)) {
 			if (event.type == sf::Event::Closed) {
@@ -55,12 +56,23 @@ void Game::Engine::Start()
 		}
 		rw.clear();
 		
-		currentView.setCenter(c.getPosition().x, 460.f);
 		
-		rw.setView(currentView);
+		
+		currentView.setCenter(c.getPosition().x, 460.f);
 		back.draw(rw, sf::RenderStates::Default);
 		currentLevel.draw(rw);
-		c.update(currentLevel);
+		c.Update(currentLevel);
+	
+		manager.CheckCollision(c, currentLevel,rw,currentView);
+		if (manager.GetMinVector().x != 0 || manager.GetMinVector().y != 0) {
+			c.setPosition(sf::Vector2f(c.getPosition().x + manager.GetMinVector().x, c.getPosition().y + manager.GetMinVector().y));
+		}
+		
+	
+		manager.ResetMinimumVector();
+		rw.setView(currentView);
+		
+		
 		
 	//	e.update(this->c);
 		
@@ -70,10 +82,12 @@ void Game::Engine::Start()
 			gui.update(*c.tracker, currentView);
 			gui.draw(rw);
 			
+			
 		//	e.DisplayInfo();
 		//	e.Draw(rw);
 			rw.display();
-
+		
+			std::cout << "frame :" << ++NoOfFrames << std::endl;
 
 	}
 }
