@@ -43,10 +43,14 @@ namespace Game {
 		sf::Vector2f  velocity;
 		const sf::Vector2f maxVelocity;
 		
+		
 	public:
 		virtual void addSprites() = 0;//add co-ordinate information for sprite areas
 		virtual void DisplayInfo() = 0;// show where sprite is
-
+		const sf::Vector2f& getVelocity() { return velocity; }
+		void setVelocity(const sf::Vector2f& velocity) { this->velocity = velocity; }
+		const sf::Vector2f& getAcceleration() { return acceleration; };
+		bool  IsAccelerating;
 
 		AnimatedObject(const sf::Vector2f& startPos, const sf::Vector2f& startSize, int noOfSprites, const sf::Vector2f& acceleration, const sf::Vector2f& maxSpeed);
 		
