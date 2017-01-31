@@ -24,6 +24,7 @@ namespace Game {
 		Level(sf::Vector2f startSize,int levelID);
 		void draw(sf::RenderTarget & target, sf::RenderStates states = sf::RenderStates::Default) const;
 		void eraseCoin(int index);
+		sf::Vector2f respawnPoint;
 	};
 }
 
