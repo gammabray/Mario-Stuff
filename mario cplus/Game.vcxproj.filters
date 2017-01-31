@@ -5,117 +5,153 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files">
+    <Filter Include="Game">
+      <UniqueIdentifier>{d76cb37a-14d4-49ec-84a2-0397e3df4553}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Class Definitions">
+      <UniqueIdentifier>{8641405d-db89-4d8a-900b-0655ee1fe816}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
+    <Filter Include="Game\Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Class Definitions">
-      <UniqueIdentifier>{8641405d-db89-4d8a-900b-0655ee1fe816}</UniqueIdentifier>
+    <Filter Include="Interface">
+      <UniqueIdentifier>{053810ac-01b4-41de-808d-330610022fae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Resource Files\Levels">
+      <UniqueIdentifier>{6ce50ded-d1f0-483d-982b-e36c818f0eac}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DisplayObject.cpp">
-      <Filter>Class Definitions</Filter>
+    <ClCompile Include="AABB.cpp">
+      <Filter>Game\Class Definitions</Filter>
     </ClCompile>
     <ClCompile Include="AnimatedObject.cpp">
-      <Filter>Class Definitions</Filter>
-    </ClCompile>
-    <ClCompile Include="Character.cpp">
-      <Filter>Class Definitions</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine.cpp">
-      <Filter>Class Definitions</Filter>
-    </ClCompile>
-    <ClCompile Include="Tile.cpp">
-      <Filter>Class Definitions</Filter>
+      <Filter>Game\Class Definitions</Filter>
     </ClCompile>
     <ClCompile Include="Background.cpp">
-      <Filter>Class Definitions</Filter>
+      <Filter>Game\Class Definitions</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Class Definitions</Filter>
-    </ClCompile>
-    <ClCompile Include="Level.cpp">
-      <Filter>Class Definitions</Filter>
-    </ClCompile>
-    <ClCompile Include="AABB.cpp">
-      <Filter>Class Definitions</Filter>
-    </ClCompile>
-    <ClCompile Include="GameInterface.cpp">
-      <Filter>Class Definitions</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerTracker.cpp">
-      <Filter>Class Definitions</Filter>
+    <ClCompile Include="Character.cpp">
+      <Filter>Game\Class Definitions</Filter>
     </ClCompile>
     <ClCompile Include="Coin.cpp">
-      <Filter>Class Definitions</Filter>
+      <Filter>Game\Class Definitions</Filter>
+    </ClCompile>
+    <ClCompile Include="DisplayObject.cpp">
+      <Filter>Game\Class Definitions</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Game\Class Definitions</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine.cpp">
+      <Filter>Game\Class Definitions</Filter>
+    </ClCompile>
+    <ClCompile Include="GameInterface.cpp">
+      <Filter>Game\Class Definitions</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Game\Class Definitions</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerTracker.cpp">
+      <Filter>Game\Class Definitions</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Game\Class Definitions</Filter>
     </ClCompile>
     <ClCompile Include="Source.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldManager.cpp">
+      <Filter>Game\Class Definitions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DisplayObject.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="AABB.hpp">
+      <Filter>Game\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AnimatedObject.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Character.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tile.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Game\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Background.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Game\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Level.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AABB.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameInterface.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Character.hpp">
+      <Filter>Game\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Coin.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Game\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DisplayObject.hpp">
+      <Filter>Game\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.hpp">
+      <Filter>Game\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.hpp">
+      <Filter>Game\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameInterface.hpp">
+      <Filter>Game\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.hpp">
+      <Filter>Game\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PlayerTracker.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Game\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PowerUp.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Game\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.hpp">
+      <Filter>Game\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldManager.hpp">
+      <Filter>Game\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Images\block.png">
-      <Filter>Resource Files</Filter>
+      <Filter>Game\Resource Files</Filter>
     </Image>
     <Image Include="Images\char.png">
-      <Filter>Resource Files</Filter>
+      <Filter>Game\Resource Files</Filter>
     </Image>
     <Image Include="Images\tilesample.png">
-      <Filter>Resource Files</Filter>
+      <Filter>Game\Resource Files</Filter>
+    </Image>
+    <Image Include="Images\checkpole.png">
+      <Filter>Game\Resource Files</Filter>
+    </Image>
+    <Image Include="Images\Coin.png">
+      <Filter>Game\Resource Files</Filter>
+    </Image>
+    <Image Include="Images\leftblock.png">
+      <Filter>Game\Resource Files</Filter>
+    </Image>
+    <Image Include="Images\metalblock.png">
+      <Filter>Game\Resource Files</Filter>
+    </Image>
+    <Image Include="Images\rightblock.png">
+      <Filter>Game\Resource Files</Filter>
+    </Image>
+    <Image Include="Images\powerblock.png">
+      <Filter>Game\Resource Files</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Levels\level_one.txt">
+      <Filter>Game\Resource Files\Levels</Filter>
+    </Text>
     <Text Include="Levels\testlevel.txt">
-      <Filter>Resource Files</Filter>
+      <Filter>Game\Resource Files\Levels</Filter>
     </Text>
   </ItemGroup>
 </Project>
