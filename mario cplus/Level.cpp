@@ -1,7 +1,7 @@
 #include "Level.hpp"
 #include <cmath>
 const int Game::Level::testLevelID;
-const std::unordered_map<int, sf::Vector2f> Game::Level::levelSizes = { {1,sf::Vector2f(8000,1000)} };
+const std::unordered_map<int, sf::Vector2f> Game::Level::levelSizes = { {1,sf::Vector2f(8000,1000)},{0,sf::Vector2f(8000,1000) } };
 void Game::Level::addTiles(int levelID) //generate tiles and collsion boxes
 {
 	std::ifstream input;
@@ -10,9 +10,11 @@ void Game::Level::addTiles(int levelID) //generate tiles and collsion boxes
 	switch (levelID) {
 	case testLevelID:
 		filepath = "Levels\\testlevel.txt";
+		respawnPoint = sf::Vector2f(640, 500);
 		break;
 	case 1:
 		filepath = "Levels\\level_one.txt";
+		respawnPoint = sf::Vector2f(640,500);
 		
 
 	}
@@ -32,24 +34,39 @@ void Game::Level::addTiles(int levelID) //generate tiles and collsion boxes
 	int count = 0;
 	for (std::string& s : layout) {
 		for (char& c : s){
-			if (c == tileID::DIRT || c == 'L' || c == 'R') {
-				tiles.push_back(Tile(currentPos, sf::Vector2f(32, 32),tileID::DIRT));
-				//the if statement above adds a tile to the container of tiles if
-				//the given character in the string is a tile ( not just air)
-				//the last line converts the ASCII character to its int value by 
-				//reducing the character by the value of the character 0.
+			switch (c) {
+			case tileID::DIRT:
+				tiles.push_back(Tile(currentPos, sf::Vector2f(32, 32), tileID::DIRT));
+				break;
 
-				
-			}
-			else if (c == Coin::s_ID) {
+
+			case Coin::s_ID: 
 				coins.emplace_back(sf::Vector2f(currentPos.x, currentPos.y - 16));
 				//coins are created in the middle/top of the tile grid
-																				   
-			}
-			else if (c == tileID::METAL) {
+				break;
+			
+			case tileID::METAL: 
 				tiles.push_back(Tile(currentPos, sf::Vector2f(32, 32), tileID::METAL));
-				
-
+				break;
+			
+			case tileID::CHECKFLAG:
+				tiles.push_back(Tile(currentPos, sf::Vector2f(32, 32), tileID::CHECKFLAG));	 
+				break;
+			
+			case tileID::CHECKPOLE:
+				tiles.push_back(Tile(currentPos, sf::Vector2f(32, 32), tileID::CHECKPOLE));		
+				break;
+		
+			case tileID::LCORNER:
+				tiles.push_back(Tile(currentPos, sf::Vector2f(32, 32), tileID::LCORNER));	
+				break;
+			
+			case tileID::RCORNER:
+				tiles.push_back(Tile(currentPos, sf::Vector2f(32, 32), tileID::RCORNER));	  
+				break;
+			case tileID::POWERUP:
+				tiles.push_back(Tile(currentPos, sf::Vector2f(32, 32), tileID::POWERUP));
+				break;
 			}
 			count++;
 			
@@ -99,11 +116,7 @@ void Game::Level::draw(sf::RenderTarget & target, sf::RenderStates states) const
 
 void Game::Level::eraseCoin(int index)
 {
-	try {
+   
 		this->coins.erase(coins.begin() + index);
-	}
-	catch (std::out_of_range e) {
-		std::cout << e.what() << std::endl;
-	}
 	
 }
