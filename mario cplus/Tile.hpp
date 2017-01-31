@@ -9,7 +9,12 @@ namespace Game {
 		DIRT = '1',
 		SNOW,
 		SAND,
-		METAL
+		METAL,
+		POWERUP = 'P',
+		CHECKPOLE = 'C',
+		CHECKFLAG,
+		LCORNER = 'L',
+		RCORNER = 'R'
 	};
 	class Tile : public DisplayObject
 		///<summary>
@@ -21,9 +26,10 @@ namespace Game {
 
 	{
 	protected:
-		tileID ID;
+		
 	public:
 		
+		tileID ID;
 		void Draw(sf::RenderTarget& target, const sf::RenderStates& states = sf::RenderStates::Default);
 		Tile(const sf::Vector2f& startPos, const sf::Vector2f& startSize,tileID ID,sf::Texture &t = sf::Texture());
 		

@@ -21,6 +21,22 @@ Game::Tile::Tile(const sf::Vector2f & startPos, const sf::Vector2f & startSize,G
 	case tileID::METAL:
 		filepath = "Images\\metalblock.png";
 		break;
+	case tileID::CHECKPOLE:
+		filepath = "Images\\checkpole.png";
+		break;
+	case tileID::CHECKFLAG:
+		filepath = "Images\\checkflag.png";
+		break;
+	case tileID::LCORNER:
+		filepath = "Images\\leftblock.png";
+		break;
+	case tileID::RCORNER:
+		filepath = "Images\\rightblock.png";
+		break;
+	case tileID::POWERUP:
+		filepath = "Images\\powerblock.png";
+
+
 	}
 	if (!texture->loadFromFile(filepath)) {
 		std::cout << "Failed to load tile texture";
@@ -28,6 +44,7 @@ Game::Tile::Tile(const sf::Vector2f & startPos, const sf::Vector2f & startSize,G
 	sprite->setTexture(*texture);
 	sprite->setPosition(position);
 	sprite->setOrigin(16.f, 16.f);
+	boundingBox = sprite->getGlobalBounds();
 }
 
 
