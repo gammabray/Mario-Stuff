@@ -6,6 +6,7 @@ Game::Coin::Coin(const sf::Vector2f& startPos) : DisplayObject(startPos,s_size)
 		std::cout << "Failed to load texture for coin...";
 	}
 	sprite->setTexture(*texture);
+	boundingBox = sprite->getGlobalBounds();
 
 }
 
