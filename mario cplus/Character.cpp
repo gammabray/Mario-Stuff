@@ -8,7 +8,7 @@
 
 Game::Character::Character(const sf::Vector2f& startPos)
 	: AnimatedObject(startPos, sf::Vector2f(24, 48), 6,sf::Vector2f(0.02f,0.08f),sf::Vector2f(0.3f,2.f)),
-	IsJumping(false), IsWalking(false), StartSpeed(0.0f, 1.f), fallAcceleration(0.f, 0.08f), currentFallSpeed(0.f, 0.f)
+	IsJumping(false), IsWalking(false),CanFall(true) ,StartSpeed(0.4f, 1.f), fallAcceleration(0.f, 0.08f), currentFallSpeed(0.f, 0.f)
 {
 	tracker = new PlayerTracker();
 	animationClock.restart();
@@ -25,7 +25,8 @@ Game::Character::Character(const sf::Vector2f& startPos)
 	sprite->setScale(scaleFactor);
 	
 	IsMovable = true;
-
+	IsAccelerating = false;
+	velocity.x = StartSpeed.x;
 }
 
 Game::Character::~Character()
@@ -46,67 +47,94 @@ void Game::Character::addSprites()
 	SpriteStates.push_back(sf::IntRect(125,0, 24, 48));	//jump
 	SpriteStates.push_back(sf::IntRect(163, 0, 24, 48));//dead
 }
-void Game::Character::update(Level& l)
+void Game::Character::Update(Level& l)
 //updates the position of the sprite on the screen
-{
 
+{
+	if (!respawnPointSet) {
+		respawnPoint = l.respawnPoint;
+		respawnPointSet = true;
+	}
+	if (IsDead) {
+		
+		sprite->setPosition(respawnPoint);
+		this->position = sprite->getPosition();
+		respawnPointSet = true;
+		IsDead = false;
+	}
 	changeSprite();
-	float delta = static_cast<float>(speedClock.restart().asMilliseconds());//time since last frame
+	float delta = static_cast<float>(speedClock.restart().asMilliseconds());//time since last frame;
 	tracker->trackTime();
 	if (IsJumping) {
-		this->move(delta, l);
+		this->fall(delta);
+		this->Move(delta, l);
 	}
-	
+	else if (CanFall) {
+		this->fall(delta);
+	}
+	if (position.y > 1280) {
+		this->Destroy();
+	}
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
 		this->jump();
+		
 		travelling = direction::UP;
 
 
 	}
 	else {
 		if (IsJumping) return;
-
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		{
 			if (!IsWalking) {  //just started walking
 				velocity.x = StartSpeed.x;
 			}
+			IsWalking = true;
 			sprite->setScale(-1, 1);
 			travelling = direction::LEFT;
-			
-			this->move(delta, l);
-			return;
+
+			this->Move(delta, l);
+
 
 
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		{
 			if (!IsWalking) {  //just started walking
 				velocity.x = StartSpeed.x;
 			}
+			IsWalking = true;
 			sprite->setScale(1, 1);
-			
+
 			travelling = direction::RIGHT;
-			this->move(delta, l);
-			return;
+			this->Move(delta, l);
+
 
 
 		}
-		
-		
+		else if (this->CanFall) {
+			travelling = direction::STATIONARY;
+			this->Move(delta, l);
+		}
+
+
 		else {
 			travelling = direction::STATIONARY;
-			
+			velocity = sf::Vector2f(0, 0);
 		}
-		
+
 	}
 }
+
+
+	
 void Game::Character::jump()
 //checks if the player is already jumping.
 //if not, store the velocity before jumping
 //and change the state of the object to jumping
 {
-	if (!IsJumping) {
+	if (!IsJumping && !CanFall) {
 		
 		sprite->setPosition(this->getPosition().x, this->getPosition().y);
 		switch (travelling) {
@@ -123,6 +151,8 @@ void Game::Character::jump()
 		directionBeforeJumping = travelling;
 		IsJumping = true;
 		IsWalking = false;
+		CanFall = false;
+		acceleration.y = fallAcceleration.y;
 		
 		velocity.y = StartSpeed.y;
 		
@@ -130,38 +160,58 @@ void Game::Character::jump()
 	
 }
 
-void Game::Character::move(float delta, Level& l)
-//change the position of the player depending on whether
-//they are jumping or not.
+void Game::Character::StopJump()
+//stop the player jumping
 {
-	sf::Vector2f oldPos = this->position;
-	sf::Vector2f newPos = oldPos;
+	if (IsJumping) {
+		velocity = directionBeforeJumping == direction::RIGHT ? VelocityBeforeJumping : -VelocityBeforeJumping;
+		CanFall = false;
+		if (VelocityBeforeJumping.x != 0.f) {
+			this->IsWalking = true;
+		}
+		else {
+			IsWalking = false;
+		}
+		IsJumping = false;
+	}
+}
+void Game::Character::Move(float delta, Level& l)
+//change the position of the player depending on whether
+//they are jumping/faliing, or not.
+{
+
 	if (IsWalking && velocity.x < maxVelocity.x) {
 		velocity.x += acceleration.x;
+		IsAccelerating = true;
 	}
-
+	else {
+		IsAccelerating = false;
+	}
 
 	switch (travelling) {
 	case direction::LEFT:
-		if (IsJumping) {
+		if (IsJumping || CanFall) {
+			IsWalking = false;
 			return;
 		}
-		IsWalking = true;
-		newPos += sf::Vector2f(delta * -velocity.x, 0.f);
+		
+		sprite->move(delta * -velocity.x, 0);
 
 		break;
 	case direction::RIGHT:
-		if (IsJumping) {
+		if (IsJumping || CanFall) {
+			IsWalking = false;
 			return;
 		}
-		IsWalking = true;
-		newPos += sf::Vector2f(delta * velocity.x, 0.f);
+		
+		sprite->move(delta * velocity.x, 0);
 
 		break;
 	case direction::UP:
 		if (IsJumping) {
-			velocity.y -= fallAcceleration.y;
-			newPos += sf::Vector2f(delta * VelocityBeforeJumping.x, delta * -velocity.y);
+			velocity.y -= acceleration.y / 2;
+			IsAccelerating = true;
+			sprite->move(delta * VelocityBeforeJumping.x, delta * -velocity.y);
 		}
 		break;
 	case direction::DOWN:
@@ -170,41 +220,22 @@ void Game::Character::move(float delta, Level& l)
 
 		break;
 	case direction::STATIONARY:
-		velocity = sf::Vector2f(0, 0);
-		currentFallSpeed = sf::Vector2f(0, 0);
-		IsWalking = false;
-		currSprite = 0;
 		break;
-
-
-	}
-	
-
-	collisionBox.setPosition(sprite->getPosition());
-	
-	if (this->collisionCheck(l)) {
-		if (IsJumping) {
-			velocity = directionBeforeJumping == direction::RIGHT? VelocityBeforeJumping : -VelocityBeforeJumping;
-			if (VelocityBeforeJumping.x != 0.f) {
-				this->IsWalking = true;
-			}
-			else {
-				IsWalking = false;
-			}
-		}
 		
-		this->sprite->move(this->collisionBox.getMinVector());
-		IsJumping = false;
 	
+
+
+
+	}
+
 		
-	}
-	else {
-		sprite->setPosition(newPos);
-		this->position = newPos;
-	}
-										 
+	
+
+
+								 
 	this->setPosition(sprite->getPosition());
 	collisionBox.setPosition(sprite->getPosition());
+	boundingBox = sprite->getGlobalBounds();
 	
 	
 
@@ -243,9 +274,9 @@ bool Game::Character::collisionCheck(Level & l)
 			tracker->addScore(Coin::s_scoreGiven);
 		}
 	}
-	
+	sf::FloatRect checkBox(this->position.x - 200, this->position.y - 200,400.f,400.f);
 	for (Tile& t : l.getTiles()) {
-		
+		if (!checkBox.contains(t.getPosition())) continue;
 		if (this->collisionBox.IsColliding(t.getCollisionBox())) {
 			return true;
 		}
@@ -283,18 +314,35 @@ void Game::Character::changeSprite(int changeTo)
 
 }
 
-void Game::Character::hit(sf::RenderWindow& rw)
+void Game::Character::Destroy()
 {
-	currSprite = 6;
-	sprite->setTextureRect(SpriteStates[currSprite]);
-	sf::Font f;
-	f.loadFromFile("C://Windows//Fonts//Arial.ttf");
+	velocity = sf::Vector2f(0, 0);
+	IsWalking = false;
+	IsJumping = false;
+	CanFall = true;
+	tracker->removeLife();
+	if (!tracker->AllLivesLost) {
+		IsDead = true;
+	}
+	else {
+		while (true) {
+
+		}
+	}
+
+
 	
-	sf::Text t("you lost", f, 40u);
-	
-	t.setPosition(this->position.x, this->position.y - 200);
-	rw.draw(*sprite);
-	rw.draw(t);
-	rw.display();
+}
+
+void Game::Character::fall(float delta)
+{
+	if (CanFall) {
+		IsWalking = false;
+		velocity.y += fallAcceleration.y;
+		sprite->move(0, velocity.y);
+		boundingBox = sprite->getGlobalBounds();
+		position = sprite->getPosition();
+	}
+
 	
 }
