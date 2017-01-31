@@ -25,7 +25,7 @@ namespace Game {
 		sf::Time timeSpent;
 		
 	 public:
-		 bool isDead;
+		 bool AllLivesLost;
 		 PlayerTracker();
 		 void trackTime();
 		 void setScore(int score);
