@@ -28,27 +28,38 @@ namespace Game {
 		direction directionBeforeJumping;
 		const sf::Vector2f StartSpeed;//original speed when starting to move
 		sf::Vector2f respawnPoint;
-
+		void jump();//Initiate jumping
+		
 	public:
 		PlayerTracker* tracker;
 		bool IsWalking;
 		bool IsJumping;
+		bool respawnPointSet;
+		bool CanFall;
+		bool IsDead;
+		
+	
 
 		Character(const sf::Vector2f& startPos);
 		~Character();
 
 		void addSprites();
-		void move(float delta, Level& l);//move character and view according to speed, whether player is jumping
-		void update(Level& l);//Update position of character on screen
-		void jump();//Initiate jumping
+		void Move(float delta, Level& l);//move character and view according to speed, whether player is jumping
+		void Update(Level& l);//Update position of character on screen
+		
+		void StopJump();
+	
 		void DisplayInfo();
 		void Draw(sf::RenderTarget& target, const sf::RenderStates& states = sf::RenderStates::Default);
 		bool collisionCheck(Enemy& e);
 		bool collisionCheck(Level& l); 	
 		void changeSprite(int changeTo = 0);//change what sprite is displayed
-		void hit(sf::RenderWindow& rw);//when hit by enemy
-		
-		void setRespawnPoint(const sf::Vector2f& value) { respawnPoint = value; }
+		void Destroy();
+		void fall(float delta);
+		//when hit by enemy
+		void Respawn();
+		void SetRespawnPoint(const sf::Vector2f& value) { respawnPoint = value; }
+	
 		sf::Vector2f& getRespawnPoint() { return respawnPoint; }
 
 
