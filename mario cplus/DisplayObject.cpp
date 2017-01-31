@@ -10,6 +10,7 @@ Game::DisplayObject::DisplayObject(const sf::Vector2f& startPosition, const sf::
 	sprite = std::make_unique<sf::Sprite>();
 	sprite->setPosition(position);
 	sprite->setOrigin(size.x / 2, size.y / 2);
+	boundingBox = sprite->getGlobalBounds();
 	
 }
 

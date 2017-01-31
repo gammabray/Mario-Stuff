@@ -27,10 +27,13 @@ namespace Game {
 		std::unique_ptr<sf::Texture> texture;
 		std::unique_ptr<sf::Sprite>  sprite;
 		AABB collisionBox;
+		
 		bool IsMovable;
 	public:
+		sf::FloatRect boundingBox;
 		const sf::Vector2f& getPosition() { return position; }
-		void setPosition(const sf::Vector2f& value) { position = value; }
+		void setPosition(const sf::Vector2f& value) { position = value; sprite->setPosition(position); }
+		void setPosition(float x, float y) { position.x = x; position.y = y; sprite->setPosition(position); }
 		const sf::Vector2f& getSize() { return size; }
 		void setSize(const sf::Vector2f& value) { size = value; }
 		sf::Sprite getSprite() const { return *sprite; }
