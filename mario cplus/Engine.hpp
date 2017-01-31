@@ -7,8 +7,10 @@
 #include "Enemy.hpp"
 #include "Level.hpp"
 #include "GameInterface.hpp"
+#include "WorldManager.hpp"
 #include <vector>
 #include <memory>
+
 
 typedef std::string Logger;
 
@@ -22,6 +24,7 @@ namespace Game {
 		Character          c;
 		Enemy			   e;
 		Logger             l;
+		WorldManager   manager;
 		sf::RenderWindow   rw;
 		sf::View           currentView;
 		sf::Keyboard::Key  pressedKey;
