@@ -8,9 +8,6 @@
     <Filter Include="Game">
       <UniqueIdentifier>{d76cb37a-14d4-49ec-84a2-0397e3df4553}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Class Definitions">
-      <UniqueIdentifier>{8641405d-db89-4d8a-900b-0655ee1fe816}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
@@ -25,49 +22,55 @@
     <Filter Include="Game\Resource Files\Levels">
       <UniqueIdentifier>{6ce50ded-d1f0-483d-982b-e36c818f0eac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Class Implementation">
+      <UniqueIdentifier>{8641405d-db89-4d8a-900b-0655ee1fe816}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AABB.cpp">
-      <Filter>Game\Class Definitions</Filter>
+      <Filter>Game\Class Implementation</Filter>
     </ClCompile>
     <ClCompile Include="AnimatedObject.cpp">
-      <Filter>Game\Class Definitions</Filter>
+      <Filter>Game\Class Implementation</Filter>
     </ClCompile>
     <ClCompile Include="Background.cpp">
-      <Filter>Game\Class Definitions</Filter>
+      <Filter>Game\Class Implementation</Filter>
     </ClCompile>
     <ClCompile Include="Character.cpp">
-      <Filter>Game\Class Definitions</Filter>
+      <Filter>Game\Class Implementation</Filter>
     </ClCompile>
     <ClCompile Include="Coin.cpp">
-      <Filter>Game\Class Definitions</Filter>
+      <Filter>Game\Class Implementation</Filter>
     </ClCompile>
     <ClCompile Include="DisplayObject.cpp">
-      <Filter>Game\Class Definitions</Filter>
+      <Filter>Game\Class Implementation</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
-      <Filter>Game\Class Definitions</Filter>
+      <Filter>Game\Class Implementation</Filter>
     </ClCompile>
     <ClCompile Include="Engine.cpp">
-      <Filter>Game\Class Definitions</Filter>
+      <Filter>Game\Class Implementation</Filter>
     </ClCompile>
     <ClCompile Include="GameInterface.cpp">
-      <Filter>Game\Class Definitions</Filter>
+      <Filter>Game\Class Implementation</Filter>
     </ClCompile>
     <ClCompile Include="Level.cpp">
-      <Filter>Game\Class Definitions</Filter>
+      <Filter>Game\Class Implementation</Filter>
     </ClCompile>
     <ClCompile Include="PlayerTracker.cpp">
-      <Filter>Game\Class Definitions</Filter>
+      <Filter>Game\Class Implementation</Filter>
     </ClCompile>
     <ClCompile Include="Tile.cpp">
-      <Filter>Game\Class Definitions</Filter>
+      <Filter>Game\Class Implementation</Filter>
     </ClCompile>
     <ClCompile Include="Source.cpp">
       <Filter>Interface</Filter>
     </ClCompile>
     <ClCompile Include="WorldManager.cpp">
-      <Filter>Game\Class Definitions</Filter>
+      <Filter>Game\Class Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="BadGuy.cpp">
+      <Filter>Game\Class Implementation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -113,6 +116,15 @@
     <ClInclude Include="WorldManager.hpp">
       <Filter>Game\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Projectile.hpp">
+      <Filter>Game\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource1.h">
+      <Filter>Game\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BadGuy.hpp">
+      <Filter>Game\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Images\block.png">
@@ -144,14 +156,19 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="Levels\level_one.txt">
       <Filter>Game\Resource Files\Levels</Filter>
     </Text>
     <Text Include="Levels\testlevel.txt">
       <Filter>Game\Resource Files\Levels</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Game1.rc">
+      <Filter>Game\Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
 </Project>
