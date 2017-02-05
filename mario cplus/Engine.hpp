@@ -12,17 +12,19 @@
 #include <memory>
 
 
-typedef std::string Logger;
 
-//temporary aliases before actual implementations added
+
+
 namespace Game {
+	typedef std::string Logger;
+	typedef std::vector<std::shared_ptr<Enemy>> enemyList;
 	class Engine {
 	private:
 		Level              currentLevel;
 		sf::Texture        tempLevelTexture;//temporary before level implemented
 		sf::Sprite         tempLevelSprite;
 		Character          c;
-		Enemy			   e;
+		enemyList          enemies;
 		Logger             l;
 		WorldManager   manager;
 		sf::RenderWindow   rw;
@@ -32,7 +34,9 @@ namespace Game {
 		bool               keyFlag;
 		GameInterface	   gui;
 		
-		
+		void updateEnemies();
+		void drawEnemies();
+	
 	
 	public:
 		

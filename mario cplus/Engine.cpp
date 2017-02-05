@@ -1,4 +1,5 @@
 #include "Engine.hpp"
+#include "BadGuy.hpp"
 #include <algorithm>
 #include <iostream>
 #include <thread>
@@ -6,10 +7,10 @@
 
 
 
+
 Game::Engine::Engine(int startLevel) :
 	c(sf::Vector2f(640, 500)), 
 	currentView(sf::Vector2f(640, 460), sf::Vector2f(1280, 720)),	
-	e(sf::Vector2f(1200, 600), sf::Vector2f(16,16), 0, Game::EnemyType::TY1),
 	currentLevel(Level::levelSizes.at(startLevel),startLevel),
 	back(Level::levelSizes.at(startLevel)),		 
 	rw(sf::VideoMode(1280, 720), "Game Title"),
@@ -17,9 +18,10 @@ Game::Engine::Engine(int startLevel) :
 	manager()
 	
 { 
-	
-
+	std::shared_ptr<BadGuy> bg = std::make_shared<BadGuy>(sf::Vector2f(1200.f, 600.f));
+	enemies.emplace_back(bg);
 	rw.setFramerateLimit(120);
+
 	
 	
 }
@@ -60,34 +62,51 @@ void Game::Engine::Start()
 		
 		currentView.setCenter(c.getPosition().x, 460.f);
 		back.draw(rw, sf::RenderStates::Default);
-		currentLevel.draw(rw);
+		
 		c.Update(currentLevel);
+		updateEnemies();
+		
 	
 		manager.CheckCollision(c, currentLevel,rw,currentView);
 		if (manager.GetMinVector().x != 0 || manager.GetMinVector().y != 0) {
-			c.setPosition(sf::Vector2f(c.getPosition().x + manager.GetMinVector().x, c.getPosition().y + manager.GetMinVector().y));
+			c.setPosition(c.getPosition().x + manager.GetMinVector().x, c.getPosition().y + manager.GetMinVector().y);
 		}
-		
+		manager.ResetMinimumVector();
+		for (auto enemy : enemies) {
+			manager.CheckCollision(enemy, currentLevel);
+			enemy->setPosition(enemy->getPosition().x + manager.GetMinVector().x, enemy->getPosition().y + manager.GetMinVector().y);
+		}
 	
 		manager.ResetMinimumVector();
+		currentLevel.draw(rw);
 		rw.setView(currentView);
+		drawEnemies();
+		c.Draw(rw);
+		gui.update(*c.tracker, currentView);
+		gui.draw(rw);
+		rw.display();
 		
-		
-		
-	//	e.update(this->c);
-		
-
-
-			c.Draw(rw);
-			gui.update(*c.tracker, currentView);
-			gui.draw(rw);
-			
-			
-		//	e.DisplayInfo();
-		//	e.Draw(rw);
-			rw.display();
-		
-			std::cout << "frame :" << ++NoOfFrames << std::endl;
+		std::cout << "frame :" << ++NoOfFrames << std::endl;
 
 	}
 }
+void Game::Engine::updateEnemies()
+{
+	
+	for (int i = 0; i < enemies.size(); ++i) {
+		enemies[i]->update(c);
+		if (enemies[i]->getPosition().y > 1500) {
+			
+			enemies.erase(enemies.begin() + i);
+		}
+		
+	}
+}
+
+void Game::Engine::drawEnemies()
+{
+	for (auto enemy : enemies) {
+		enemy->Draw(rw);
+	}
+}
+
