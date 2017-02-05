@@ -10,22 +10,26 @@ namespace Game {
 						//(formerly known as CollisionManager)
 	public:
 		WorldManager();
-		void AddGravity(Character & ch, float delta);
 		const sf::Vector2f& GetMinVector() { return minVector; }
 		void ResetMinimumVector(){ minVector.x = 0; minVector.y = 0; }
-		
-		void CheckCollision(Character& ch, Level& l
-			 //);
-			, sf::RenderWindow& rw, sf::View& v);
-	
+		//NOTE: PascalCase collision functions are public methods
+		//      camelCase  collision functions are private methods used by
+		//		the public ones.
+		void CheckCollision(Character& ch, Level& l, sf::RenderWindow& rw, sf::View& v);
+		void CheckCollision(const std::shared_ptr<Enemy>& e, Level & l);
 
-		
 		bool MoveAfterCollision;
 	private:
 		sf::Vector2f minVector;
 		double frameTime;
 		bool HasCollided;
-		void CheckCollision(Character& ch, Tile& t);
+		void checkCollision(Character& ch, Tile& t);
+
+		void checkCollision(const std::shared_ptr<Enemy>& e, Tile & t);
+
+		;
+
+		
 		
 		
 	};
