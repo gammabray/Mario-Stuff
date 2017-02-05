@@ -68,7 +68,7 @@ void Game::Level::addTiles(int levelID) //generate tiles and collsion boxes
 				tiles.push_back(Tile(currentPos, sf::Vector2f(32, 32), tileID::POWERUP));
 				break;
 			}
-			count++;
+			++count;
 			
 			currentPos.x += xOffset;
 
@@ -117,6 +117,6 @@ void Game::Level::draw(sf::RenderTarget & target, sf::RenderStates states) const
 void Game::Level::eraseCoin(int index)
 {
    
-		this->coins.erase(coins.begin() + index);
+		coins.erase(coins.begin() + index);
 	
 }

@@ -59,7 +59,7 @@ void Game::Background::draw(sf::RenderTarget & target, sf::RenderStates states) 
 void Game::Background::generateBackgroundTiles(int NoOfTiles)
 {
 	
-	for (int i = 0; i < NoOfTiles; i++) {
+	for (int i = 0; i < NoOfTiles; ++i) {
 		backTiles.emplace_back(sf::Vector2f(i * BackgroundTile::s_tilesize.x, 0), *s_blockTextures[0]);
 		//backTiles.emplace_back(sf::Vector2f(i * BackgroundTile::s_tilesize.x, BackgroundTile::s_tilesize.y), *s_blockTextures[0]);
 	}
