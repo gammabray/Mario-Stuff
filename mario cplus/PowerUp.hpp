@@ -6,7 +6,7 @@
 namespace Game {
 	class Character;
 	
-	class PowerUp : public DisplayObject {
+	class PowerUp : public DisplayObject {// The collectible that creates the powerup
 	public:	 
 		enum PowerUpType : char {
 			BETTERJUMP = 'J',
