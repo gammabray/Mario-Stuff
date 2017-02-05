@@ -31,7 +31,7 @@ void Game::PlayerTracker::addScore(int score)
 
 void Game::PlayerTracker::addLife()
 {
-	currLives++;
+	++currLives;
 }
 
 void Game::PlayerTracker::removeLife()
