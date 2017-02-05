@@ -35,7 +35,7 @@ namespace Game {
 		bool IsWalking;
 		bool IsJumping;
 		bool respawnPointSet;
-		bool CanFall;
+	
 		bool IsDead;
 		
 	

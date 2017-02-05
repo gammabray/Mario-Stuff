@@ -8,8 +8,9 @@
 
 Game::Character::Character(const sf::Vector2f& startPos)
 	: AnimatedObject(startPos, sf::Vector2f(24, 48), 6,sf::Vector2f(0.02f,0.08f),sf::Vector2f(0.3f,2.f)),
-	IsJumping(false), IsWalking(false),CanFall(true) ,StartSpeed(0.4f, 1.f), fallAcceleration(0.f, 0.08f), currentFallSpeed(0.f, 0.f)
+	IsJumping(false), IsWalking(false) ,StartSpeed(0.4f, 1.f), fallAcceleration(0.f, 0.08f), currentFallSpeed(0.f, 0.f)
 {
+	CanFall = true;
 	tracker = new PlayerTracker();
 	animationClock.restart();
 	travelling = direction::STATIONARY;
@@ -258,32 +259,8 @@ void Game::Character::Draw(sf::RenderTarget & target, const sf::RenderStates & s
 		target.draw(*sprite,states.Default);
 }
 
-bool Game::Character::collisionCheck(Enemy & e)
-//Checks for collision with an enemy
-{
-	return this->collisionBox.IsColliding(e.getCollisionBox());
-} 
 
-bool Game::Character::collisionCheck(Level & l)
-//checks for collision between the coins and the player, and then the
-//the tiles and they player. For coins the player is given score if they 
-{
-	for (int i = 0; i < l.getCoins().size(); i++) {
-		if (this->collisionBox.IsColliding(l.getCoins()[i].getCollisionBox())) {
-			l.eraseCoin(i);
-			tracker->addScore(Coin::s_scoreGiven);
-		}
-	}
-	sf::FloatRect checkBox(this->position.x - 200, this->position.y - 200,400.f,400.f);
-	for (Tile& t : l.getTiles()) {
-		if (!checkBox.contains(t.getPosition())) continue;
-		if (this->collisionBox.IsColliding(t.getCollisionBox())) {
-			return true;
-		}
-		
-	}
-	return false;
-}
+
 
 void Game::Character::changeSprite(int changeTo)
 //Changes what sprite is displayed
