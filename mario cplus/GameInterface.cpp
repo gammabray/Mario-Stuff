@@ -3,7 +3,7 @@
 
 
 
-Game::GameInterface::GameInterface()
+Game::GameInterface::GameInterface() : hasWon(false)
 {
 	font = std::make_unique<sf::Font>();
 	if (!font->loadFromFile("C://Windows//Fonts//Arial.ttf")) {
@@ -45,6 +45,12 @@ Game::GameInterface::GameInterface()
 	lifeValue.setFont(*font);
 	lifeValue.setFillColor(sf::Color::White);
 	lifeValue.setCharacterSize(32);
+
+	wonLabel.setString("You beat the level");
+	wonLabel.setFont(*font);
+	wonLabel.setFillColor(sf::Color::White);
+	wonLabel.setCharacterSize(32);
+
 	
 	
 	
@@ -64,7 +70,10 @@ void Game::GameInterface::update(PlayerTracker & tracker,const sf::View& v)
 	lifeLabel.setPosition(v.getCenter().x + 400, v.getCenter().y + 300);
 	lifeValue.setPosition(v.getCenter().x + 500, v.getCenter().y + 300);
 	lifeValue.setString(std::to_string(tracker.currLives));
-
+	hasWon = tracker.GameCompleted;
+	if (hasWon) {
+		wonLabel.setPosition(v.getCenter());
+	}
 
 }
 
@@ -76,6 +85,10 @@ void Game::GameInterface::draw(sf::RenderTarget & target, sf::RenderStates state
 	target.draw(scoreLabel);
 	target.draw(lifeValue);
 	target.draw(lifeLabel);
+	if (hasWon) {
+		target.draw(wonLabel);
+	}
+	
 	
 
 	

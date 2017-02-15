@@ -11,7 +11,7 @@ namespace Game {
 	class GameInterface: public sf::Drawable {
 	private:
 	
-
+		bool hasWon;
 		std::unique_ptr<sf::Font> font;
 		static std::string convertToStandardTime(sf::Time& t);
 		sf::Text scoreLabel;
@@ -20,6 +20,7 @@ namespace Game {
 		sf::Text timeValue;
 		sf::Text lifeLabel;
 		sf::Text lifeValue;
+		sf::Text wonLabel;
 	
 		
 		
