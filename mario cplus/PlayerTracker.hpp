@@ -26,6 +26,7 @@ namespace Game {
 		
 	 public:
 		 bool AllLivesLost;
+		 bool GameCompleted;
 		 PlayerTracker();
 		 void trackTime();
 		 void setScore(int score);

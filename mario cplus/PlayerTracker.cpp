@@ -8,7 +8,7 @@
 
 
 
-Game::PlayerTracker::PlayerTracker() :  AllLivesLost(false)
+Game::PlayerTracker::PlayerTracker() :  AllLivesLost(false),GameCompleted(false)
 {
 	currScore = 0;
 	clock.restart();
@@ -17,7 +17,10 @@ Game::PlayerTracker::PlayerTracker() :  AllLivesLost(false)
  
 void Game::PlayerTracker::trackTime()
 {
-	timeSpent = this->clock.getElapsedTime();
+	if (!GameCompleted) {
+		timeSpent = this->clock.getElapsedTime();
+	}
+	
 }
 
 void Game::PlayerTracker::setScore(int score)
@@ -36,9 +39,11 @@ void Game::PlayerTracker::addLife()
 
 void Game::PlayerTracker::removeLife()
 {
-	currLives--;
-	if (currLives < 0) {
-		AllLivesLost = true;
+	if (!GameCompleted) {
+		currLives--;
+		if (currLives < 0) {
+			AllLivesLost = true;
+		}
 	}
 }
 
