@@ -25,6 +25,9 @@
     <ClCompile Include="BadGuy.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Coin.cpp" />
+    <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="ScoreSaver.cpp" />
+    <ClCompile Include="ShootingEnemy.cpp" />
     <ClCompile Include="WorldManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Engine.cpp" />
@@ -44,6 +47,8 @@
     <ClInclude Include="Coin.hpp" />
     <ClInclude Include="Projectile.hpp" />
     <ClInclude Include="resource1.h" />
+    <ClInclude Include="ScoreSaver.hpp" />
+    <ClInclude Include="ShootingEnemy.hpp" />
     <ClInclude Include="WorldManager.hpp" />
     <ClInclude Include="DisplayObject.hpp" />
     <ClInclude Include="Enemy.hpp" />

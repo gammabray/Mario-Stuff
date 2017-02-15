@@ -72,6 +72,15 @@
     <ClCompile Include="BadGuy.cpp">
       <Filter>Game\Class Implementation</Filter>
     </ClCompile>
+    <ClCompile Include="ScoreSaver.cpp">
+      <Filter>Game\Class Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="ShootingEnemy.cpp">
+      <Filter>Game\Class Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Game\Class Implementation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AABB.hpp">
@@ -123,6 +132,12 @@
       <Filter>Game\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BadGuy.hpp">
+      <Filter>Game\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreSaver.hpp">
+      <Filter>Game\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ShootingEnemy.hpp">
       <Filter>Game\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
