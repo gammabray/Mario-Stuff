@@ -51,7 +51,7 @@ namespace Game {
 		void  setVelocity(const sf::Vector2f& velocity) { this->velocity = velocity; }
 		const sf::Vector2f& getAcceleration() { return acceleration; };
 		bool  IsAccelerating;
-		bool  CanFall;
+	
 
 		AnimatedObject(const sf::Vector2f& startPos, const sf::Vector2f& startSize, int noOfSprites, const sf::Vector2f& acceleration, const sf::Vector2f& maxSpeed);
 		
