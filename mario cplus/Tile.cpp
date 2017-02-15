@@ -7,6 +7,7 @@ void Game::Tile::Draw(sf::RenderTarget & target, const sf::RenderStates & states
 	target.draw(*this->sprite);
 }
 
+
 Game::Tile::Tile(const sf::Vector2f & startPos, const sf::Vector2f & startSize,Game::tileID ID, sf::Texture &t) :
 	DisplayObject(startPos,startSize)
 {
@@ -35,6 +36,8 @@ Game::Tile::Tile(const sf::Vector2f & startPos, const sf::Vector2f & startSize,G
 		break;
 	case tileID::POWERUP:
 		filepath = "Images\\powerblock.png";
+	case tileID::FINISHFLAG:
+		filepath = "Images\\finishflag.png";
 
 
 	}

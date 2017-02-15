@@ -13,6 +13,7 @@ namespace Game {
 		POWERUP = 'P',
 		CHECKPOLE = 'C',
 		CHECKFLAG,
+		FINISHFLAG = 'F',
 		LCORNER = 'L',
 		RCORNER = 'R'
 	};
@@ -31,6 +32,7 @@ namespace Game {
 		
 		tileID ID;
 		void Draw(sf::RenderTarget& target, const sf::RenderStates& states = sf::RenderStates::Default);
+		
 		Tile(const sf::Vector2f& startPos, const sf::Vector2f& startSize,tileID ID,sf::Texture &t = sf::Texture());
 		
 		
