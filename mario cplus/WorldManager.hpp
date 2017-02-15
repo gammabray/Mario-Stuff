@@ -23,6 +23,7 @@ namespace Game {
 		sf::Vector2f minVector;
 		double frameTime;
 		bool HasCollided;
+		bool NoTouches;
 		void checkCollision(Character& ch, Tile& t);
 
 		void checkCollision(const std::shared_ptr<Enemy>& e, Tile & t);

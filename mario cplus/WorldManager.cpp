@@ -2,7 +2,7 @@
 
 namespace Game {
 	WorldManager::WorldManager() : frameTime(static_cast<double>(1000.l / 60.l))	//game runs at 60FPS
-											,HasCollided(false)
+											,HasCollided(false), NoTouches(true)
 	{
 	}
 	//For each of the collision checking functions,
@@ -12,7 +12,7 @@ namespace Game {
 	//Enemies are passed as const references to shared pointers
 	void WorldManager::CheckCollision(Character & ch,Level & l, sf::RenderWindow& rw, sf::View& v)
 	{
-
+		NoTouches = true;
 		for (unsigned int i = 0; i < l.coins.size(); ++i) {
 			if(ch.boundingBox.intersects(l.coins[i].boundingBox)) {
 				ch.tracker->addScore(Coin::s_scoreGiven);
@@ -20,48 +20,77 @@ namespace Game {
 			}
 	    }
 		for (Tile& t : l.tiles) {
-		
-		
+
+
 			checkCollision(ch, t);
-			
+
 			rw.setView(v);
 			if (HasCollided) {
-				HasCollided = false;			
+				HasCollided = false;
 				return;
-			}			 
-		}	
+			}
+			
+
+		}
+		if (NoTouches) {
+			ch.CanFall = true;
+		}
+	
+		
+		
+		
+	
 	}
 
 	void WorldManager::CheckCollision(const std::shared_ptr<Enemy> & e, Level & l)
 	{
 		for (Tile& t : l.tiles) {
 			checkCollision(e, t);
+			if (HasCollided) {
+				HasCollided = false;			
+				return;
+			}
 		}
+		e->CanFall = true;
+		
+		
+		
+		
+		
 	}
 	
 	void WorldManager::checkCollision(Character & ch, Tile & t)
 	{
 		
-		sf::FloatRect checkArea(ch.getPosition().x - ch.getSize().x, ch.getPosition().y - ch.getSize().y,200,200);
-		if (!checkArea.contains(t.getPosition())) return;
+	
+		sf::Vector2f lengthBetweenCentres(ch.getPosition().x - t.getPosition().x, ch.getPosition().y - t.getPosition().y);
 		if (ch.boundingBox.intersects(t.boundingBox)) //already colliding  
 		{
-			if (t.ID == tileID::CHECKFLAG || t.ID == tileID::CHECKPOLE) {//no movement needed
+			if (t.ID == tileID::CHECKFLAG) {//no movement needed
 				ch.SetRespawnPoint(t.getPosition());
 				ch.respawnPointSet = true;
 				return;
-			} 
-			sf::Vector2f lengthBetweenCentres(ch.getPosition().x - t.getPosition().x, ch.getPosition().y - t.getPosition().y);		
+			}
+			if (t.ID == tileID::FINISHFLAG)
+			{
+				ch.tracker->GameCompleted = true;
+				return;
+			}
+					
 			
-			if (lengthBetweenCentres.y < 0)// colliding from top
+			if (lengthBetweenCentres.y < 0 )// colliding from top
 			{
 				minVector = sf::Vector2f(0, -lengthBetweenCentres.y - (ch.getSize().y / 2) - (t.getSize().y / 2));
 				ch.CanFall = false;
+				ch.IsWalking = false;
+				
 			}
 			else if (lengthBetweenCentres.y > 0) //colliding from below
-			{
-				ch.CanFall = true;
+			{	
+			
 				minVector = sf::Vector2f(0, -lengthBetweenCentres.y + (ch.getSize().y / 2) + (t.getSize().y / 2));
+				ch.CanFall = true;
+				ch.IsWalking = false;
 			}				
 			if (lengthBetweenCentres.x > 0 && ch.IsWalking) { //colliding from right
 			
@@ -76,23 +105,30 @@ namespace Game {
 
 			
 			
-			ch.setVelocity(sf::Vector2f(0, 0));
-			ch.IsWalking = false;
+					
 			ch.IsAccelerating = false;
-			ch.IsJumping = false;
-			ch.IsJumping = false; 			
-			HasCollided = true;				  
+			ch.IsJumping = false;		
+			ch.setVelocity(sf::Vector2f(ch.getVelocity().x, 0));
+			HasCollided = true;
+			NoTouches = false;
+			
 		}
-		else {
-			ch.CanFall = true;
+		else if (-lengthBetweenCentres.y - (ch.getSize().y / 2) - (t.getSize().y / 2) == 0) {
+			NoTouches = false;
 		}
+		
+		
+		
+		
+		
+		
 	
 	}
 	void WorldManager::checkCollision(const std::shared_ptr<Enemy> & e, Tile & t)
 	{
 		sf::FloatRect checkArea(e->getPosition().x - 50, e->getPosition().y - 50, 200, 200);
 		if (!checkArea.contains(t.getPosition())) return;
-		if (t.ID == tileID::CHECKFLAG || t.ID == tileID::CHECKPOLE) {//no movement needed
+		if (t.ID == tileID::CHECKFLAG || t.ID == tileID::CHECKPOLE || t.ID == tileID::FINISHFLAG) {//no movement needed
 			return;
 		}
 		
@@ -108,6 +144,7 @@ namespace Game {
 			{
 
 				minVector = sf::Vector2f(0, -lengthBetweenCentres.y + (e->getSize().y / 2) + (t.getSize().y / 2));
+				e->CanFall = true;
 			}
 
 			if (lengthBetweenCentres.x > 0 && e->IsWalking) { //colliding from right
@@ -119,13 +156,16 @@ namespace Game {
 				minVector.x = -lengthBetweenCentres.x - (e->getSize().x / 2) - (t.getSize().x / 2);
 				minVector.y = 0;
 			}
+			
+			HasCollided = true;
+			e->setVelocity(sf::Vector2f(e->getVelocity().x, 0));
 		}
-			else {
-				e->CanFall = true;
-
-			}
-
+		
+		
+			
+		
 	}
+	
 
 	
 }
