@@ -35,7 +35,7 @@ namespace Game {
 		bool IsWalking;
 		bool IsJumping;
 		bool respawnPointSet;
-	
+		bool CanFall;
 		bool IsDead;
 		
 	
@@ -51,8 +51,6 @@ namespace Game {
 	
 		void DisplayInfo();
 		void Draw(sf::RenderTarget& target, const sf::RenderStates& states = sf::RenderStates::Default);
-		bool collisionCheck(Enemy& e);
-		bool collisionCheck(Level& l); 	
 		void changeSprite(int changeTo = 0);//change what sprite is displayed
 		void Destroy();
 		void fall(float delta);
