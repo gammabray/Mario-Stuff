@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <iostream>
 #include <thread>
+#import <C:\\Program Files (x86)\\Common Files\\System\\ado\\msado15.dll> rename( "EOF", "AdoNSEOF" )
 
 
 
@@ -11,7 +12,7 @@
 Game::Engine::Engine(int startLevel) :
 	c(sf::Vector2f(640, 500)), 
 	currentView(sf::Vector2f(640, 460), sf::Vector2f(1280, 720)),	
-	currentLevel(Level::levelSizes.at(startLevel),startLevel),
+	currentLevel(Level::levelSizes.at(startLevel),startLevel), 
 	back(Level::levelSizes.at(startLevel)),		 
 	rw(sf::VideoMode(1280, 720), "Game Title"),
 	gui(),
@@ -56,11 +57,10 @@ void Game::Engine::Start()
 
 
 		}
+		
 		rw.clear();
-		
-		
-		
 		currentView.setCenter(c.getPosition().x, 460.f);
+		
 		back.draw(rw, sf::RenderStates::Default);
 		
 		c.Update(currentLevel);
@@ -87,6 +87,9 @@ void Game::Engine::Start()
 		rw.display();
 		
 		std::cout << "frame :" << ++NoOfFrames << std::endl;
+		if (c.tracker->GameCompleted) {
+		
+		}
 
 	}
 }
