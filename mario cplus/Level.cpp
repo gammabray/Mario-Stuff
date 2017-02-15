@@ -67,6 +67,9 @@ void Game::Level::addTiles(int levelID) //generate tiles and collsion boxes
 			case tileID::POWERUP:
 				tiles.push_back(Tile(currentPos, sf::Vector2f(32, 32), tileID::POWERUP));
 				break;
+			case tileID::FINISHFLAG:
+				tiles.push_back(Tile(currentPos, sf::Vector2f(32, 32), tileID::FINISHFLAG));
+				break;
 			}
 			++count;
 			
