@@ -13,6 +13,9 @@ namespace Game {
 	
 		bool hasWon;
 		std::unique_ptr<sf::Font> font;
+		std::unique_ptr<sf::Texture> keyTexture;
+		sf::Sprite keySprite;
+		bool DrawKey;
 		static std::string convertToStandardTime(sf::Time& t);
 		sf::Text scoreLabel;
 		sf::Text scoreValue;
@@ -21,6 +24,9 @@ namespace Game {
 		sf::Text lifeLabel;
 		sf::Text lifeValue;
 		sf::Text wonLabel;
+
+		sf::Text powerUpLabel;
+		sf::Text powerUpValue;
 	
 		
 		

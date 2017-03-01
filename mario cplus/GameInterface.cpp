@@ -1,4 +1,5 @@
 #include "GameInterface.hpp"
+#include <iostream>
 
 
 
@@ -6,10 +7,15 @@
 Game::GameInterface::GameInterface() : hasWon(false)
 {
 	font = std::make_unique<sf::Font>();
-	if (!font->loadFromFile("C://Windows//Fonts//Arial.ttf")) {
-		printf("Could not load font");
-		fflush(stdout);
+	keyTexture = std::make_unique<sf::Texture>();
+	if (!keyTexture->loadFromFile("Images\\Interface\\zkey.png")) {
+		std::cout << "Could not load Z key image for power-up" << std::endl;
 	}
+	if (!font->loadFromFile("C://Windows//Fonts//Arial.ttf")) {
+		std::cout << "Could not load font" << std::endl;
+		
+	}
+	keySprite.setTexture(*keyTexture);
 	
 
 
@@ -51,6 +57,18 @@ Game::GameInterface::GameInterface() : hasWon(false)
 	wonLabel.setFillColor(sf::Color::White);
 	wonLabel.setCharacterSize(32);
 
+	powerUpLabel.setString("Current Power-up:");
+	powerUpLabel.setFont(*font);
+	powerUpLabel.setFillColor(sf::Color::Cyan);
+	powerUpLabel.setCharacterSize(32);
+
+	powerUpValue.setString("None");
+	powerUpValue.setFont(*font);
+	powerUpValue.setFillColor(sf::Color::White);
+	powerUpValue.setCharacterSize(32);
+
+	
+
 	
 	
 	
@@ -59,7 +77,7 @@ Game::GameInterface::GameInterface() : hasWon(false)
 void Game::GameInterface::update(PlayerTracker & tracker,const sf::View& v)
 {
 	
-	scoreLabel.setPosition(v.getCenter().x - 600,v.getCenter().y -360 );
+	scoreLabel.setPosition(v.getCenter().x - 600,v.getCenter().y - 360);
 	scoreValue.setPosition(v.getCenter().x - 500, v.getCenter().y - 360);
 	scoreValue.setString(std::to_string(tracker.currScore));
 
@@ -70,6 +88,31 @@ void Game::GameInterface::update(PlayerTracker & tracker,const sf::View& v)
 	lifeLabel.setPosition(v.getCenter().x + 400, v.getCenter().y + 300);
 	lifeValue.setPosition(v.getCenter().x + 500, v.getCenter().y + 300);
 	lifeValue.setString(std::to_string(tracker.currLives));
+
+	powerUpLabel.setPosition(v.getCenter().x - 600, v.getCenter().y + 300);
+	powerUpValue.setPosition(v.getCenter().x - 320, v.getCenter().y + 300);
+
+	keySprite.setPosition(v.getCenter().x - 200, v.getCenter().y + 300);
+	
+	switch (tracker.currPowerUp)
+	{
+	case PowerUpType::BETTERJUMP:
+		powerUpValue.setString("Higher jump");
+		powerUpValue.setFillColor(sf::Color::Green);
+		DrawKey = false;
+		break;
+	case PowerUpType::FIREBALL:
+		powerUpValue.setString("Fireball");		
+		powerUpValue.setFillColor(sf::Color::Red);
+		DrawKey = true;
+		break;
+	default:
+		powerUpValue.setString("None");
+		powerUpValue.setFillColor(sf::Color::White);
+		DrawKey = false;
+		break;
+	}
+
 	hasWon = tracker.GameCompleted;
 	if (hasWon) {
 		wonLabel.setPosition(v.getCenter());
@@ -85,6 +128,12 @@ void Game::GameInterface::draw(sf::RenderTarget & target, sf::RenderStates state
 	target.draw(scoreLabel);
 	target.draw(lifeValue);
 	target.draw(lifeLabel);
+	target.draw(powerUpLabel);
+	target.draw(powerUpValue);
+	if (DrawKey) {
+		target.draw(keySprite);
+	}
+	
 	if (hasWon) {
 		target.draw(wonLabel);
 	}
