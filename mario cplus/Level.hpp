@@ -8,8 +8,10 @@
 #include "AABB.hpp"
 #include "Coin.hpp"
 #include <unordered_map>
+#include "PowerUp.hpp"
 
 namespace Game {
+	class PowerUp;
 	class Level : public sf::Drawable {
 	private:
 	
@@ -18,10 +20,13 @@ namespace Game {
 	public:														  
 		std::vector<Tile> tiles;
 		std::vector<Coin> coins;
+		std::vector<PowerUp> powerUps;
+	
 		const static std::unordered_map<int,sf::Vector2f> levelSizes;
 		Level(sf::Vector2f startSize,int levelID);
 		void draw(sf::RenderTarget & target, sf::RenderStates states = sf::RenderStates::Default) const;
 		void eraseCoin(int index);
+		void erasePowerUp(int index);
 		sf::Vector2f respawnPoint;
 	};
 }

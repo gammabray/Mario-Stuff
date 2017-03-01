@@ -44,7 +44,12 @@ void Game::Level::addTiles(int levelID) //generate tiles and collsion boxes
 				coins.emplace_back(sf::Vector2f(currentPos.x, currentPos.y - 16));
 				//coins are created in the middle/top of the tile grid
 				break;
-			
+			case PowerUpType::FIREBALL:
+				powerUps.emplace_back(sf::Vector2f(currentPos.x, currentPos.y), PowerUpType::FIREBALL);
+				break;
+			case PowerUpType::BETTERJUMP:
+				powerUps.emplace_back(sf::Vector2f(currentPos.x, currentPos.y), PowerUpType::BETTERJUMP);
+				break;
 			case tileID::METAL: 
 				tiles.push_back(Tile(currentPos, sf::Vector2f(32, 32), tileID::METAL));
 				break;
@@ -110,16 +115,23 @@ Game::Level::Level(sf::Vector2f startSize,int levelID)
 void Game::Level::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	for (auto& coin : coins) {
-		target.draw(coin.getSprite());
+		coin.Draw(target, states);
 	}
 	for (auto& tile : tiles) {
-		target.draw(tile.getSprite());
+		tile.Draw(target, states);
+	}
+	for (auto& powerUp : powerUps) {
+		powerUp.Draw(target, states);
 	}
 }
 
 void Game::Level::eraseCoin(int index)
 {
    
-		coins.erase(coins.begin() + index);
+	coins.erase(coins.begin() + index);
 	
+}
+void Game::Level::erasePowerUp(int index) 
+{
+	powerUps.erase(powerUps.begin() + index);
 }
