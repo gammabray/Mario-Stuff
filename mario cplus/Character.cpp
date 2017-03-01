@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Enemy.hpp"
 #include "Tile.hpp"
+#include "Projectile.hpp"
 
 
 
@@ -74,6 +75,13 @@ void Game::Character::Update(Level& l)
 		if (position.y > 1280) {
 			this->Destroy();
 		}
+		if (tracker->getPowerUp() == PowerUpType::FIREBALL && powerUpClock.getElapsedTime().asMilliseconds() > 250) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
+				powerUpClock.restart();
+				projectileQueue.push(ProjectileType::p_fireball);
+
+			}
+		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
 			this->jump();
@@ -145,10 +153,14 @@ void Game::Character::jump()
 		directionBeforeJumping = travelling;
 		IsJumping = true;
 		IsWalking = false;
-
 		acceleration.y = fallAcceleration.y;
+		if (tracker->getPowerUp() == PowerUpType::BETTERJUMP) {
+			velocity.y = StartSpeed.y * 1.5;
+		}
+		else {
+			velocity.y = StartSpeed.y;
+		}
 		
-		velocity.y = StartSpeed.y;
 		
 	}
 	
@@ -220,13 +232,7 @@ void Game::Character::Move(float delta, Level& l)
 
 
 
-	}
-
-		
-	
-
-
-								 
+	}								 
 	this->setPosition(sprite->getPosition());
 	collisionBox.setPosition(sprite->getPosition());
 	boundingBox = sprite->getGlobalBounds();
@@ -245,7 +251,7 @@ void Game::Character::DisplayInfo()
 	std::cout << "position: " << this->position << std::endl << "velocity:" << this->velocity << std::endl;
 }
 
-void Game::Character::Draw(sf::RenderTarget & target, const sf::RenderStates & states)
+void Game::Character::Draw(sf::RenderTarget & target, const sf::RenderStates & states) const
 //Draws the sprite onto the screen
 {
 	if(IsMovable)
@@ -289,7 +295,8 @@ void Game::Character::Destroy()
 	velocity = sf::Vector2f(0, 0);
 	IsWalking = false;
 	IsJumping = false;
-	
+	tracker->HasPowerUp = false;
+	tracker->setPowerUp(PowerUpType::NONE);
 	tracker->removeLife();
 	if (!tracker->AllLivesLost) {
 		IsDead = true;
@@ -315,4 +322,11 @@ void Game::Character::fall(float delta)
 	}
 
 	
+}
+
+Game::ProjectileType Game::Character::dequeue_projectile()
+{
+	auto proj = projectileQueue.front(); 
+	projectileQueue.pop();
+	return proj;
 }
