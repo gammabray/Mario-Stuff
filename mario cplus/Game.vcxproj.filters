@@ -81,6 +81,9 @@
     <ClCompile Include="Projectile.cpp">
       <Filter>Game\Class Implementation</Filter>
     </ClCompile>
+    <ClCompile Include="PowerUp.cpp">
+      <Filter>Game\Class Implementation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AABB.hpp">
