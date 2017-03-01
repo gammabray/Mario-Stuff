@@ -19,8 +19,8 @@ Game::Engine::Engine(int startLevel) :
 	manager()
 	
 { 
-	std::shared_ptr<BadGuy> bg = std::make_shared<BadGuy>(sf::Vector2f(1200.f, 600.f));
-	enemies.emplace_back(bg);
+	
+	enemies.emplace_back(std::move(std::unique_ptr<BadGuy>(new BadGuy(sf::Vector2f(1200.f,600.f)))));
 	rw.setFramerateLimit(120);
 
 	
@@ -64,6 +64,7 @@ void Game::Engine::Start()
 		back.draw(rw, sf::RenderStates::Default);
 		
 		c.Update(currentLevel);
+		
 		updateEnemies();
 		
 	
@@ -71,8 +72,11 @@ void Game::Engine::Start()
 		if (manager.GetMinVector().x != 0 || manager.GetMinVector().y != 0) {
 			c.setPosition(c.getPosition().x + manager.GetMinVector().x, c.getPosition().y + manager.GetMinVector().y);
 		}
+		if (c.getProjectileCount() > 0) {
+			projectiles.push_back(Projectile(c.dequeue_projectile()));
+		}
 		manager.ResetMinimumVector();
-		for (auto enemy : enemies) {
+		for (auto& enemy : enemies) {
 			manager.CheckCollision(enemy, currentLevel);
 			enemy->setPosition(enemy->getPosition().x + manager.GetMinVector().x, enemy->getPosition().y + manager.GetMinVector().y);
 		}
@@ -96,7 +100,7 @@ void Game::Engine::Start()
 void Game::Engine::updateEnemies()
 {
 	
-	for (int i = 0; i < enemies.size(); ++i) {
+	for (unsigned int i = 0; i < enemies.size(); ++i) {
 		enemies[i]->update(c);
 		if (enemies[i]->getPosition().y > 1500) {
 			
@@ -108,7 +112,7 @@ void Game::Engine::updateEnemies()
 
 void Game::Engine::drawEnemies()
 {
-	for (auto enemy : enemies) {
+	for (auto& enemy : enemies) {
 		enemy->Draw(rw);
 	}
 }

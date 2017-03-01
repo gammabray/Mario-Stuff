@@ -8,6 +8,7 @@
 #include "Level.hpp"
 #include "GameInterface.hpp"
 #include "WorldManager.hpp"
+#include "Projectile.hpp"
 #include <vector>
 #include <memory>
 
@@ -17,14 +18,17 @@
 
 namespace Game {
 	typedef std::string Logger;
-	typedef std::vector<std::shared_ptr<Enemy>> enemyList;
+	typedef std::vector<std::unique_ptr<Enemy>> EnemyList;
+	typedef std::vector<std::unique_ptr<Projectile>> ProjectileList;
+
 	class Engine {
 	private:
 		Level              currentLevel;
 		sf::Texture        tempLevelTexture;//temporary before level implemented
 		sf::Sprite         tempLevelSprite;
 		Character          c;
-		enemyList          enemies;
+		EnemyList          enemies;
+		ProjectileList	   projectiles;
 		Logger             l;
 		WorldManager   manager;
 		sf::RenderWindow   rw;
