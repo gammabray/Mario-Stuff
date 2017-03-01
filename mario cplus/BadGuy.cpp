@@ -59,6 +59,11 @@ void Game::BadGuy::addSprites()
 	SpriteStates.push_back(sf::IntRect(0, 0, 24, 24));
 }
 
+void Game::BadGuy::Draw(sf::RenderTarget & target, const sf::RenderStates & states) const
+{
+	target.draw(*sprite, states.Default);
+}
+
 void Game::BadGuy::fall() {
 	if (CanFall) {
 		IsWalking = false;
