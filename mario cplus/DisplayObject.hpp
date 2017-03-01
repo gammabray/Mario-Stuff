@@ -38,7 +38,7 @@ namespace Game {
 		void setSize(const sf::Vector2f& value) { size = value; }
 		sf::Sprite getSprite() const { return *sprite; }
 		AABB& getCollisionBox() { return collisionBox; }
-		virtual void Draw(sf::RenderTarget& target, const sf::RenderStates& states = sf::RenderStates::Default) = 0;//pure virtual function : implementation left to derived classes
+		virtual void Draw(sf::RenderTarget& target, const sf::RenderStates& states = sf::RenderStates::Default) const = 0;//pure virtual function : implementation left to derived classes
 		DisplayObject(const sf::Vector2f& startPos, const sf::Vector2f &startSize);
 		
 
