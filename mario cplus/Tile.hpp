@@ -30,9 +30,9 @@ namespace Game {
 		
 	public:
 		
-		tileID ID;
-		void Draw(sf::RenderTarget& target, const sf::RenderStates& states = sf::RenderStates::Default);
-		
+		tileID ID;		
+		void Draw(sf::RenderTarget & target, const sf::RenderStates & states) const;
+
 		Tile(const sf::Vector2f& startPos, const sf::Vector2f& startSize,tileID ID,sf::Texture &t = sf::Texture());
 		
 		

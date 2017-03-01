@@ -16,7 +16,7 @@ namespace Game {
 		//      camelCase  collision functions are private methods used by
 		//		the public ones.
 		void CheckCollision(Character& ch, Level& l, sf::RenderWindow& rw, sf::View& v);
-		void CheckCollision(const std::shared_ptr<Enemy>& e, Level & l);
+		void CheckCollision(const std::unique_ptr<Enemy>& e, Level & l);
 
 		bool MoveAfterCollision;
 	private:
@@ -26,7 +26,7 @@ namespace Game {
 		bool NoTouches;
 		void checkCollision(Character& ch, Tile& t);
 
-		void checkCollision(const std::shared_ptr<Enemy>& e, Tile & t);
+		void checkCollision(const std::unique_ptr<Enemy>& e, Tile & t);
 
 		;
 

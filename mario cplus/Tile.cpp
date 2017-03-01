@@ -2,9 +2,9 @@
 #include <SFML\Graphics.hpp>
 #include <iostream>
 
-void Game::Tile::Draw(sf::RenderTarget & target, const sf::RenderStates & states)
+void Game::Tile::Draw(sf::RenderTarget & target, const sf::RenderStates & states) const
 {
-	target.draw(*this->sprite);
+	target.draw(*this->sprite,states);
 }
 
 

@@ -1,7 +1,7 @@
 #pragma once
 #ifndef PLAYER_TRACKER_HPP
 #define PLAYER_TRACKER_HPP
-#include "GameInterface.hpp"
+
 #include "PowerUp.hpp"
 
 
@@ -10,13 +10,13 @@
 ///Tracks information about the player in the game.
 ///</summary>
 namespace Game {
-	
+	class PowerUp;
 	class PlayerTracker {
 	 private:
 		int currScore;
 		int currLives;
 		
-		PowerUp::PowerUpType currPowerUp;
+		PowerUpType currPowerUp;
 		sf::Clock clock;
 		
 		friend class GameInterface;//to allow the GameInterface class to get all information
@@ -27,13 +27,17 @@ namespace Game {
 	 public:
 		 bool AllLivesLost;
 		 bool GameCompleted;
+		 bool HasPowerUp; // Only one power-up at a time
 		 PlayerTracker();
 		 void trackTime();
 		 void setScore(int score);
 		 void addScore(int score);
+		 void setPowerUp(PowerUpType newPowerUp);
+		 const PowerUpType& getPowerUp();
+		 
 		 void addLife();
 		 void removeLife();
-		 //void updatePowerUp(PowerUpType type);	//not implemented power-ups yet.
+		
 
 
 	};

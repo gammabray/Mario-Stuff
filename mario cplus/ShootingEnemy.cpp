@@ -1,12 +1,11 @@
 #include "ShootingEnemy.hpp"
 
 
-
-ShootingEnemy::ShootingEnemy()
-{
-}
-
-
-ShootingEnemy::~ShootingEnemy()
-{
-}
+//Game::ShootingEnemy::ShootingEnemy()
+//{
+//}
+//
+//
+//Game::ShootingEnemy::~ShootingEnemy()
+//{
+//}

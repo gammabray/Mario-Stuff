@@ -17,7 +17,8 @@ namespace Game {
 	public:
 		
 		Projectile(const sf::Vector2f& startPos, ProjectileType type,direction d);
-		~Projectile();
+		
+		void update();
 		bool HurtsPlayers;
 		bool HurtsEnemies;
 		bool Destroyed;

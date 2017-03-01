@@ -19,6 +19,20 @@ namespace Game {
 				l.eraseCoin(i);
 			}
 	    }
+		for (unsigned int i = 0; i < l.powerUps.size(); ++i) {
+			if (ch.boundingBox.intersects(l.powerUps[i].boundingBox)) {
+				
+				if (ch.tracker->HasPowerUp) {
+					ch.tracker->addScore(200);
+				}
+				else {
+					ch.tracker->addScore(80);
+					ch.restartPowerClock();
+				}
+				ch.tracker->setPowerUp(l.powerUps[i].type);
+				l.erasePowerUp(i);
+			}
+		}
 		for (Tile& t : l.tiles) {
 
 
@@ -42,7 +56,7 @@ namespace Game {
 	
 	}
 
-	void WorldManager::CheckCollision(const std::shared_ptr<Enemy> & e, Level & l)
+	void WorldManager::CheckCollision(const std::unique_ptr<Enemy> & e, Level & l)
 	{
 		for (Tile& t : l.tiles) {
 			checkCollision(e, t);
@@ -67,7 +81,7 @@ namespace Game {
 		if (ch.boundingBox.intersects(t.boundingBox)) //already colliding  
 		{
 			if (t.ID == tileID::CHECKFLAG) {//no movement needed
-				ch.SetRespawnPoint(t.getPosition());
+				ch.setRespawnPoint(t.getPosition());
 				ch.respawnPointSet = true;
 				return;
 			}
@@ -113,8 +127,9 @@ namespace Game {
 			NoTouches = false;
 			
 		}
-		else if (-lengthBetweenCentres.y - (ch.getSize().y / 2) - (t.getSize().y / 2) == 0) {
+		else if ((-lengthBetweenCentres.y - (ch.getSize().y / 2) - (t.getSize().y / 2) == 0) && abs(lengthBetweenCentres.x) <= 24) {
 			NoTouches = false;
+			HasCollided = true;
 		}
 		
 		
@@ -124,7 +139,7 @@ namespace Game {
 		
 	
 	}
-	void WorldManager::checkCollision(const std::shared_ptr<Enemy> & e, Tile & t)
+	void WorldManager::checkCollision(const std::unique_ptr<Enemy> & e, Tile & t)
 	{
 		sf::FloatRect checkArea(e->getPosition().x - 50, e->getPosition().y - 50, 200, 200);
 		if (!checkArea.contains(t.getPosition())) return;
