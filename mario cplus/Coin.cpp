@@ -2,7 +2,7 @@
 const sf::Vector2f Game::Coin::s_size(16, 16);
 Game::Coin::Coin(const sf::Vector2f& startPos) : DisplayObject(startPos,s_size)
 {
-	if (!texture->loadFromFile("Images\\Coin.png")) {
+	if (!texture->loadFromFile("Images\\Collectibles\\Coin.png")) {
 		std::cout << "Failed to load texture for coin...";
 	}
 	sprite->setTexture(*texture);
@@ -10,7 +10,7 @@ Game::Coin::Coin(const sf::Vector2f& startPos) : DisplayObject(startPos,s_size)
 
 }
 
-void Game::Coin::Draw(sf::RenderTarget & target, const sf::RenderStates & states)
+void Game::Coin::Draw(sf::RenderTarget & target, const sf::RenderStates & states) const
 {
 	target.draw(*sprite);
 }

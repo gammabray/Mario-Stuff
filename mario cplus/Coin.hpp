@@ -11,7 +11,8 @@ namespace Game {
 		const static int s_scoreGiven = 25;
 		const static sf::Vector2f s_size;
 		Coin(const sf::Vector2f& startPos);
-		void Draw(sf::RenderTarget& target, const sf::RenderStates& states = sf::RenderStates::Default);
+		void Draw(sf::RenderTarget & target, const sf::RenderStates & states) const;
+		
 	
 	
 	
