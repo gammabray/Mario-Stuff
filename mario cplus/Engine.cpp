@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <iostream>
 #include <thread>
-#import <C:\\Program Files (x86)\\Common Files\\System\\ado\\msado15.dll> rename( "EOF", "AdoNSEOF" )
+
 
 
 
@@ -62,18 +62,26 @@ void Game::Engine::Start()
 		currentView.setCenter(c.getPosition().x, 460.f);
 		
 		back.draw(rw, sf::RenderStates::Default);
-		
+		updateProjectiles();
 		c.Update(currentLevel);
 		
 		updateEnemies();
+		
 		
 	
 		manager.CheckCollision(c, currentLevel,rw,currentView);
 		if (manager.GetMinVector().x != 0 || manager.GetMinVector().y != 0) {
 			c.setPosition(c.getPosition().x + manager.GetMinVector().x, c.getPosition().y + manager.GetMinVector().y);
 		}
-		if (c.getProjectileCount() > 0) {
-			projectiles.push_back(Projectile(c.dequeue_projectile()));
+		if (c.getProjectileCount() > 0) { //Projectiles to be created
+			switch (ProjectileType pt = c.dequeue_projectile())
+			{
+			case ProjectileType::p_fireball:
+				projectiles.push_back(std::move(std::make_unique<Fireball>(c.getPosition(),c.getFacing())));
+				break;
+			default:
+				break;
+			}
 		}
 		manager.ResetMinimumVector();
 		for (auto& enemy : enemies) {
@@ -82,9 +90,12 @@ void Game::Engine::Start()
 		}
 	
 		manager.ResetMinimumVector();
+
 		currentLevel.draw(rw);
 		rw.setView(currentView);
+		drawProjectiles();
 		drawEnemies();
+		
 		c.Draw(rw);
 		gui.update(*c.tracker, currentView);
 		gui.draw(rw);
@@ -114,6 +125,25 @@ void Game::Engine::drawEnemies()
 {
 	for (auto& enemy : enemies) {
 		enemy->Draw(rw);
+	}
+}
+
+void Game::Engine::updateProjectiles()
+{
+	for (unsigned int i = 0; i < projectiles.size(); ++i) {
+		projectiles[i]->update();
+		if (projectiles[i]->getPosition().x > currentView.getCenter().x + 1000 || projectiles[i]->getPosition().x < currentView.getCenter().x - 1000) {
+
+			projectiles.erase(projectiles.begin() + i);
+		}
+
+	}
+}
+
+void Game::Engine::drawProjectiles()
+{
+	for (auto& projectile : projectiles) {
+		projectile->Draw(rw);
 	}
 }
 

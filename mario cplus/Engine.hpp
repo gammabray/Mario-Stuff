@@ -9,6 +9,7 @@
 #include "GameInterface.hpp"
 #include "WorldManager.hpp"
 #include "Projectile.hpp"
+#include "Fireball.hpp"
 #include <vector>
 #include <memory>
 
@@ -40,6 +41,9 @@ namespace Game {
 		
 		void updateEnemies();
 		void drawEnemies();
+
+		void updateProjectiles();
+		void drawProjectiles();
 	
 	
 	public:
