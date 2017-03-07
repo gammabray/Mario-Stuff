@@ -2,6 +2,7 @@
 #define PROJECTILE_HPP
 #include "AnimatedObject.hpp"
 namespace Game {
+	
 	enum class ProjectileType
 		//p_ for player projectiles
 		//e_ for enemy projectiles
@@ -16,16 +17,17 @@ namespace Game {
 	{
 	public:
 		
-		Projectile(const sf::Vector2f& startPos, ProjectileType type,direction d);
-		
-		void update();
-		bool HurtsPlayers;
-		bool HurtsEnemies;
+		Projectile(const sf::Vector2f& startPos,const sf::Vector2f& startSize,const sf::Vector2f& startSpeed,direction d, int NoOfSprites);
+		ProjectileType type;		
 		bool Destroyed;
+		virtual void update() = 0;
+		virtual void OnPlayerHit() {}   //Optional action to be called when the projectile hits player
+		virtual void OnTerrainHit() {}; //Optional action to be called when the projectile hits the terrain
+		virtual void OnEnemyHit() {};   //Optional action to be called when the projectile hits enemies
 
-	private:
-		const sf::Vector2f startSpeed;
-		const sf::Vector2f size;
+	
+	
+	
 		
 
 
