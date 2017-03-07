@@ -50,31 +50,11 @@ void Game::Level::addTiles(int levelID) //generate tiles and collsion boxes
 			case PowerUpType::BETTERJUMP:
 				powerUps.emplace_back(sf::Vector2f(currentPos.x, currentPos.y), PowerUpType::BETTERJUMP);
 				break;
-			case tileID::METAL: 
-				tiles.push_back(Tile(currentPos, sf::Vector2f(32, 32), tileID::METAL));
+			case '0': //air
 				break;
+			default:
+				tiles.push_back(Tile(currentPos, sf::Vector2f(32, 32), static_cast<tileID>(c)));
 			
-			case tileID::CHECKFLAG:
-				tiles.push_back(Tile(currentPos, sf::Vector2f(32, 32), tileID::CHECKFLAG));	 
-				break;
-			
-			case tileID::CHECKPOLE:
-				tiles.push_back(Tile(currentPos, sf::Vector2f(32, 32), tileID::CHECKPOLE));		
-				break;
-		
-			case tileID::LCORNER:
-				tiles.push_back(Tile(currentPos, sf::Vector2f(32, 32), tileID::LCORNER));	
-				break;
-			
-			case tileID::RCORNER:
-				tiles.push_back(Tile(currentPos, sf::Vector2f(32, 32), tileID::RCORNER));	  
-				break;
-			case tileID::POWERUP:
-				tiles.push_back(Tile(currentPos, sf::Vector2f(32, 32), tileID::POWERUP));
-				break;
-			case tileID::FINISHFLAG:
-				tiles.push_back(Tile(currentPos, sf::Vector2f(32, 32), tileID::FINISHFLAG));
-				break;
 			}
 			++count;
 			
