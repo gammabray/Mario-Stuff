@@ -5,7 +5,7 @@
 Game::AnimatedObject::AnimatedObject(const sf::Vector2f & startPos, const sf::Vector2f& startSize, int noOfSprites, const sf::Vector2f& acceleration, const sf::Vector2f& maxSpeed)
 	: DisplayObject(startPos,startSize),acceleration(acceleration),maxVelocity(maxSpeed)
 {
-
+	
 
 }
 std::ostream & Game::operator<<(std::ostream & o, sf::Vector2f v)
