@@ -25,6 +25,9 @@
     <Filter Include="Game\Class Implementation">
       <UniqueIdentifier>{8641405d-db89-4d8a-900b-0655ee1fe816}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Interface\XML">
+      <UniqueIdentifier>{2d97157d-6d98-49b1-bf7d-12aaa1dcfc82}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AABB.cpp">
@@ -84,6 +87,12 @@
     <ClCompile Include="PowerUp.cpp">
       <Filter>Game\Class Implementation</Filter>
     </ClCompile>
+    <ClCompile Include="Fireball.cpp">
+      <Filter>Game\Class Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="TinyXML\tinyxml2.cpp">
+      <Filter>Interface\XML</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AABB.hpp">
@@ -142,6 +151,12 @@
     </ClInclude>
     <ClInclude Include="ShootingEnemy.hpp">
       <Filter>Game\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Fireball.hpp">
+      <Filter>Game\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TinyXML\tinyxml2.h">
+      <Filter>Interface\XML</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
