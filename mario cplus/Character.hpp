@@ -4,7 +4,7 @@
 #include "AnimatedObject.hpp"
 #include <SFML\Graphics.hpp>
 #include <queue>
-
+#include "Projectile.hpp"
 #include "Level.hpp"
 #include "Enemy.hpp"
 #include "PlayerTracker.hpp"
@@ -13,7 +13,7 @@
 
 
 namespace Game {
-	class Enemy; class PlayerTracker; class Level;
+	class Enemy; class PlayerTracker; class Level; class Projectile;
 	class Character : public AnimatedObject
 	{
 		///<summary>
@@ -30,7 +30,6 @@ namespace Game {
 		const sf::Vector2f StartSpeed;//original speed when starting to move
 		sf::Vector2f respawnPoint;
 		void jump();//Initiate jumping
-		void createFireball();
 		sf::Clock powerUpClock;
 		int projectilesToCreate;
 		std::queue<ProjectileType> projectileQueue;//a queue of projectiles the engine needs to create

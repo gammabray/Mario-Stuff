@@ -2,7 +2,7 @@
 #include <iostream>
 #include "Enemy.hpp"
 #include "Tile.hpp"
-#include "Projectile.hpp"
+
 
 
 
@@ -16,7 +16,7 @@ Game::Character::Character(const sf::Vector2f& startPos)
 	animationClock.restart();
 	travelling = direction::STATIONARY;
 	
-	if (!texture->loadFromFile("Images\\char.png")) {
+	if (!texture->loadFromFile("Images\\common\\char.png")) {
 		texture.release();//delete texture
 		std::cout << "Failed to load Texture for Character..." << std::endl;
 	}
@@ -29,6 +29,7 @@ Game::Character::Character(const sf::Vector2f& startPos)
 	IsMovable = true;
 	IsAccelerating = false;
 	velocity.x = StartSpeed.x;
+	facing = direction::RIGHT;
 }
 
 Game::Character::~Character()
@@ -96,10 +97,12 @@ void Game::Character::Update(Level& l)
 			{
 				if (!IsWalking) {  //just started walking
 					velocity.x = StartSpeed.x;
+					facing = direction::LEFT;
 				}
 				IsWalking = true;
 				sprite->setScale(-1, 1);
 				travelling = direction::LEFT;
+				
 
 				this->Move(delta, l);
 
@@ -110,11 +113,13 @@ void Game::Character::Update(Level& l)
 			{
 				if (!IsWalking) {  //just started walking
 					velocity.x = StartSpeed.x;
+					facing = direction::RIGHT;
 				}
 				IsWalking = true;
 				sprite->setScale(1, 1);
 
 				travelling = direction::RIGHT;
+				
 				this->Move(delta, l);
 
 
