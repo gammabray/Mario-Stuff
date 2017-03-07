@@ -37,7 +37,8 @@ void Game::PlayerTracker::setPowerUp(PowerUpType newPowerUp)
 {
 	if (!HasPowerUp) {
 		currPowerUp = newPowerUp;
-		HasPowerUp = true;
+		if(newPowerUp != PowerUpType::NONE)
+			HasPowerUp = true;
 	}
 	
 }
