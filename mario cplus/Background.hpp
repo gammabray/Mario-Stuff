@@ -3,7 +3,6 @@
 #define BACKGROUND_HPP
 #include <SFML\Graphics.hpp>
 #include <vector>
-#include <array>
 #include <memory>
 
 
@@ -23,9 +22,7 @@ namespace Game {
 
 	};
 	class Background : public sf::Drawable {
-	private:
-		
-		
+	private:		
 		std::vector<BackgroundTile> backTiles;//container of background tiles
 		static std::vector<std::string> s_filepaths;//filepaths of tile images
 		static std::vector<std::shared_ptr<sf::Texture>> s_blockTextures;//pointers to the texture
