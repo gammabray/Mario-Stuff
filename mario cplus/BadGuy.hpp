@@ -17,6 +17,7 @@ namespace Game {
 		void move(float delta, Character & ch);
 		void addSprites();
 		void Draw(sf::RenderTarget& target, const sf::RenderStates& states = sf::RenderStates::Default) const;
+		void changeSprite(int changeTo) {}
 	};
 }
 #endif
