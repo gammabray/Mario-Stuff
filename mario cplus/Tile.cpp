@@ -17,7 +17,7 @@ Game::Tile::Tile(const sf::Vector2f & startPos, const sf::Vector2f & startSize,G
 	this->ID = ID;
 	switch (this->ID) {
 	case tileID::DIRT:
-		filepath = "Images\\block.png";
+		filepath = "Images\\Levels\\block.png";
 		break;
 	case tileID::METAL:
 		filepath = "Images\\metalblock.png";
@@ -28,11 +28,23 @@ Game::Tile::Tile(const sf::Vector2f & startPos, const sf::Vector2f & startSize,G
 	case tileID::CHECKFLAG:
 		filepath = "Images\\checkflag.png";
 		break;
-	case tileID::LCORNER:
-		filepath = "Images\\leftblock.png";
+	case tileID::DLTOP:
+		filepath = "Images\\Levels\\lefttopcornerblock.png";
 		break;
-	case tileID::RCORNER:
-		filepath = "Images\\rightblock.png";
+	case tileID::DRTOP:
+		filepath = "Images\\Levels\\righttopcornerblock.png";
+		break;
+	case tileID::DTEDGE:
+		filepath = "Images\\Levels\\topedgeblock.png";
+		break;
+	case tileID::DBEDGE:
+		filepath = "Images\\Levels\\botedgeblock.png";
+		break;
+	case tileID::DLBOT:
+		filepath = "Images\\Levels\\leftbotcornerblock.png";
+		break;
+	case tileID::DRBOT:
+		filepath = "Images\\Levels\\rightbotcornerblock.png";
 		break;
 	case tileID::POWERUP:
 		filepath = "Images\\powerblock.png";

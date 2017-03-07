@@ -6,16 +6,26 @@
 #include "DisplayObject.hpp"
 namespace Game {
 	enum tileID : char {
+
 		DIRT = '1',
-		SNOW,
-		SAND,
-		METAL,
+		SNOW,   // 2
+		SAND,   // 3
+		METAL,// 4
+		DLTOP,// 5
+		DRTOP,// 6
+		DLBOT,// 7
+		DRBOT,// 8
+		DLEDGE = 'G', 
+		DREDGE, //H
+		DTEDGE, //I
+		DBEDGE, //J
+		DMIDDLE, //K
 		POWERUP = 'P',
 		CHECKPOLE = 'C',
-		CHECKFLAG,
+		CHECKFLAG = 'D',
 		FINISHFLAG = 'F',
-		LCORNER = 'L',
-		RCORNER = 'R'
+		
+
 	};
 	class Tile : public DisplayObject
 		///<summary>
