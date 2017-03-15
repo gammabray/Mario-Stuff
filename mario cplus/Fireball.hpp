@@ -1,8 +1,10 @@
 #pragma once
+
 #ifndef FIREBALL_H
 #define FIREBALL_H
 
 #include "Projectile.hpp"
+
 namespace Game {
 	class Fireball :
 		public Projectile
@@ -15,6 +17,7 @@ namespace Game {
 		void Draw(sf::RenderTarget& target, const sf::RenderStates& states = sf::RenderStates::Default) const;
 		void changeSprite(int changeTo);
 		void update();
+		
 	private:
 		const static sf::Vector2f s_size;
 		const static sf::Vector2f s_speed;

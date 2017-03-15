@@ -5,9 +5,10 @@
 #include "DisplayObject.hpp"
 namespace Game {
 	
-	enum PowerUpType : char {
-		BETTERJUMP = 'J',
-		FIREBALL = 'B',
+	enum PowerUpType{
+		FIREBALL = 18,
+		BETTERJUMP = 19,
+		
 		NONE = 'N'
 	};
 	class PowerUp : public DisplayObject {// The collectible that creates the powerup
