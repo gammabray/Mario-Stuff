@@ -4,17 +4,24 @@
 
 void Game::Tile::Draw(sf::RenderTarget & target, const sf::RenderStates & states) const
 {
-	target.draw(*this->sprite,states);
+
+		target.draw(*this->sprite,states);
 }
 
 
-Game::Tile::Tile(const sf::Vector2f & startPos, const sf::Vector2f & startSize,Game::tileID ID, sf::Texture &t) :
+Game::Tile::Tile(const sf::Vector2f & startPos, const sf::Vector2f & startSize,std::string location, int tID) :
 	DisplayObject(startPos,startSize)
 {
+	if (tID == 13 || tID == 14) {
+		this->ID = tileID::CHECKFLAG;
+	}
+	else {
+		this->ID = tileID::DIRT;
+	}
 
-
-	std::string filepath;
-	this->ID = ID;
+	std::string filepath = location;
+	
+	/*this->ID = ID;
 	switch (this->ID) {
 	case tileID::DIRT:
 		filepath = "Images\\Levels\\block.png";
@@ -52,7 +59,7 @@ Game::Tile::Tile(const sf::Vector2f & startPos, const sf::Vector2f & startSize,G
 		filepath = "Images\\finishflag.png";
 
 
-	}
+	}*/
 	if (!texture->loadFromFile(filepath)) {
 		std::cout << "Failed to load tile texture";
 	}
