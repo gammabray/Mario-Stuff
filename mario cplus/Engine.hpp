@@ -38,7 +38,7 @@ namespace Game {
 		Background		   back;
 		bool               keyFlag;
 		GameInterface	   gui;
-		
+		sf::FloatRect renderArea;
 		void updateEnemies();
 		void drawEnemies();
 
