@@ -1,107 +1,111 @@
 #include "Level.hpp"
 #include <cmath>
+#include "TinyXML\tinyxml2.h"
 const int Game::Level::testLevelID;
+std::map<int, std::string> Game::Level::imageFilepaths;
 const std::unordered_map<int, sf::Vector2f> Game::Level::levelSizes = { {1,sf::Vector2f(8000,1000)},{0,sf::Vector2f(8000,1000) } };
 void Game::Level::addTiles(int levelID) //generate tiles and collsion boxes
 {
 	std::ifstream input;
 	std::vector<std::string> layout;
 	std::string filepath;
-	switch (levelID) {
-	case testLevelID:
-		filepath = "Levels\\testlevel.txt";
-		respawnPoint = sf::Vector2f(640, 500);
-		break;
-	case 1:
-		filepath = "Levels\\level_one.txt";
-		respawnPoint = sf::Vector2f(640,500);
+	loadXml(levelID);	
+	
+}
+
+void Game::Level::loadXml(int levelID)
+{
+	
+	
+	tinyxml2::XMLDocument xmlDoc;
+	tinyxml2::XMLError result = xmlDoc.LoadFile("Levels//test.tmx");
+	//get <tileset> subtree
+	auto tileset = xmlDoc.FirstChild()
+		->NextSibling()
+		->FirstChild();
+	//Loop through tree and store location of filepath of each tile id
+	for (auto ele = tileset->FirstChild()->ToElement();
+		ele->NextSibling() != nullptr;
+		ele = ele->NextSibling()->ToElement())
+	{
+		auto tempString = std::string(ele->FirstChildElement()->Attribute("source"));
+		int size = tempString.size();
 		
-
+		tempString.erase(0, 3);
+		imageFilepaths.insert(
+			std::pair<int, std::string>(
+				atoi(ele->Attribute("id")) + 1,
+				tempString
+			)
+		);
 	}
-	input.open(filepath,std::ios::in);
-	while(!input.eof()) {
-		std::string s;
-		std::getline(input,s);
-		layout.push_back(s);		 
-	}
-	input.close();
-	sf::Vector2f currentPos;//current position of tile creator
-	const float xOffset = 32;
-	const float yOffset = 32;
-	
-	float groundLevel;
-	//add tiles
-	int count = 0;
-	for (std::string& s : layout) {
-		for (char& c : s){
-			switch (c) {
-			case tileID::DIRT:
-				tiles.push_back(Tile(currentPos, sf::Vector2f(32, 32), tileID::DIRT));
-				break;
+	//Get first <tile> value
+	auto tileData = xmlDoc.FirstChild()
+		->NextSibling()
+		->FirstChild()
+		->NextSibling()
+		->FirstChild(); //Get tile data
 
 
-			case Coin::s_ID: 
-				coins.emplace_back(sf::Vector2f(currentPos.x, currentPos.y - 16));
-				//coins are created in the middle/top of the tile grid
-				break;
-			case PowerUpType::FIREBALL:
-				powerUps.emplace_back(sf::Vector2f(currentPos.x, currentPos.y), PowerUpType::FIREBALL);
-				break;
-			case PowerUpType::BETTERJUMP:
-				powerUps.emplace_back(sf::Vector2f(currentPos.x, currentPos.y), PowerUpType::BETTERJUMP);
-				break;
-			case '0': //air
-				break;
-			default:
-				tiles.push_back(Tile(currentPos, sf::Vector2f(32, 32), static_cast<tileID>(c)));
-			
-			}
-			++count;
-			
-			currentPos.x += xOffset;
+	sf::Vector2f currentPos(0, 0);
+	const float xOffset = 32; const float yOffset = 32;
 
+
+	int tilecount = 0;
+
+	for (auto element = tileData->FirstChild()->ToElement();
+		element->NextSibling() != nullptr;
+		element = element->NextSibling()->ToElement())
+	{
+		auto id = atoi(element->Attribute("gid"));
+		if (id == Coin::s_ID) {
+			coins.push_back(Coin(currentPos));
 		}
-		currentPos.x = 0;
-		currentPos.y += yOffset;
-
+		else if (id == PowerUpType::FIREBALL|| id == PowerUpType::BETTERJUMP) {
+			powerUps.push_back(PowerUp(currentPos,PowerUpType(id)));
+		}
+		else if (id != 0) {
+			tiles.push_back(Tile( 
+				currentPos, 
+				sf::Vector2f(xOffset, yOffset),
+				imageFilepaths[id],
+				id
+				)
+			);
+		}
+		
+	
+		if (tilecount % 250 == 0 && tilecount != 0) {
+			currentPos.x = 0;
+			currentPos.y += yOffset;
+		}
+		else {
+			currentPos.x += xOffset;
+		}
+		tilecount++;
 	}
-	
-	groundLevel = currentPos.y;
-
-	//create collsion boxes for level
-
-	int currTile = 0;
-	float currTileYpos = tiles[0].getPosition().y;
-	sf::Vector2f topleft(0, currTileYpos);
-	sf::Vector2f topright;
-	float bot = 0;
-	printf("%d", tiles.size());
-	fflush(stdout);
-
-	
-	
-	
-
-	
 	
 
 }
 
-Game::Level::Level(sf::Vector2f startSize,int levelID)
+Game::Level::Level(sf::Vector2f startSize,int levelID,sf::FloatRect renderArea) : checkArea(renderArea)
 {
-	addTiles(levelID);		 
+	loadXml(levelID);		 
 }
 
 void Game::Level::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	for (auto& coin : coins) {
-		coin.Draw(target, states);
+		if(checkArea.contains(coin.getPosition()))
+			coin.Draw(target, states);
 	}
 	for (auto& tile : tiles) {
+		if (checkArea.contains(tile.getPosition()))
 		tile.Draw(target, states);
 	}
 	for (auto& powerUp : powerUps) {
-		powerUp.Draw(target, states);
+		if (checkArea.contains(powerUp.getPosition()))
+			powerUp.Draw(target, states);
 	}
 }
 
