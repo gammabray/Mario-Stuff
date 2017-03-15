@@ -10,13 +10,14 @@
 
 
 Game::Engine::Engine(int startLevel) :
-	c(sf::Vector2f(640, 500)), 
-	currentView(sf::Vector2f(640, 460), sf::Vector2f(1280, 720)),	
-	currentLevel(Level::levelSizes.at(startLevel),startLevel), 
-	back(Level::levelSizes.at(startLevel)),		 
+	c(sf::Vector2f(100, 500)), 
+	currentView(sf::Vector2f(640, 460), sf::Vector2f(1280, 720)),		 
 	rw(sf::VideoMode(1280, 720), "Game Title"),
 	gui(),
-	manager()
+	manager(),
+	renderArea(c.getPosition().x - 1000, c.getPosition().y - 600, 2000, 1000),
+	currentLevel(Level::levelSizes.at(startLevel), startLevel, renderArea),
+	back(Level::levelSizes.at(startLevel))
 	
 { 
 	
@@ -59,11 +60,12 @@ void Game::Engine::Start()
 		}
 		
 		rw.clear();
-		currentView.setCenter(c.getPosition().x, 460.f);
+		currentView.setCenter(c.getPosition().x, c.getPosition().y < 800.f ? c.getPosition().y: 800.f);
 		
 		back.draw(rw, sf::RenderStates::Default);
 		updateProjectiles();
 		c.Update(currentLevel);
+		
 		
 		updateEnemies();
 		
@@ -88,9 +90,11 @@ void Game::Engine::Start()
 			manager.CheckCollision(enemy, currentLevel);
 			enemy->setPosition(enemy->getPosition().x + manager.GetMinVector().x, enemy->getPosition().y + manager.GetMinVector().y);
 		}
-	
-		manager.ResetMinimumVector();
+		renderArea.top = c.getPosition().y - 600;
+		renderArea.left = c.getPosition().x - 1000;
 
+		manager.ResetMinimumVector();
+		currentLevel.updateCheckArea(renderArea);
 		currentLevel.draw(rw);
 		rw.setView(currentView);
 		drawProjectiles();
