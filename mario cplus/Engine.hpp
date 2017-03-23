@@ -10,6 +10,7 @@
 #include "WorldManager.hpp"
 #include "Projectile.hpp"
 #include "Fireball.hpp"
+#include "ScoreSaver.hpp"
 #include <vector>
 #include <memory>
 
@@ -19,26 +20,27 @@
 
 namespace Game {
 	typedef std::string Logger;
-	typedef std::vector<std::unique_ptr<Enemy>> EnemyList;
-	typedef std::vector<std::unique_ptr<Projectile>> ProjectileList;
+	
+	
 
 	class Engine {
 	private:
-		Level              currentLevel;
-		sf::Texture        tempLevelTexture;//temporary before level implemented
-		sf::Sprite         tempLevelSprite;
-		Character          c;
-		EnemyList          enemies;
-		ProjectileList	   projectiles;
-		Logger             l;
-		WorldManager   manager;
-		sf::RenderWindow   rw;
-		sf::View           currentView;
+		Level              currentLevel; //The level currently loaded
+		Character          c;			 
+		EnemyList          enemies;	     //Vector of pointers to enemies
+		ProjectileList	   projectiles;  //The projectiles currently in the game
+		WorldManager       manager;		 //Manages object states w/ collision
+		sf::RenderWindow   rw;			 //The window to be drawn to 
+		sf::View           currentView;  //The camera : where the window is looking at
 		sf::Keyboard::Key  pressedKey;
-		Background		   back;
+		Background		   back;		 //The background behind the level
 		bool               keyFlag;
-		GameInterface	   gui;
-		sf::FloatRect renderArea;
+		GameInterface	   gui;			 //The HUD which shows the player's progress
+		sf::FloatRect      renderArea;   //The area the window should render
+		sf::Clock		   finishClock;  //Clock to keep time of level endings
+		ScoreSaver*		   saver;
+		bool			   finishClockStarted;
+		bool			   saved;
 		void updateEnemies();
 		void drawEnemies();
 
@@ -49,7 +51,7 @@ namespace Game {
 	public:
 		
 		Engine(int startLevel);
-		
+		~Engine();
 		void Start();
 
 

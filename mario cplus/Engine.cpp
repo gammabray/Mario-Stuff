@@ -17,15 +17,24 @@ Game::Engine::Engine(int startLevel) :
 	manager(),
 	renderArea(c.getPosition().x - 1000, c.getPosition().y - 600, 2000, 1000),
 	currentLevel(Level::levelSizes.at(startLevel), startLevel, renderArea),
-	back(Level::levelSizes.at(startLevel))
+	back(Level::levelSizes.at(startLevel)),
+	finishClockStarted(false),
+	saved(false)
 	
 { 
 	
 	enemies.emplace_back(std::move(std::unique_ptr<BadGuy>(new BadGuy(sf::Vector2f(1200.f,600.f)))));
-	rw.setFramerateLimit(120);
+	enemies.emplace_back(std::move(std::unique_ptr<BadGuy>(new BadGuy(sf::Vector2f(1000.f, 600.f)))));
+
+	rw.setFramerateLimit(60);
 
 	
 	
+}
+
+Game::Engine::~Engine()
+{
+	delete saver;
 }
 
 
@@ -39,6 +48,10 @@ void Game::Engine::Start()
 
 	int NoOfFrames = 0 ;
 	while (rw.isOpen()) {
+		if (saved) {
+			rw.close();
+			return;
+		}
 		while (rw.pollEvent(event)) {
 			if (event.type == sf::Event::Closed) {
 				rw.close();
@@ -51,7 +64,7 @@ void Game::Engine::Start()
 
 			else if (event.type == sf::Event::KeyReleased && keyFlag) {
 				pressedKey = sf::Keyboard::Unknown;
-				c.IsWalking = false;
+				//c.IsWalking = false;
 				keyFlag = false;
 
 			}
@@ -90,10 +103,11 @@ void Game::Engine::Start()
 			manager.CheckCollision(enemy, currentLevel);
 			enemy->setPosition(enemy->getPosition().x + manager.GetMinVector().x, enemy->getPosition().y + manager.GetMinVector().y);
 		}
-		renderArea.top = c.getPosition().y - 600;
-		renderArea.left = c.getPosition().x - 1000;
+		
 
 		manager.ResetMinimumVector();
+		renderArea.top = c.getPosition().y - 600;
+		renderArea.left = c.getPosition().x - 1000;
 		currentLevel.updateCheckArea(renderArea);
 		currentLevel.draw(rw);
 		rw.setView(currentView);
@@ -105,9 +119,22 @@ void Game::Engine::Start()
 		gui.draw(rw);
 		rw.display();
 		
-		std::cout << "frame :" << ++NoOfFrames << std::endl;
+		//std::cout << "frame :" << ++NoOfFrames << std::endl;
 		if (c.tracker->GameCompleted) {
-		
+			if (!finishClockStarted) {
+				finishClock.restart();
+				finishClockStarted = true;
+			}			
+			if (finishClock.getElapsedTime().asSeconds() > 4) {
+				gui.drawLast = true;
+				
+			}
+			if (finishClock.getElapsedTime().asSeconds() > 8) {
+				saver = new ScoreSaver(*c.tracker);
+				saved = saver->SaveScore(currentLevel.LevelID);
+				
+
+			}
 		}
 
 	}
@@ -135,8 +162,12 @@ void Game::Engine::drawEnemies()
 void Game::Engine::updateProjectiles()
 {
 	for (unsigned int i = 0; i < projectiles.size(); ++i) {
+
 		projectiles[i]->update();
-		if (projectiles[i]->getPosition().x > currentView.getCenter().x + 1000 || projectiles[i]->getPosition().x < currentView.getCenter().x - 1000) {
+		if (projectiles[i]->getTimeRemaining().asSeconds() > 0.5) {
+			projectiles.erase(projectiles.begin() + i);
+		}
+		else if (projectiles[i]->getPosition().x > currentView.getCenter().x + 1000 || projectiles[i]->getPosition().x < currentView.getCenter().x - 1000) {
 
 			projectiles.erase(projectiles.begin() + i);
 		}
