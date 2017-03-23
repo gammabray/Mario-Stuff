@@ -1,6 +1,7 @@
 #include "Engine.hpp"
 #include "TinyXML\tinyxml2.h"
 #include <sstream>
+#include <Windows.h>
 namespace XML = tinyxml2;
 
 int main(int argc, char** argv) {
@@ -10,11 +11,13 @@ int main(int argc, char** argv) {
 			startLevel = atoi(argv[1]);//converts a string to its int value
 	}
 	else {
-		startLevel = 0;
+		startLevel = 2;
 	}
 	Game::Background::s_addTextures();
 	Game::Engine Engine(startLevel);
+	FreeConsole();
 	Engine.Start();
+
 	return EXIT_SUCCESS;
 	
 
