@@ -2,6 +2,7 @@
 #define COLLISIONMANAGER_HPP
 #include "Character.hpp"
 #include "Tile.hpp"
+#include "Projectile.hpp"
 #include <SFML\Graphics.hpp>
 
 namespace Game {
@@ -17,6 +18,8 @@ namespace Game {
 		//		the public ones.
 		void CheckCollision(Character& ch, Level& l, sf::RenderWindow& rw, sf::View& v);
 		void CheckCollision(const std::unique_ptr<Enemy>& e, Level & l);
+		void CheckCollision(ProjectileList pList, Character & c);
+		void CheckCollision();
 
 		bool MoveAfterCollision;
 	private:
@@ -25,7 +28,9 @@ namespace Game {
 		bool HasCollided;
 		bool NoTouches;
 		void checkCollision(Character& ch, Tile& t);
-
+		
+		void checkCollision(const std::unique_ptr<Projectile>& p, Character& c);
+		
 		void checkCollision(const std::unique_ptr<Enemy>& e, Tile & t);
 
 		;

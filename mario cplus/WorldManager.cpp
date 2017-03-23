@@ -1,5 +1,6 @@
 #include "WorldManager.hpp"
 
+
 namespace Game {
 	WorldManager::WorldManager() : frameTime(static_cast<double>(1000.l / 60.l))	//game runs at 60FPS
 											,HasCollided(false), NoTouches(true)
@@ -72,11 +73,21 @@ namespace Game {
 		
 		
 	}
+	void WorldManager::CheckCollision(ProjectileList pList, Character& c)
+	{
+		for (auto& projectile : pList) {
+			if (projectile->HurtsPlayers && !projectile->Destroyed) {
+				checkCollision(projectile, c);
+			}				
+
+		}
+	}
 	
 	void WorldManager::checkCollision(Character & ch, Tile & t)
 	{
 		
-	
+		sf::FloatRect checkArea(ch.getPosition().x - 100, ch.getPosition().y - 100, 200, 200);
+		if (!checkArea.contains(t.getPosition())) { return; }
 		sf::Vector2f lengthBetweenCentres(ch.getPosition().x - t.getPosition().x, ch.getPosition().y - t.getPosition().y);
 		if (ch.boundingBox.intersects(t.boundingBox)) //already colliding  
 		{
@@ -106,20 +117,33 @@ namespace Game {
 				ch.CanFall = true;
 				ch.IsWalking = false;
 			}				
-			if (lengthBetweenCentres.x > 0 && ch.IsWalking) { //colliding from right
+			if (lengthBetweenCentres.x > 0) { //colliding from right
 			
 				minVector.x = -lengthBetweenCentres.x + (ch.getSize().x / 2) + (t.getSize().x / 2);
-				minVector.y = 0;
-			}
-			else if (lengthBetweenCentres.x < 0 && ch.IsWalking) { //colliding from left
-				minVector.x = -lengthBetweenCentres.x - (ch.getSize().x / 2) - (t.getSize().x / 2);
-				minVector.y = 0;
-			}
 				
+				
+				
+			}
+			else if (lengthBetweenCentres.x < 0) { //colliding from left
+				
+				minVector.x = -lengthBetweenCentres.x - (ch.getSize().x / 2) - (t.getSize().x / 2);
+				
+				
+			}
+			if (minVector.x < minVector.y && !ch.IsJumping) {
+				minVector.y = 0;
+				ch.CanFall = false;
+			}
+			else {
+				minVector.x = 0;
+
+			}
+		
+
 
 			
 			
-					
+				
 			ch.IsAccelerating = false;
 			ch.IsJumping = false;		
 			ch.setVelocity(sf::Vector2f(ch.getVelocity().x, 0));
@@ -139,6 +163,14 @@ namespace Game {
 		
 	
 	}
+	void WorldManager::checkCollision(const std::unique_ptr<Projectile>& p, Character & c)
+	{
+		if (p->boundingBox.intersects(c.boundingBox)) {
+			p->OnPlayerHit();
+			c.Destroy();
+		}
+	}
+	
 	void WorldManager::checkCollision(const std::unique_ptr<Enemy> & e, Tile & t)
 	{
 		sf::FloatRect checkArea(e->getPosition().x - 50, e->getPosition().y - 50, 200, 200);
