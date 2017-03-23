@@ -12,8 +12,11 @@ void Game::Tile::Draw(sf::RenderTarget & target, const sf::RenderStates & states
 Game::Tile::Tile(const sf::Vector2f & startPos, const sf::Vector2f & startSize,std::string location, int tID) :
 	DisplayObject(startPos,startSize)
 {
-	if (tID == 13 || tID == 14) {
+	if (tID == 13) {
 		this->ID = tileID::CHECKFLAG;
+	}
+	else if (tID == 15) {
+		this->ID = tileID::FINISHFLAG;
 	}
 	else {
 		this->ID = tileID::DIRT;
