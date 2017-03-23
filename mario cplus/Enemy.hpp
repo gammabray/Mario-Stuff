@@ -4,6 +4,7 @@
 #include "AnimatedObject.hpp"
 #include "Character.hpp"
 namespace Game {
+	
 	class Character;
 	enum class EnemyType
 	{
@@ -35,6 +36,7 @@ namespace Game {
 		Enemy(const sf::Vector2f& startPos,const sf::Vector2f& startSize,const sf::Vector2f& startSpeed,EnemyType t);
 	
 	};
+	typedef std::vector<std::unique_ptr<Enemy>> EnemyList;
 }
 #endif
 
