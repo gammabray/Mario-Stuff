@@ -3,15 +3,8 @@
 #include "TinyXML\tinyxml2.h"
 const int Game::Level::testLevelID;
 std::map<int, std::string> Game::Level::imageFilepaths;
-const std::unordered_map<int, sf::Vector2f> Game::Level::levelSizes = { {1,sf::Vector2f(8000,1000)},{0,sf::Vector2f(8000,1000) } };
-void Game::Level::addTiles(int levelID) //generate tiles and collsion boxes
-{
-	std::ifstream input;
-	std::vector<std::string> layout;
-	std::string filepath;
-	loadXml(levelID);	
-	
-}
+const std::unordered_map<int, sf::Vector2f> Game::Level::levelSizes = { {1,sf::Vector2f(8000,1000)},{0,sf::Vector2f(8000,1000) },{2,sf::Vector2f(8000,1000) } };
+
 
 void Game::Level::loadXml(int levelID)
 {
@@ -34,7 +27,7 @@ void Game::Level::loadXml(int levelID)
 		tempString.erase(0, 3);
 		imageFilepaths.insert(
 			std::pair<int, std::string>(
-				atoi(ele->Attribute("id")) + 1,
+				std::stoi(ele->Attribute("id")) + 1,
 				tempString
 			)
 		);
@@ -88,7 +81,7 @@ void Game::Level::loadXml(int levelID)
 
 }
 
-Game::Level::Level(sf::Vector2f startSize,int levelID,sf::FloatRect renderArea) : checkArea(renderArea)
+Game::Level::Level(sf::Vector2f startSize,int levelID,sf::FloatRect renderArea) : checkArea(renderArea) ,LevelID(levelID)
 {
 	loadXml(levelID);		 
 }

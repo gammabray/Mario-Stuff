@@ -16,12 +16,12 @@ namespace Game {
 	private:
 	
 		void addTiles(int levelID);
-		void loadXml(int levelID);
-		
+		void loadXml(int levelID);		
 		const static int testLevelID = 0;
 		static std::map<int, std::string> imageFilepaths;
 		sf::FloatRect checkArea;
-	public:														  
+	public:					
+		int LevelID;
 		std::vector<Tile> tiles;
 		std::vector<Coin> coins;
 		std::vector<PowerUp> powerUps;
