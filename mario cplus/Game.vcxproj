@@ -85,6 +85,11 @@
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
   </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Profiles\profile.xml">
+      <SubType>Designer</SubType>
+    </Xml>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6952d47b-ec73-4fdc-aca9-efe195e3ea56}</ProjectGuid>
     <RootNamespace>mario_cplus</RootNamespace>
