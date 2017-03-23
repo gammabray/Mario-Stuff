@@ -12,6 +12,9 @@ namespace Game {
 	private:
 	
 		bool hasWon;
+		bool lastValuesSet; //final values for score and time set
+		
+
 		std::unique_ptr<sf::Font> font;
 		std::unique_ptr<sf::Texture> keyTexture;
 		sf::Sprite keySprite;
@@ -27,12 +30,16 @@ namespace Game {
 
 		sf::Text powerUpLabel;
 		sf::Text powerUpValue;
+
+		sf::Text finalScore;
+		sf::Text finalTime;
+		
 	
 		
 		
 	public:
 		GameInterface();
-		
+		bool drawLast;
 		void update(PlayerTracker& tracker,const sf::View& v);
 		void draw(sf::RenderTarget & target, sf::RenderStates states = sf::RenderStates::Default) const;
 	};

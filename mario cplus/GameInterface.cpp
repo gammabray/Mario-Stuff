@@ -56,6 +56,7 @@ Game::GameInterface::GameInterface() : hasWon(false)
 	wonLabel.setFont(*font);
 	wonLabel.setFillColor(sf::Color::White);
 	wonLabel.setCharacterSize(32);
+	wonLabel.setOrigin((wonLabel.getPosition() + wonLabel.findCharacterPos(10)));
 
 	powerUpLabel.setString("Current Power-up:");
 	powerUpLabel.setFont(*font);
@@ -66,6 +67,8 @@ Game::GameInterface::GameInterface() : hasWon(false)
 	powerUpValue.setFont(*font);
 	powerUpValue.setFillColor(sf::Color::White);
 	powerUpValue.setCharacterSize(32);
+
+
 
 	
 
@@ -114,29 +117,55 @@ void Game::GameInterface::update(PlayerTracker & tracker,const sf::View& v)
 	}
 
 	hasWon = tracker.GameCompleted;
-	if (hasWon) {
-		wonLabel.setPosition(v.getCenter());
+	if (hasWon && !lastValuesSet) {
+		wonLabel.setPosition(v.getCenter().x, v.getCenter().y - 200.f);
+		finalScore.setString("Score : " + std::to_string(tracker.currScore));
+		finalTime.setString("Time : " + convertToStandardTime(tracker.timeSpent));
+		lastValuesSet = true;
+		
+		finalScore.setFont(*font);
+		finalScore.setFillColor(sf::Color::White);
+		finalScore.setCharacterSize(32);
+		finalScore.setPosition(v.getCenter().x - 200, v.getCenter().y - 100.f);
+
+		
+		finalTime.setFont(*font);
+		finalTime.setFillColor(sf::Color::White);
+		finalTime.setCharacterSize(32);
+		finalTime.setPosition(v.getCenter().x + 50, v.getCenter().y - 100.f);
+
+		
 	}
 
 }
 
 void Game::GameInterface::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
-	target.draw(timeLabel);
-	target.draw(timeValue);
-	target.draw(scoreValue);
-	target.draw(scoreLabel);
-	target.draw(lifeValue);
-	target.draw(lifeLabel);
-	target.draw(powerUpLabel);
-	target.draw(powerUpValue);
-	if (DrawKey) {
-		target.draw(keySprite);
-	}
-	
 	if (hasWon) {
 		target.draw(wonLabel);
+		if (drawLast) {
+			target.draw(finalScore);
+			target.draw(finalTime);
+		}
+		
 	}
+	else
+	{
+		target.draw(timeLabel);
+		target.draw(timeValue);
+		target.draw(scoreValue);
+		target.draw(scoreLabel);
+		target.draw(lifeValue);
+		target.draw(lifeLabel);
+		target.draw(powerUpLabel);
+		target.draw(powerUpValue);
+		if (DrawKey) {
+			target.draw(keySprite);
+		}
+	}
+	
+	
+	
 	
 	
 
