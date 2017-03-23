@@ -32,6 +32,8 @@ namespace Game {
 		 void trackTime();
 		 void setScore(int score);
 		 void addScore(int score);
+		 int  getScore() { return currScore; }
+		 const sf::Time& getTime() { return timeSpent; }
 		 void setPowerUp(PowerUpType newPowerUp);
 		 const PowerUpType& getPowerUp();
 		 
