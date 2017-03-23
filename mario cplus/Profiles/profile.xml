@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<User xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <bestScores>
+        <int>3200</int>
+        <int>0</int>
+        <int>930</int>
+        <int>0</int>
+        <int>0</int>
+        <int>0</int>
+        <int>0</int>
+        <int>0</int>
+        <int>0</int>
+        <int>0</int>
+    </bestScores>
+    <bestTimes>
+        <float>320</float>
+        <float>0</float>
+        <float>2477</float>
+        <float>0</float>
+        <float>0</float>
+        <float>0</float>
+        <float>0</float>
+        <float>0</float>
+        <float>0</float>
+        <float>0</float>
+    </bestTimes>
+    <Name>who</Name>
+</User>
