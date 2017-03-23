@@ -67,7 +67,7 @@ void Game::Character::Update(Level& l)
 			IsDead = false;
 		}
 		changeSprite();
-		float delta = static_cast<float>(speedClock.restart().asMilliseconds());//time since last frame;
+		float delta = 1000.f / 60.f;//time since last frame;
 		tracker->trackTime();
 		fall(delta);
 		if (IsJumping) {
