@@ -46,22 +46,33 @@ void Game::Fireball::changeSprite(int changeTo = 0)
 		}
 	}
 	else{
-		currSprite = 0;
+		currSprite = changeTo;
 	}
 	
 }
 
 void Game::Fireball::update()
 {
-	float delta = static_cast<float>(speedClock.restart().asMilliseconds());
-	changeSprite();
-	sprite->setTextureRect(SpriteStates[currSprite]);
-	if (travelling == direction::RIGHT){
-		sprite->move(delta * maxVelocity.x, 0);
+	if (!Destroyed) {
+		float delta = static_cast<float>(speedClock.restart().asMilliseconds());
+		changeSprite();
+		sprite->setTextureRect(SpriteStates[currSprite]);
+		if (travelling == direction::RIGHT) {
+			sprite->move(delta * maxVelocity.x, 0);
+		}
+		else if (travelling == direction::LEFT) {
+			sprite->move(-delta * maxVelocity.x, 0);
+		}
+
 	}
-	else if (travelling == direction::LEFT) {
-		sprite->move(-delta * maxVelocity.x, 0);
-	}
+
+}
+
+void Game::Fireball::OnEnemyHit()
+{
+	Destroyed = true;
+	sprite->setTextureRect(SpriteStates[2]);
+	deathClock.restart();
 	
 }
 

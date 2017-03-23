@@ -17,6 +17,7 @@ namespace Game {
 		void Draw(sf::RenderTarget& target, const sf::RenderStates& states = sf::RenderStates::Default) const;
 		void changeSprite(int changeTo);
 		void update();
+		void OnEnemyHit();
 		
 	private:
 		const static sf::Vector2f s_size;
