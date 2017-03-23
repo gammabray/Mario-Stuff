@@ -15,7 +15,7 @@
       </Enum>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>DAAABQAAAAAAFAAAAAAAAAAECAAAAgQIABRAAAAIAAA=</HashCode>
+      <HashCode>DAAABRgAAAAAFAAAAAAAAAAECAAAAgQJABRAAAAIAAE=</HashCode>
       <FileName>AnimatedObject.hpp</FileName>
     </TypeIdentifier>
   </Class>
@@ -36,7 +36,7 @@
   <Class Name="Game::BadGuy">
     <Position X="5.25" Y="15.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAABAAAAAAAAgCAAAAAAAAAAAAIAAAAAAAgACAEAAA=</HashCode>
+      <HashCode>AAAABAAAAAAAAgCAAAAAAAAAAAAIAAAAAAAgACAEAAE=</HashCode>
       <FileName>BadGuy.hpp</FileName>
     </TypeIdentifier>
   </Class>
@@ -57,19 +57,19 @@
   <Class Name="Game::Level">
     <Position X="8.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAACAAAAAAAAAIAAIAADAAAhAAAIABAAAAAAQAACA=</HashCode>
+      <HashCode>QAAAACAAAAAAAAAIIAIAADAAAhAAAIAHAAAAAAQAACA=</HashCode>
       <FileName>Level.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Game::Character">
     <Position X="0.75" Y="11.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQCBCAIAIIAGpAAARAAECAABABIIAAAcAAQQAABKQE=</HashCode>
+      <HashCode>AAQCBCCIAIIiGpAAABAAFCAAAABIIAAAYAAAQIABKQE=</HashCode>
       <FileName>Character.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Game::Coin">
-    <Position X="7" Y="6" Width="1.5" />
+    <Position X="6.5" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAIAAAgAAAAAABAAQAAAAAAAAAAAAAIAAAAA=</HashCode>
       <FileName>Coin.hpp</FileName>
@@ -78,7 +78,7 @@
   <Class Name="Game::Projectile">
     <Position X="7" Y="11.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAgAAIAAAAEAAAAAAAAAAAABAAAEIIA=</HashCode>
+      <HashCode>AAAABAAAAAIAAAAAAAAAAAAAAAABAAAAAAAAAAAEIKA=</HashCode>
       <FileName>Projectile.hpp</FileName>
     </TypeIdentifier>
   </Class>
@@ -106,33 +106,33 @@
   <Class Name="Game::DisplayObject">
     <Position X="6.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAMAAAAKAAAgkAAJAAIAACABAAAgAhAAAEAAAAAAA=</HashCode>
+      <HashCode>AAAAIAAAAKAAAgkAAJAAIAACABAAAgAhAAAEAAAAAAA=</HashCode>
       <FileName>DisplayObject.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Game::Engine">
-    <Position X="4" Y="0.5" Width="1.5" />
+    <Position X="2.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AEAAAAFAACAAAgAAAAAgAEAFAAAAAAKBBABAAAAABAA=</HashCode>
+      <HashCode>AEAAAAVAQGACAgAAAAAgAEAFQAAAAAKBBABAAAAAAAA=</HashCode>
       <FileName>Engine.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Game::GameInterface">
     <Position X="11.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CAIAAAAAEgCIiAAAAAMAAAACAAAEAAAIIGAAAAAMAAA=</HashCode>
+      <HashCode>CAIAAAAAEgCIiAEEAAMCAAACAAAEABAIIGAAAAAMAAA=</HashCode>
       <FileName>GameInterface.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Game::PowerUp">
-    <Position X="10.25" Y="6" Width="1.5" />
+    <Position X="10" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAABAAAAAgAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
       <FileName>PowerUp.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Game::Tile">
-    <Position X="12.5" Y="6" Width="1.5" />
+    <Position X="8.25" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAggAAAAAAAAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
       <FileName>Tile.hpp</FileName>
@@ -183,7 +183,7 @@
   <Enum Name="Game::tileID" Collapsed="true">
     <Position X="18.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgAABAAAAAAAEAAAAAAAECCEAAEAAAAAAAAAAQAAAAA=</HashCode>
+      <HashCode>AAAgBAAAAAgAEAAAAIAAEDCEIAEAAAAAACAAAQAAIKA=</HashCode>
       <FileName>Tile.hpp</FileName>
     </TypeIdentifier>
   </Enum>
